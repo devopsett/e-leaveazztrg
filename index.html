@@ -169,33 +169,33 @@
 <body class="min-h-screen flex flex-col lg:h-screen lg:overflow-hidden">
 
     <!-- ==================== HEADER BAR MODEN ==================== -->
-    <header class="no-print bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 z-30 sticky top-0">
+    <header class="no-print bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-3.5 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between gap-2 z-30 sticky top-0">
         <!-- Jenama Sistem -->
-        <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#3f5829] to-[#588635] text-white flex items-center justify-center shadow-sm shadow-[#3f5829]/20">
-                <i data-lucide="file-check-2" class="w-5 h-5"></i>
+        <div class="flex items-center gap-2.5 min-w-0">
+            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-br from-[#3f5829] to-[#588635] text-white flex items-center justify-center shadow-sm shadow-[#3f5829]/20 shrink-0">
+                <i data-lucide="file-check-2" class="w-4 h-4 sm:w-5 sm:h-5"></i>
             </div>
-            <div>
+            <div class="min-w-0">
                 <div class="flex items-center gap-2">
-                    <h1 class="font-display font-bold text-slate-900 text-base sm:text-lg tracking-tight">e-Leave Az-Zuha</h1>
+                    <h1 class="font-display font-bold text-slate-900 text-sm sm:text-lg tracking-tight truncate">e-Leave Az-Zuha</h1>
                     <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#3f5829]/10 text-[#3f5829] border border-[#3f5829]/20">
                         HR-05 (04/2022)
                     </span>
                 </div>
-                <p class="text-[11px] text-slate-500">Borang Permohonan Cuti</p>
+                <p class="text-[11px] text-slate-500 truncate">Borang Permohonan Cuti</p>
             </div>
         </div>
 
         <!-- Bar Tindakan Pantas -->
-        <div class="flex items-center gap-1.5 sm:gap-2">
+        <div class="flex items-center gap-1.5 sm:gap-2 shrink-0">
             <button type="button" onclick="saveProfileData()" title="Simpan profil nama, no. staf & jawatan dalam pelayar"
-                class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 rounded-xl transition cursor-pointer">
+                class="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 rounded-xl transition cursor-pointer">
                 <i data-lucide="bookmark-check" class="w-4 h-4 text-[#3f5829]"></i>
                 <span class="hidden md:inline">Simpan Profil</span>
             </button>
 
             <button type="button" onclick="resetForm()" title="Kosongkan semua medan borang"
-                class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition cursor-pointer">
+                class="inline-flex items-center justify-center gap-1.5 p-2 sm:px-3 sm:py-2 text-xs font-semibold text-slate-600 bg-slate-100 sm:bg-transparent hover:text-rose-600 hover:bg-rose-50 rounded-xl transition cursor-pointer">
                 <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                 <span class="hidden md:inline">Set Semula</span>
             </button>
@@ -203,7 +203,7 @@
             <div class="h-5 w-[1px] bg-slate-200 mx-0.5 hidden sm:block"></div>
 
             <button type="button" onclick="window.print()"
-                class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
+                class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
                 <i data-lucide="printer" class="w-4 h-4"></i>
                 <span>Cetak / PDF</span>
             </button>
@@ -211,16 +211,16 @@
     </header>
 
     <!-- Penukar Paparan Khas Mudah Alih (Mobile View Switcher) -->
-    <div class="no-print lg:hidden bg-white border-b border-slate-200 px-4 py-2 sticky top-[61px] z-20 shadow-sm">
+    <div class="no-print lg:hidden bg-white border-b border-slate-200 px-3.5 py-2 sticky top-[57px] z-20">
         <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-100 rounded-xl">
             <button type="button" onclick="setMobileView('editor')" id="mob-btn-editor"
-                class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold bg-[#3f5829] text-white shadow-sm transition cursor-pointer">
-                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                class="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold bg-[#3f5829] text-white shadow-sm transition cursor-pointer">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5 shrink-0"></i>
                 <span>Isi Borang</span>
             </button>
             <button type="button" onclick="setMobileView('preview')" id="mob-btn-preview"
-                class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition cursor-pointer">
-                <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                class="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                <i data-lucide="file-text" class="w-3.5 h-3.5 shrink-0"></i>
                 <span>Pratonton A4</span>
             </button>
         </div>
@@ -243,39 +243,39 @@
         <aside id="editorPanel" class="no-print w-full lg:w-[440px] xl:w-[480px] bg-white border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col lg:h-full shrink-0">
             
             <!-- Navigasi Tab Langkah -->
-            <div class="px-4 pt-3 pb-2 bg-slate-50/70 border-b border-slate-200/80">
+            <div class="px-3.5 sm:px-4 pt-3 pb-2.5 bg-slate-50/70 border-b border-slate-200/80">
                 <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-200/70 rounded-xl">
                     <button type="button" onclick="switchTab('tab-pemohon')" id="btn-tab-pemohon"
-                        class="tab-btn flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-semibold bg-white text-[#3f5829] shadow-sm transition cursor-pointer">
-                        <i data-lucide="user-circle" class="w-3.5 h-3.5"></i>
+                        class="tab-btn flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 py-2 px-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-white text-[#3f5829] shadow-sm transition cursor-pointer text-center leading-tight">
+                        <i data-lucide="user-circle" class="w-3.5 h-3.5 shrink-0"></i>
                         <span>1. Pemohon</span>
                     </button>
                     <button type="button" onclick="switchTab('tab-cuti')" id="btn-tab-cuti"
-                        class="tab-btn flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer">
-                        <i data-lucide="calendar-days" class="w-3.5 h-3.5"></i>
-                        <span>2. Butiran Cuti</span>
+                        class="tab-btn flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 py-2 px-1.5 rounded-lg text-[11px] sm:text-xs font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer text-center leading-tight">
+                        <i data-lucide="calendar-days" class="w-3.5 h-3.5 shrink-0"></i>
+                        <span>2. Cuti</span>
                     </button>
                     <button type="button" onclick="switchTab('tab-pengesahan')" id="btn-tab-pengesahan"
-                        class="tab-btn flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer">
-                        <i data-lucide="pen-tool" class="w-3.5 h-3.5"></i>
-                        <span>3. Tandatangan</span>
+                        class="tab-btn flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 py-2 px-1.5 rounded-lg text-[11px] sm:text-xs font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer text-center leading-tight">
+                        <i data-lucide="pen-tool" class="w-3.5 h-3.5 shrink-0"></i>
+                        <span>3. Sah &amp; Sign</span>
                     </button>
                 </div>
             </div>
 
             <!-- Badan Borang Input (Scrollable) -->
-            <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5">
+            <div class="flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-4 sm:space-y-5">
 
                 <!-- ==================== TAB 1: MAKLUMAT PEMOHON & LOGO ==================== -->
                 <div id="tab-pemohon" class="tab-panel space-y-4">
                     <!-- Kad Maklumat Pemohon -->
-                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3.5">
-                        <div class="flex items-center justify-between">
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
+                        <div class="flex items-center justify-between gap-2">
                             <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                                <i data-lucide="id-card" class="w-4 h-4 text-[#3f5829]"></i>
-                                Identiti Kakitangan
+                                <i data-lucide="id-card" class="w-4 h-4 text-[#3f5829] shrink-0"></i>
+                                <span>Identiti Kakitangan</span>
                             </h2>
-                            <span class="text-[10px] font-medium text-slate-400">Auto-kemas kini</span>
+                            <span class="text-[10px] font-medium text-slate-400 shrink-0">Auto-kemas kini</span>
                         </div>
 
                         <div>
@@ -284,7 +284,7 @@
                                 class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
                         </div>
 
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">No. Staf</label>
                                 <input type="text" id="inNoStaf" oninput="syncForm()" placeholder="Contoh: AZ-0124"
@@ -306,7 +306,7 @@
 
                     <div class="flex justify-end pt-1">
                         <button type="button" onclick="switchTab('tab-cuti')"
-                            class="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
                             <span>Seterusnya: Butiran Cuti</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </button>
@@ -316,68 +316,68 @@
                 <!-- ==================== TAB 2: BUTIRAN & JENIS CUTI ==================== -->
                 <div id="tab-cuti" class="tab-panel hidden space-y-4">
                     <!-- Pilihan Jenis Cuti -->
-                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3">
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 space-y-3">
                         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                            <i data-lucide="check-square" class="w-4 h-4 text-[#3f5829]"></i>
-                            Jenis Permohonan Cuti
+                            <i data-lucide="check-square" class="w-4 h-4 text-[#3f5829] shrink-0"></i>
+                            <span>Jenis Permohonan Cuti</span>
                         </h2>
 
                         <div class="grid grid-cols-2 gap-2">
-                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
-                                <input type="checkbox" id="chkTahunan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
-                                <span class="text-xs font-semibold text-slate-700">Cuti Tahunan</span>
+                            <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkTahunan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
+                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Tahunan</span>
                             </label>
 
-                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
-                                <input type="checkbox" id="chkTanpaGaji" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
-                                <span class="text-xs font-semibold text-slate-700">Cuti Tanpa Gaji</span>
+                            <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkTanpaGaji" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
+                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Tanpa Gaji</span>
                             </label>
 
-                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
-                                <input type="checkbox" id="chkSakit" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
-                                <span class="text-xs font-semibold text-slate-700">Cuti Sakit</span>
+                            <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkSakit" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
+                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Sakit</span>
                             </label>
 
-                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
-                                <input type="checkbox" id="chkKecemasan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
-                                <span class="text-xs font-semibold text-slate-700">Cuti Kecemasan</span>
+                            <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkKecemasan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
+                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Kecemasan</span>
                             </label>
 
-                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
-                                <input type="checkbox" id="chkGanti" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
-                                <span class="text-xs font-semibold text-slate-700">Cuti Ganti</span>
+                            <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkGanti" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
+                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Ganti</span>
                             </label>
 
-                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
-                                <input type="checkbox" id="chkLain" onchange="toggleLainInput(); syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
-                                <span class="text-xs font-semibold text-slate-700">Lain-Lain</span>
+                            <label class="flex items-center gap-2 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkLain" onchange="toggleLainInput(); syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
+                                <span class="text-xs font-semibold text-slate-700 leading-tight">Lain-Lain</span>
                             </label>
                         </div>
 
                         <div id="lainTextWrapper" class="hidden pt-1">
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Nyatakan Jenis Cuti Lain-lain</label>
                             <input type="text" id="inLainText" oninput="syncForm()" placeholder="Contoh: CUTI ISTERI BERSALIN / KEMATIAN"
-                                class="w-full px-3.5 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase">
+                                class="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase">
                         </div>
                     </div>
 
                     <!-- Tempoh & Sebab Cuti -->
-                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3.5">
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 space-y-3.5">
                         <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                            <i data-lucide="calendar-range" class="w-4 h-4 text-[#3f5829]"></i>
-                            Tempoh &amp; Sebab Cuti
+                            <i data-lucide="calendar-range" class="w-4 h-4 text-[#3f5829] shrink-0"></i>
+                            <span>Tempoh &amp; Sebab Cuti</span>
                         </h2>
 
-                        <div class="grid grid-cols-2 gap-3">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">Tarikh Mula</label>
                                 <input type="date" id="inTarikhMula" onchange="calculateDays(); syncForm()"
-                                    class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                    class="w-full px-3 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">Hingga / Dan</label>
                                 <input type="date" id="inTarikhAkhir" onchange="calculateDays(); syncForm()"
-                                    class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                    class="w-full px-3 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
                             </div>
                         </div>
 
@@ -385,7 +385,7 @@
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Jumlah Hari Cuti</label>
                             <div class="relative">
                                 <input type="number" step="0.5" min="0.5" id="inJumlahHari" oninput="syncForm()" placeholder="Contoh: 2"
-                                    class="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none pr-12">
+                                    class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none pr-12">
                                 <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400">hari</span>
                             </div>
                         </div>
@@ -403,14 +403,14 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between pt-1">
+                    <div class="flex items-center justify-between gap-2 pt-1">
                         <button type="button" onclick="switchTab('tab-pemohon')"
-                            class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer">
+                            class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer">
                             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
                             <span>Kembali</span>
                         </button>
                         <button type="button" onclick="switchTab('tab-pengesahan')"
-                            class="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
+                            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
                             <span>Seterusnya: Tandatangan</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </button>
@@ -420,27 +420,28 @@
                 <!-- ==================== TAB 3: TANDATANGAN & PENGESAHAN ==================== -->
                 <div id="tab-pengesahan" class="tab-panel hidden space-y-4">
                     <!-- Pad Tandatangan Pemohon -->
-                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                                <i data-lucide="signature" class="w-4 h-4 text-[#3f5829]"></i>
-                                Tandatangan Pemohon
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 space-y-3">
+                        <div class="flex items-center justify-between gap-2">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
+                                <i data-lucide="signature" class="w-4 h-4 text-[#3f5829] shrink-0"></i>
+                                <span>Tandatangan Pemohon</span>
                             </h2>
-                            <div class="flex items-center gap-2.5">
-                                <label class="text-[11px] font-semibold text-[#3f5829] hover:underline flex items-center gap-1 cursor-pointer">
-                                    <i data-lucide="upload" class="w-3 h-3"></i> Muat Naik
+                            <div class="flex items-center gap-1.5 shrink-0">
+                                <label class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-lg transition cursor-pointer whitespace-nowrap">
+                                    <i data-lucide="upload" class="w-3 h-3"></i>
+                                    <span>Muat Naik</span>
                                     <input type="file" accept="image/*" onchange="handleSigUpload(event, 'pemohon')" class="hidden">
                                 </label>
-                                <span class="text-slate-300">|</span>
-                                <button type="button" onclick="clearSignature('pemohon')" class="text-[11px] font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer">
-                                    <i data-lucide="eraser" class="w-3 h-3"></i> Padam
+                                <button type="button" onclick="clearSignature('pemohon')" class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition cursor-pointer whitespace-nowrap">
+                                    <i data-lucide="eraser" class="w-3 h-3"></i>
+                                    <span>Padam</span>
                                 </button>
                             </div>
                         </div>
 
                         <div class="relative bg-white border-2 border-dashed border-slate-300 rounded-xl overflow-hidden touch-none">
                             <canvas id="sigCanvasPemohon" class="w-full h-28 block cursor-crosshair"></canvas>
-                            <div id="sigPlaceholderPemohon" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-[11px]">
+                            <div id="sigPlaceholderPemohon" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-[11px] px-4 text-center">
                                 <i data-lucide="pen-line" class="w-4 h-4 mb-1 opacity-60"></i>
                                 <span>Lukis tandatangan atau klik Muat Naik (PNG/JPG)</span>
                             </div>
@@ -449,29 +450,29 @@
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Tarikh Permohonan</label>
                             <input type="date" id="inTarikhMohon" onchange="syncForm()"
-                                class="w-full px-3.5 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                class="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
                         </div>
                     </div>
 
                     <!-- Maklumat Penyemak & Pelulus (Terbuka & Lengkap) -->
-                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-4">
-                        <div class="flex items-center justify-between">
-                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                                <i data-lucide="users-check" class="w-4 h-4 text-[#3f5829]"></i>
-                                Maklumat Semakan &amp; Kelulusan
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-3.5 sm:p-4 space-y-4">
+                        <div class="flex items-center justify-between gap-2">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-600 flex items-center gap-1.5">
+                                <i data-lucide="users-check" class="w-4 h-4 text-[#3f5829] shrink-0"></i>
+                                <span>Semakan &amp; Kelulusan</span>
                             </h2>
-                            <span class="text-[10px] font-medium text-slate-400">Auto-kemas kini</span>
+                            <span class="text-[10px] font-medium text-slate-400 shrink-0">Auto-kemas kini</span>
                         </div>
 
                         <!-- 1) SEMAKAN -->
-                        <div class="p-3 bg-white border border-slate-200/90 rounded-xl space-y-2.5">
-                            <p class="text-[11px] font-bold text-[#3f5829] uppercase tracking-wide">1) Bahagian Semakan</p>
+                        <div class="p-3.5 bg-white border border-slate-200/90 rounded-xl space-y-3">
+                            <p class="text-[11px] font-bold text-[#3f5829] uppercase tracking-wide border-b border-slate-100 pb-1.5">1) Bahagian Semakan</p>
                             <div>
                                 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Penyemak</label>
                                 <input type="text" id="inSemakNama" oninput="syncForm()" placeholder="Contoh: MOHD FARID BIN HASSAN"
                                     class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
                             </div>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-600 mb-1">Jawatan</label>
                                     <input type="text" id="inSemakJawatan" oninput="syncForm()" placeholder="Contoh: KETUA UNIT"
@@ -480,21 +481,21 @@
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-600 mb-1">Tarikh Semakan</label>
                                     <input type="date" id="inSemakTarikh" onchange="syncForm()"
-                                        class="w-full px-2.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                        class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Status Ulasan Semakan</label>
                                 <div class="grid grid-cols-3 gap-1.5">
-                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition text-center whitespace-nowrap">
                                         <input type="radio" name="radSemakan" value="none" checked onchange="syncForm()" class="hidden">
                                         <span>Kosongkan</span>
                                     </label>
-                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-[#3f5829] has-[:checked]:bg-[#3f5829] has-[:checked]:text-white has-[:checked]:border-[#3f5829] transition">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-[#3f5829] has-[:checked]:bg-[#3f5829] has-[:checked]:text-white has-[:checked]:border-[#3f5829] transition text-center whitespace-nowrap">
                                         <input type="radio" name="radSemakan" value="sokong" onchange="syncForm()" class="hidden">
-                                        <span>MENYOKONG</span>
+                                        <span>SOKONG</span>
                                     </label>
-                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-rose-500 has-[:checked]:bg-rose-600 has-[:checked]:text-white has-[:checked]:border-rose-600 transition">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-rose-500 has-[:checked]:bg-rose-600 has-[:checked]:text-white has-[:checked]:border-rose-600 transition text-center whitespace-nowrap">
                                         <input type="radio" name="radSemakan" value="tidak" onchange="syncForm()" class="hidden">
                                         <span>TIDAK SOKONG</span>
                                     </label>
@@ -502,22 +503,23 @@
                             </div>
                             <!-- Tandatangan Pegawai Semakan -->
                             <div class="pt-1">
-                                <div class="flex items-center justify-between mb-1">
+                                <div class="flex items-center justify-between gap-2 mb-1.5">
                                     <label class="text-[11px] font-semibold text-slate-600">Tandatangan Penyemak</label>
-                                    <div class="flex items-center gap-2">
-                                        <label class="text-[10px] font-semibold text-[#3f5829] hover:underline flex items-center gap-0.5 cursor-pointer">
-                                            <i data-lucide="upload" class="w-3 h-3"></i> Muat Naik
+                                    <div class="flex items-center gap-1.5 shrink-0">
+                                        <label class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-md cursor-pointer whitespace-nowrap">
+                                            <i data-lucide="upload" class="w-3 h-3"></i>
+                                            <span>Muat Naik</span>
                                             <input type="file" accept="image/*" onchange="handleSigUpload(event, 'semak')" class="hidden">
                                         </label>
-                                        <span class="text-slate-300">|</span>
-                                        <button type="button" onclick="clearSignature('semak')" class="text-[10px] font-semibold text-rose-600 hover:underline flex items-center gap-0.5 cursor-pointer">
-                                            <i data-lucide="eraser" class="w-3 h-3"></i> Padam
+                                        <button type="button" onclick="clearSignature('semak')" class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-md cursor-pointer whitespace-nowrap">
+                                            <i data-lucide="eraser" class="w-3 h-3"></i>
+                                            <span>Padam</span>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="relative bg-slate-50 border border-dashed border-slate-300 rounded-lg overflow-hidden touch-none">
-                                    <canvas id="sigCanvasSemak" class="w-full h-20 block cursor-crosshair"></canvas>
-                                    <div id="sigPlaceholderSemak" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px]">
+                                    <canvas id="sigCanvasSemak" class="w-full h-24 block cursor-crosshair"></canvas>
+                                    <div id="sigPlaceholderSemak" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px] px-3 text-center">
                                         <span>Lukis atau Muat Naik tandatangan penyemak</span>
                                     </div>
                                 </div>
@@ -525,14 +527,14 @@
                         </div>
 
                         <!-- 2) KELULUSAN -->
-                        <div class="p-3 bg-white border border-slate-200/90 rounded-xl space-y-2.5">
-                            <p class="text-[11px] font-bold text-[#3f5829] uppercase tracking-wide">2) Bahagian Kelulusan</p>
+                        <div class="p-3.5 bg-white border border-slate-200/90 rounded-xl space-y-3">
+                            <p class="text-[11px] font-bold text-[#3f5829] uppercase tracking-wide border-b border-slate-100 pb-1.5">2) Bahagian Kelulusan</p>
                             <div>
                                 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Pelulus</label>
                                 <input type="text" id="inLulusNama" oninput="syncForm()" placeholder="Contoh: HAJI AHMAD ZAKI"
                                     class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
                             </div>
-                            <div class="grid grid-cols-2 gap-2">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-600 mb-1">Jawatan</label>
                                     <input type="text" id="inLulusJawatan" oninput="syncForm()" placeholder="Contoh: PENGURUS HR"
@@ -541,21 +543,21 @@
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-600 mb-1">Tarikh Kelulusan</label>
                                     <input type="date" id="inLulusTarikh" onchange="syncForm()"
-                                        class="w-full px-2.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                        class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
                                 </div>
                             </div>
                             <div>
                                 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Status Ulasan Kelulusan</label>
                                 <div class="grid grid-cols-3 gap-1.5">
-                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition text-center whitespace-nowrap">
                                         <input type="radio" name="radKelulusan" value="none" checked onchange="syncForm()" class="hidden">
                                         <span>Kosongkan</span>
                                     </label>
-                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-[#3f5829] has-[:checked]:bg-[#3f5829] has-[:checked]:text-white has-[:checked]:border-[#3f5829] transition">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-[#3f5829] has-[:checked]:bg-[#3f5829] has-[:checked]:text-white has-[:checked]:border-[#3f5829] transition text-center whitespace-nowrap">
                                         <input type="radio" name="radKelulusan" value="lulus" onchange="syncForm()" class="hidden">
-                                        <span>MELULUSKAN</span>
+                                        <span>LULUS</span>
                                     </label>
-                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-rose-500 has-[:checked]:bg-rose-600 has-[:checked]:text-white has-[:checked]:border-rose-600 transition">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-rose-500 has-[:checked]:bg-rose-600 has-[:checked]:text-white has-[:checked]:border-rose-600 transition text-center whitespace-nowrap">
                                         <input type="radio" name="radKelulusan" value="tidak" onchange="syncForm()" class="hidden">
                                         <span>TIDAK LULUS</span>
                                     </label>
@@ -563,22 +565,23 @@
                             </div>
                             <!-- Tandatangan Pegawai Kelulusan -->
                             <div class="pt-1">
-                                <div class="flex items-center justify-between mb-1">
+                                <div class="flex items-center justify-between gap-2 mb-1.5">
                                     <label class="text-[11px] font-semibold text-slate-600">Tandatangan Pelulus</label>
-                                    <div class="flex items-center gap-2">
-                                        <label class="text-[10px] font-semibold text-[#3f5829] hover:underline flex items-center gap-0.5 cursor-pointer">
-                                            <i data-lucide="upload" class="w-3 h-3"></i> Muat Naik
+                                    <div class="flex items-center gap-1.5 shrink-0">
+                                        <label class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-md cursor-pointer whitespace-nowrap">
+                                            <i data-lucide="upload" class="w-3 h-3"></i>
+                                            <span>Muat Naik</span>
                                             <input type="file" accept="image/*" onchange="handleSigUpload(event, 'lulus')" class="hidden">
                                         </label>
-                                        <span class="text-slate-300">|</span>
-                                        <button type="button" onclick="clearSignature('lulus')" class="text-[10px] font-semibold text-rose-600 hover:underline flex items-center gap-0.5 cursor-pointer">
-                                            <i data-lucide="eraser" class="w-3 h-3"></i> Padam
+                                        <button type="button" onclick="clearSignature('lulus')" class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-md cursor-pointer whitespace-nowrap">
+                                            <i data-lucide="eraser" class="w-3 h-3"></i>
+                                            <span>Padam</span>
                                         </button>
                                     </div>
                                 </div>
                                 <div class="relative bg-slate-50 border border-dashed border-slate-300 rounded-lg overflow-hidden touch-none">
-                                    <canvas id="sigCanvasLulus" class="w-full h-20 block cursor-crosshair"></canvas>
-                                    <div id="sigPlaceholderLulus" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px]">
+                                    <canvas id="sigCanvasLulus" class="w-full h-24 block cursor-crosshair"></canvas>
+                                    <div id="sigPlaceholderLulus" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px] px-3 text-center">
                                         <span>Lukis atau Muat Naik tandatangan pelulus</span>
                                     </div>
                                 </div>
@@ -586,24 +589,22 @@
                         </div>
                     </div>
 
-                    <div class="flex items-center justify-between pt-1">
+                    <div class="flex items-center justify-between gap-2 pt-1">
                         <button type="button" onclick="switchTab('tab-cuti')"
-                            class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer">
+                            class="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer">
                             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
                             <span>Kembali</span>
                         </button>
-                        <div class="flex items-center gap-2">
-                            <button type="button" onclick="setMobileView('preview')"
-                                class="lg:hidden inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-xl transition cursor-pointer">
-                                <i data-lucide="eye" class="w-4 h-4"></i>
-                                <span>Semak Borang</span>
-                            </button>
-                            <button type="button" onclick="window.print()"
-                                class="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-[#3f5829] hover:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
-                                <i data-lucide="printer" class="w-4 h-4"></i>
-                                <span>Cetak</span>
-                            </button>
-                        </div>
+                        <button type="button" onclick="setMobileView('preview')"
+                            class="lg:hidden flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
+                            <i data-lucide="eye" class="w-4 h-4"></i>
+                            <span>Semak Borang A4</span>
+                        </button>
+                        <button type="button" onclick="window.print()"
+                            class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-[#3f5829] hover:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
+                            <i data-lucide="printer" class="w-4 h-4"></i>
+                            <span>Cetak</span>
+                        </button>
                     </div>
                 </div>
 
