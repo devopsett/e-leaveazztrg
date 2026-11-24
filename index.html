@@ -325,8 +325,8 @@
         <!-- PANEL KIRI: EDITOR BERSTRUKTUR FLOATING & STICKY DENGAN TAB -->
         <aside id="editorPanel" class="no-print w-full lg:w-[430px] xl:w-[465px] glass-panel border-b lg:border lg:border-white/85 lg:rounded-3xl flex flex-col lg:h-full lg:sticky lg:top-0 shrink-0 shadow-xl shadow-slate-900/10 lg:overflow-hidden">
             
-            <!-- Navigasi Tab Langkah (Sticky di atas panel editor) -->
-            <div class="sticky top-[57px] lg:top-0 z-10 px-3.5 sm:px-4 pt-3 pb-2.5 bg-white/75 backdrop-blur-md border-b border-white/70">
+            <!-- Navigasi Tab Langkah (Sticky di atas panel editor tanpa bergerak di mobile & desktop) -->
+            <div class="sticky top-[109px] lg:top-0 z-20 px-3.5 sm:px-4 pt-3 pb-2.5 bg-white/85 backdrop-blur-xl border-b border-white/70 shadow-2xs lg:shadow-none">
                 <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-200/60 backdrop-blur-sm rounded-xl border border-white/60">
                     <button type="button" onclick="switchTab('tab-pemohon')" id="btn-tab-pemohon"
                         class="tab-btn flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 py-2 px-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-white/95 text-[#3f5829] shadow-sm transition cursor-pointer text-center leading-tight">
