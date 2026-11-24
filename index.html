@@ -9,7 +9,7 @@
     <!-- Google Fonts: Inter & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <!-- Definisi awal pengendali ralat gambar logo sebelum DOM siap -->
@@ -50,7 +50,7 @@
         }
 
         /* =========================================================
-           GAYA RASMI BORANG A4 HR-05 (04/2022) - JANGAN DIUBAH
+           GAYA RASMI BORANG A4 HR-05 (04/2022) - SERAGAM DESKTOP & MOBILE
            ========================================================= */
         .a4-paper {
             width: 210mm;
@@ -59,11 +59,24 @@
             margin: 0 auto;
             background: #ffffff;
             box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.18);
-            font-family: Arial, Helvetica, sans-serif;
+            font-family: 'Arimo', Arial, Helvetica, sans-serif;
             color: #000000;
             position: relative;
             box-sizing: border-box;
             line-height: 1.25;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .a4-paper b,
+        .a4-paper strong,
+        .a4-paper [style*="font-weight: bold"],
+        .a4-paper .dotted-line,
+        .a4-paper .cb-box,
+        .a4-paper .form-table th,
+        .a4-paper .title-banner {
+            font-weight: 700 !important;
         }
 
         .dotted-line {
@@ -74,8 +87,8 @@
             vertical-align: bottom;
             padding-left: 6px;
             padding-right: 4px;
-            font-weight: bold;
-            color: #0f172a;
+            font-weight: 700;
+            color: #000000;
             font-size: 10.5pt;
             box-sizing: border-box;
         }
@@ -231,7 +244,7 @@
 
             <div class="h-5 w-[1px] bg-slate-200 mx-0.5 hidden sm:block"></div>
 
-            <button type="button" onclick="window.print()"
+            <button type="button" onclick="printForm()"
                 class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
                 <i data-lucide="printer" class="w-4 h-4"></i>
                 <span>Cetak / PDF</span>
@@ -659,7 +672,7 @@
                             <i data-lucide="eye" class="w-4 h-4"></i>
                             <span>Semak Borang A4</span>
                         </button>
-                        <button type="button" onclick="window.print()"
+                        <button type="button" onclick="printForm()"
                             class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-[#3f5829] hover:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
                             <i data-lucide="printer" class="w-4 h-4"></i>
                             <span>Cetak</span>
@@ -968,7 +981,7 @@
             <i data-lucide="bookmark-check" class="w-4 h-4 text-[#3f5829]"></i>
             <span>Simpan Profil</span>
         </button>
-        <button type="button" onclick="window.print()"
+        <button type="button" onclick="printForm()"
             class="flex-[1.3] inline-flex items-center justify-center gap-1.5 py-2.5 px-4 text-xs font-bold text-white bg-[#3f5829] active:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
             <i data-lucide="printer" class="w-4 h-4"></i>
             <span>Cetak / Simpan PDF</span>
@@ -1507,7 +1520,45 @@
             txtLulus.style.fontWeight = (radLulus === 'lulus') ? 'bold' : 'normal';
             txtTidakLulus.style.textDecoration = (radLulus === 'lulus') ? 'line-through' : 'none';
             txtTidakLulus.style.fontWeight = (radLulus === 'tidak') ? 'bold' : 'normal';
+
+            // Kemas kini tajuk dokumen supaya nama fail PDF automatik mengikut format (CUTI APA - NAMA TANPA BIN/BINTI)
+            updateDocumentFilename();
         }
+
+        function getFormattedPdfFilename() {
+            const jenisList = [];
+            if (document.getElementById('chkTahunan')?.checked) jenisList.push('CUTI TAHUNAN');
+            if (document.getElementById('chkTanpaGaji')?.checked) jenisList.push('CUTI TANPA GAJI');
+            if (document.getElementById('chkSakit')?.checked) jenisList.push('CUTI SAKIT');
+            if (document.getElementById('chkKecemasan')?.checked) jenisList.push('CUTI KECEMASAN');
+            if (document.getElementById('chkGanti')?.checked) jenisList.push('CUTI GANTI');
+            if (document.getElementById('chkLain')?.checked) {
+                const lainVal = (document.getElementById('inLainText')?.value || '').trim().toUpperCase();
+                jenisList.push(lainVal || 'CUTI LAIN-LAIN');
+            }
+
+            const jenisStr = jenisList.length > 0 ? jenisList.join(', ') : 'PERMOHONAN CUTI';
+
+            // Ambil nama dan buang BIN / BINTI / B. / BT. / A/L / A/P serta nama bapa selepasnya
+            let rawNama = (document.getElementById('inNama')?.value || '').trim().toUpperCase();
+            let cleanNama = rawNama
+                .split(/\s+(?:BIN|BINTI|B\.|BT\.|A\/L|A\/P)\b/i)[0]
+                .replace(/[\\/:*?"<>|]/g, '')
+                .trim();
+
+            return cleanNama ? `${jenisStr} - ${cleanNama}` : jenisStr;
+        }
+
+        function updateDocumentFilename() {
+            document.title = getFormattedPdfFilename();
+        }
+
+        function printForm() {
+            updateDocumentFilename();
+            window.print();
+        }
+
+        window.addEventListener('beforeprint', updateDocumentFilename);
 
         // =========================================================
         // 6. SIMPAN PROFIL STAF & SET SEMULA BORANG
