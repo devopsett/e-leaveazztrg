@@ -734,11 +734,11 @@
                         <!-- =========================================================
                              RUANGAN LOGO RASMI: FAIL 'logo azzuha.png' DI BACKEND
                              ========================================================= -->
-                        <div id="customLogoContainer" style="display: flex; align-items: center; justify-content: center; margin-top: 2px;">
+                        <div id="customLogoContainer" style="display: flex; align-items: center; justify-content: center; margin-top: 2px; height: 82px;">
                             <img id="customLogoImg" src="./logo azzuha.png" alt="Az-Zuha Group Travel & Tours"
                                  onload="autoCropGitHubLogo(this)"
                                  onerror="handleGitHubLogoMissing()"
-                                 style="height: 82px; width: auto; max-width: 280px; object-fit: contain; display: block;">
+                                 style="height: 82px !important; min-height: 82px !important; width: auto !important; max-width: 280px !important; object-fit: contain; display: block;">
                         </div>
 
                         <!-- Kotak Panduan Jika Fail Gambar Belum Dimasukkan -->
@@ -1082,26 +1082,36 @@
             if (promptBox) promptBox.classList.add('hidden');
 
             if (imgEl.dataset.cropped === 'true') return;
+            imgEl.dataset.cropped = 'true';
 
             try {
+                const nw = imgEl.naturalWidth;
+                const nh = imgEl.naturalHeight;
+                if (!nw || !nh) return;
+
+                // Hadkan saiz kanvas sementara supaya telefon memori rendah tidak gagal memproses imej besar
+                const maxDim = 600;
+                const ratio = Math.min(1, maxDim / Math.max(nw, nh));
+                const cwTemp = Math.round(nw * ratio);
+                const chTemp = Math.round(nh * ratio);
+
                 const tempCanvas = document.createElement('canvas');
-                tempCanvas.width = imgEl.naturalWidth;
-                tempCanvas.height = imgEl.naturalHeight;
-                if (tempCanvas.width === 0 || tempCanvas.height === 0) return;
+                tempCanvas.width = cwTemp;
+                tempCanvas.height = chTemp;
 
                 const ctx = tempCanvas.getContext('2d');
-                ctx.drawImage(imgEl, 0, 0);
+                ctx.drawImage(imgEl, 0, 0, cwTemp, chTemp);
 
-                const imgData = ctx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+                const imgData = ctx.getImageData(0, 0, cwTemp, chTemp);
                 const data = imgData.data;
-                let minX = tempCanvas.width, minY = tempCanvas.height, maxX = 0, maxY = 0;
+                let minX = cwTemp, minY = chTemp, maxX = 0, maxY = 0;
                 let hasPixels = false;
 
                 for (let i = 0; i < data.length; i += 4) {
-                    if (data[i + 3] > 15) {
+                    if (data[i + 3] > 20) {
                         hasPixels = true;
-                        const px = (i / 4) % tempCanvas.width;
-                        const py = Math.floor((i / 4) / tempCanvas.width);
+                        const px = (i / 4) % cwTemp;
+                        const py = Math.floor((i / 4) / cwTemp);
                         if (px < minX) minX = px;
                         if (px > maxX) maxX = px;
                         if (py < minY) minY = py;
@@ -1111,21 +1121,25 @@
 
                 if (hasPixels && maxX > minX && maxY > minY) {
                     const pad = 2;
-                    const cw = Math.min(tempCanvas.width, maxX - minX + pad * 2);
-                    const ch = Math.min(tempCanvas.height, maxY - minY + pad * 2);
+                    const cw = Math.min(cwTemp, maxX - minX + pad * 2);
+                    const ch = Math.min(chTemp, maxY - minY + pad * 2);
                     const sx = Math.max(0, minX - pad);
                     const sy = Math.max(0, minY - pad);
 
-                    const cropCanvas = document.createElement('canvas');
-                    cropCanvas.width = cw;
-                    cropCanvas.height = ch;
-                    cropCanvas.getContext('2d').drawImage(tempCanvas, sx, sy, cw, ch, 0, 0, cw, ch);
-
-                    imgEl.dataset.cropped = 'true';
-                    imgEl.src = cropCanvas.toDataURL('image/png');
+                    // Hanya gantikan sumber imej jika ruang kosong melebihi 15% daripada keseluruhan imej
+                    if (cw < cwTemp * 0.85 || ch < chTemp * 0.85) {
+                        const cropCanvas = document.createElement('canvas');
+                        cropCanvas.width = cw;
+                        cropCanvas.height = ch;
+                        cropCanvas.getContext('2d').drawImage(tempCanvas, sx, sy, cw, ch, 0, 0, cw, ch);
+                        const dataUrl = cropCanvas.toDataURL('image/png');
+                        if (dataUrl && dataUrl.length > 100) {
+                            imgEl.src = dataUrl;
+                        }
+                    }
                 }
             } catch (e) {
-                // Abaikan jika imej dari domain luar menyekat canvas CORS
+                // Kekalkan imej asal jika pelayar telefon menyekat pemprosesan kanvas
             }
         }
 
@@ -1531,8 +1545,8 @@
             txtTidakLulus.style.textDecoration = (radLulus === 'lulus') ? 'line-through' : 'none';
             txtTidakLulus.style.fontWeight = (radLulus === 'tidak') ? 'bold' : 'normal';
 
-            // Kemas kini tajuk dokumen supaya nama fail PDF automatik mengikut format (CUTI APA - NAMA TANPA BIN/BINTI)
-            updateDocumentFilename();
+            // Kekalkan tajuk tab pelayar sebagai e-Leave semasa mengisi borang
+            document.title = 'e-Leave';
         }
 
         function getFormattedPdfFilename() {
@@ -1575,12 +1589,16 @@
         }
 
         function restoreAfterPrint() {
+            document.title = 'e-Leave';
             fitPreviewToScreen();
         }
 
         function printForm() {
             prepareForPrint();
             window.print();
+            setTimeout(() => {
+                document.title = 'e-Leave';
+            }, 1000);
         }
 
         window.addEventListener('beforeprint', prepareForPrint);
