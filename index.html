@@ -287,36 +287,6 @@
                         </div>
                     </div>
 
-                    <!-- Kad Pengurusan Logo GitHub / Tempatan -->
-                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3">
-                        <div class="flex items-center justify-between">
-                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
-                                <i data-lucide="image" class="w-4 h-4 text-[#3f5829]"></i>
-                                Logo Rasmi Syarikat
-                            </h2>
-                            <button type="button" onclick="resetToGitHubLogo()" class="text-[11px] font-semibold text-[#3f5829] hover:underline cursor-pointer">
-                                Lalai GitHub
-                            </button>
-                        </div>
-
-                        <p class="text-[11px] text-slate-500 leading-relaxed">
-                            Sistem membaca <code class="px-1.5 py-0.5 bg-slate-200/80 rounded text-slate-800 font-mono">./logo-azzuha.png</code> secara automatik. Anda juga boleh memuat naik fail PNG/JPG sementara dari peranti anda di bawah:
-                        </p>
-
-                        <label class="flex flex-col items-center justify-center w-full p-3.5 border-2 border-dashed border-slate-300 hover:border-[#3f5829] bg-white hover:bg-[#3f5829]/5 rounded-xl cursor-pointer transition group">
-                            <div class="flex items-center gap-2 text-xs font-semibold text-slate-700 group-hover:text-[#3f5829]">
-                                <i data-lucide="upload-cloud" class="w-4 h-4"></i>
-                                <span>Pilih Fail Logo (PNG / JPG) atau Tampal (Ctrl+V)</span>
-                            </div>
-                            <input type="file" id="inLogoFile" accept="image/*" onchange="handleLogoUpload(event)" class="hidden">
-                        </label>
-
-                        <label class="flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none">
-                            <input type="checkbox" id="chkRemoveBlackBg" checked onchange="reprocessUploadedLogo()" class="rounded border-slate-300 text-[#3f5829] focus:ring-[#3f5829]">
-                            <span>Buang latar belakang hitam (untuk fail .jpg)</span>
-                        </label>
-                    </div>
-
                     <div class="flex justify-end pt-1">
                         <button type="button" onclick="switchTab('tab-cuti')"
                             class="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
@@ -439,16 +409,23 @@
                                 <i data-lucide="signature" class="w-4 h-4 text-[#3f5829]"></i>
                                 Tandatangan Pemohon
                             </h2>
-                            <button type="button" onclick="clearSignature()" class="text-[11px] font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer">
-                                <i data-lucide="eraser" class="w-3 h-3"></i> Padam
-                            </button>
+                            <div class="flex items-center gap-2.5">
+                                <label class="text-[11px] font-semibold text-[#3f5829] hover:underline flex items-center gap-1 cursor-pointer">
+                                    <i data-lucide="upload" class="w-3 h-3"></i> Muat Naik
+                                    <input type="file" accept="image/*" onchange="handleSigUpload(event, 'pemohon')" class="hidden">
+                                </label>
+                                <span class="text-slate-300">|</span>
+                                <button type="button" onclick="clearSignature('pemohon')" class="text-[11px] font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer">
+                                    <i data-lucide="eraser" class="w-3 h-3"></i> Padam
+                                </button>
+                            </div>
                         </div>
 
                         <div class="relative bg-white border-2 border-dashed border-slate-300 rounded-xl overflow-hidden touch-none">
-                            <canvas id="sigCanvas" class="w-full h-32 block cursor-crosshair"></canvas>
-                            <div id="sigPlaceholder" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-xs">
-                                <i data-lucide="pen-line" class="w-5 h-5 mb-1 opacity-60"></i>
-                                <span>Lukis tandatangan menggunakan tetikus atau jari</span>
+                            <canvas id="sigCanvasPemohon" class="w-full h-28 block cursor-crosshair"></canvas>
+                            <div id="sigPlaceholderPemohon" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-[11px]">
+                                <i data-lucide="pen-line" class="w-4 h-4 mb-1 opacity-60"></i>
+                                <span>Lukis tandatangan atau klik Muat Naik (PNG/JPG)</span>
                             </div>
                         </div>
 
@@ -506,6 +483,28 @@
                                     </label>
                                 </div>
                             </div>
+                            <!-- Tandatangan Pegawai Semakan -->
+                            <div class="pt-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <label class="text-[11px] font-semibold text-slate-600">Tandatangan Penyemak</label>
+                                    <div class="flex items-center gap-2">
+                                        <label class="text-[10px] font-semibold text-[#3f5829] hover:underline flex items-center gap-0.5 cursor-pointer">
+                                            <i data-lucide="upload" class="w-3 h-3"></i> Muat Naik
+                                            <input type="file" accept="image/*" onchange="handleSigUpload(event, 'semak')" class="hidden">
+                                        </label>
+                                        <span class="text-slate-300">|</span>
+                                        <button type="button" onclick="clearSignature('semak')" class="text-[10px] font-semibold text-rose-600 hover:underline flex items-center gap-0.5 cursor-pointer">
+                                            <i data-lucide="eraser" class="w-3 h-3"></i> Padam
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="relative bg-slate-50 border border-dashed border-slate-300 rounded-lg overflow-hidden touch-none">
+                                    <canvas id="sigCanvasSemak" class="w-full h-20 block cursor-crosshair"></canvas>
+                                    <div id="sigPlaceholderSemak" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px]">
+                                        <span>Lukis atau Muat Naik tandatangan penyemak</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <!-- 2) KELULUSAN -->
@@ -543,6 +542,28 @@
                                         <input type="radio" name="radKelulusan" value="tidak" onchange="syncForm()" class="hidden">
                                         <span>TIDAK LULUS</span>
                                     </label>
+                                </div>
+                            </div>
+                            <!-- Tandatangan Pegawai Kelulusan -->
+                            <div class="pt-1">
+                                <div class="flex items-center justify-between mb-1">
+                                    <label class="text-[11px] font-semibold text-slate-600">Tandatangan Pelulus</label>
+                                    <div class="flex items-center gap-2">
+                                        <label class="text-[10px] font-semibold text-[#3f5829] hover:underline flex items-center gap-0.5 cursor-pointer">
+                                            <i data-lucide="upload" class="w-3 h-3"></i> Muat Naik
+                                            <input type="file" accept="image/*" onchange="handleSigUpload(event, 'lulus')" class="hidden">
+                                        </label>
+                                        <span class="text-slate-300">|</span>
+                                        <button type="button" onclick="clearSignature('lulus')" class="text-[10px] font-semibold text-rose-600 hover:underline flex items-center gap-0.5 cursor-pointer">
+                                            <i data-lucide="eraser" class="w-3 h-3"></i> Padam
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="relative bg-slate-50 border border-dashed border-slate-300 rounded-lg overflow-hidden touch-none">
+                                    <canvas id="sigCanvasLulus" class="w-full h-20 block cursor-crosshair"></canvas>
+                                    <div id="sigPlaceholderLulus" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px]">
+                                        <span>Lukis atau Muat Naik tandatangan pelulus</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -603,20 +624,20 @@
                         </div>
 
                         <!-- =========================================================
-                             RUANGAN LOGO RASMI: TUKAR 'src' DI BAWAH DENGAN FAIL GAMBAR ANDA
+                             RUANGAN LOGO RASMI: FAIL 'logo azzuha.png' DI BACKEND
                              ========================================================= -->
                         <div id="customLogoContainer" style="display: flex; align-items: center; justify-content: center; margin-top: 2px;">
-                            <img id="customLogoImg" src="logo azzuha.png" alt="Az-Zuha Group Travel & Tours"
+                            <img id="customLogoImg" src="./logo azzuha.png" alt="Az-Zuha Group Travel & Tours"
                                  onload="autoCropGitHubLogo(this)"
                                  onerror="handleGitHubLogoMissing()"
                                  style="height: 82px; width: auto; max-width: 280px; object-fit: contain; display: block;">
                         </div>
 
                         <!-- Kotak Panduan Jika Fail Gambar Belum Dimasukkan -->
-                        <div id="logoUploadPrompt" class="hidden no-print" onclick="document.getElementById('inLogoFile').click()"
-                             style="border: 1.5px dashed #3f5829; background: #f4f7f1; padding: 8px 16px; border-radius: 6px; cursor: pointer; text-align: center; margin-top: 6px;">
-                            <div style="font-size: 9.5pt; font-weight: bold; color: #3f5829;">[ Letakkan fail logo-azzuha.png atau Klik untuk pratonton ]</div>
-                            <div style="font-size: 8pt; color: #475569;">Kotak ini tidak akan kelihatan semasa cetakan PDF</div>
+                        <div id="logoUploadPrompt" class="hidden no-print"
+                             style="border: 1.5px dashed #3f5829; background: #f4f7f1; padding: 8px 16px; border-radius: 6px; text-align: center; margin-top: 6px;">
+                            <div style="font-size: 9.5pt; font-weight: bold; color: #3f5829;">[ Fail logo azzuha.png akan dipaparkan di sini ]</div>
+                            <div style="font-size: 8pt; color: #475569;">Kotak panduan ini tidak akan kelihatan semasa cetakan PDF</div>
                         </div>
                     </div>
 
@@ -750,7 +771,10 @@
                                     <span id="txtSokong">MENYOKONG</span> / <span id="txtTidakSokong">TIDAK MENYOKONG</span><br>
                                     permohonan ini
                                 </td>
-                                <td style="vertical-align: bottom;">
+                                <td style="vertical-align: bottom; position: relative;">
+                                    <div style="height: 44px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                                        <img id="outSigSemakImg" src="" alt="" style="display: none; max-height: 44px; max-width: 145px; object-fit: contain; pointer-events: none;">
+                                    </div>
                                     <div>Tarikh: <span id="outSemakTarikh" style="font-weight: bold;"></span></div>
                                 </td>
                             </tr>
@@ -772,7 +796,10 @@
                                     dan <span id="txtLulus">MELULUSKAN</span> / <span id="txtTidakLulus">TIDAK<br>
                                     MELULUSKAN</span> terhadap permohonan ini
                                 </td>
-                                <td style="vertical-align: bottom;">
+                                <td style="vertical-align: bottom; position: relative;">
+                                    <div style="height: 44px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                                        <img id="outSigLulusImg" src="" alt="" style="display: none; max-height: 44px; max-width: 145px; object-fit: contain; pointer-events: none;">
+                                    </div>
                                     <div>Tarikh: <span id="outLulusTarikh" style="font-weight: bold;"></span></div>
                                 </td>
                             </tr>
@@ -784,7 +811,7 @@
                         <div style="display: flex; align-items: flex-end; margin-bottom: 12px; min-height: 36px;">
                             <span style="width: 155px; white-space: nowrap;">Tandatangan pemohon :</span>
                             <div style="width: 210px; border-bottom: 1.5px dotted #000000; position: relative; height: 34px;">
-                                <img id="outSigImg" src="" alt="" style="display: none; position: absolute; bottom: 1px; left: 15px; max-height: 44px; max-width: 180px; pointer-events: none;">
+                                <img id="outSigPemohonImg" src="" alt="" style="display: none; position: absolute; bottom: 1px; left: 15px; max-height: 44px; max-width: 180px; object-fit: contain; pointer-events: none;">
                             </div>
                         </div>
                         <div style="display: flex; align-items: baseline;">
@@ -853,7 +880,6 @@
         lucide.createIcons();
 
         // Pemboleh ubah global
-        let rawUploadedLogoDataUrl = null;
         let currentZoom = 1.0;
 
         // =========================================================
@@ -877,205 +903,308 @@
             }
 
             if (tabId === 'tab-pengesahan') {
-                setTimeout(resizeSignatureCanvas, 50);
+                setTimeout(resizeAllSignatureCanvases, 50);
             }
         }
 
         // =========================================================
-        // 2. KAWALAN ZOOM & SKALA RESPONSIF KERTAS A4
+        // 2. PENGURUSAN LOGO RASMI & AUTO-CROP RUANG LUTSINAR
         // =========================================================
+        function autoCropGitHubLogo(imgEl) {
+            const container = document.getElementById('customLogoContainer');
+            const promptBox = document.getElementById('logoUploadPrompt');
+            if (container) container.classList.remove('hidden');
+            if (promptBox) promptBox.classList.add('hidden');
+
+            if (imgEl.dataset.cropped === 'true') return;
+
+            try {
+                const tempCanvas = document.createElement('canvas');
+                tempCanvas.width = imgEl.naturalWidth;
+                tempCanvas.height = imgEl.naturalHeight;
+                if (tempCanvas.width === 0 || tempCanvas.height === 0) return;
+
+                const ctx = tempCanvas.getContext('2d');
+                ctx.drawImage(imgEl, 0, 0);
+
+                const imgData = ctx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+                const data = imgData.data;
+                let minX = tempCanvas.width, minY = tempCanvas.height, maxX = 0, maxY = 0;
+                let hasPixels = false;
+
+                for (let i = 0; i < data.length; i += 4) {
+                    if (data[i + 3] > 15) {
+                        hasPixels = true;
+                        const px = (i / 4) % tempCanvas.width;
+                        const py = Math.floor((i / 4) / tempCanvas.width);
+                        if (px < minX) minX = px;
+                        if (px > maxX) maxX = px;
+                        if (py < minY) minY = py;
+                        if (py > maxY) maxY = py;
+                    }
+                }
+
+                if (hasPixels && maxX > minX && maxY > minY) {
+                    const pad = 2;
+                    const cw = Math.min(tempCanvas.width, maxX - minX + pad * 2);
+                    const ch = Math.min(tempCanvas.height, maxY - minY + pad * 2);
+                    const sx = Math.max(0, minX - pad);
+                    const sy = Math.max(0, minY - pad);
+
+                    const cropCanvas = document.createElement('canvas');
+                    cropCanvas.width = cw;
+                    cropCanvas.height = ch;
+                    cropCanvas.getContext('2d').drawImage(tempCanvas, sx, sy, cw, ch, 0, 0, cw, ch);
+
+                    imgEl.dataset.cropped = 'true';
+                    imgEl.src = cropCanvas.toDataURL('image/png');
+                }
+            } catch (e) {
+                // Abaikan jika imej dari domain luar menyekat canvas CORS
+            }
+        }
+
+        // =========================================================
+        // 3. KAWALAN ZOOM PRATONTON A4 RESPONSIF
+        // =========================================================
+        function applyZoom(scale) {
+            currentZoom = Math.min(1.4, Math.max(0.4, scale));
+            const container = document.getElementById('scaleContainer');
+            const label = document.getElementById('zoomLabel');
+            if (container) container.style.transform = `scale(${currentZoom})`;
+            if (label) label.textContent = Math.round(currentZoom * 100) + '%';
+        }
+
         function adjustZoom(delta) {
-            currentZoom = Math.min(1.3, Math.max(0.45, +(currentZoom + delta).toFixed(2)));
-            applyZoom();
+            applyZoom(currentZoom + delta);
         }
 
         function fitPreviewToScreen() {
             const wrapper = document.getElementById('previewWrapper');
             if (!wrapper) return;
-            const availableWidth = wrapper.clientWidth - 48; // padding
-            const a4PixelWidth = 794; // ~210mm pada 96dpi
-            if (availableWidth < a4PixelWidth) {
-                currentZoom = Math.max(0.42, +(availableWidth / a4PixelWidth).toFixed(2));
+            const availableWidth = wrapper.clientWidth - 48;
+            const a4WidthPx = 794; // ~210mm pada 96dpi
+            if (availableWidth < a4WidthPx) {
+                applyZoom(availableWidth / a4WidthPx);
             } else {
-                currentZoom = 0.95;
-            }
-            applyZoom();
-        }
-
-        function applyZoom() {
-            const scaleContainer = document.getElementById('scaleContainer');
-            const zoomLabel = document.getElementById('zoomLabel');
-            if (scaleContainer) {
-                scaleContainer.style.transform = `scale(${currentZoom})`;
-                // Laraskan margin bawah supaya tidak meninggalkan ruang kosong berlebihan bila zoom out
-                const a4Height = 1123;
-                const offset = (1 - currentZoom) * a4Height;
-                scaleContainer.style.marginBottom = currentZoom < 1 ? `-${offset}px` : '24px';
-            }
-            if (zoomLabel) {
-                zoomLabel.textContent = Math.round(currentZoom * 100) + '%';
+                applyZoom(1.0);
             }
         }
 
         // =========================================================
-        // 3. PENGURUSAN LOGO RASMI (GITHUB ./logo-azzuha.png & MUAT NAIK)
+        // 4. PAD TANDATANGAN DIGITAL & MUAT NAIK (PEMOHON, SEMAK, LULUS)
         // =========================================================
-        let isCroppingGitHubLogo = false;
+        const sigConfigs = {
+            pemohon: {
+                canvas: document.getElementById('sigCanvasPemohon'),
+                placeholder: document.getElementById('sigPlaceholderPemohon'),
+                outImg: document.getElementById('outSigPemohonImg'),
+                isDrawing: false,
+                hasSig: false,
+                uploadedDataUrl: null
+            },
+            semak: {
+                canvas: document.getElementById('sigCanvasSemak'),
+                placeholder: document.getElementById('sigPlaceholderSemak'),
+                outImg: document.getElementById('outSigSemakImg'),
+                isDrawing: false,
+                hasSig: false,
+                uploadedDataUrl: null
+            },
+            lulus: {
+                canvas: document.getElementById('sigCanvasLulus'),
+                placeholder: document.getElementById('sigPlaceholderLulus'),
+                outImg: document.getElementById('outSigLulusImg'),
+                isDrawing: false,
+                hasSig: false,
+                uploadedDataUrl: null
+            }
+        };
 
-        function autoCropGitHubLogo(imgEl) {
-            if (isCroppingGitHubLogo || !imgEl || !imgEl.src || imgEl.src.startsWith('data:')) return;
-            try {
-                const canvas = document.createElement('canvas');
-                canvas.width = imgEl.naturalWidth;
-                canvas.height = imgEl.naturalHeight;
-                if (canvas.width === 0 || canvas.height === 0) return;
+        function resizeSignatureCanvas(key) {
+            const cfg = sigConfigs[key];
+            if (!cfg || !cfg.canvas) return;
+            const rect = cfg.canvas.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
 
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(imgEl, 0, 0);
-                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const data = imgData.data;
+            const tempData = cfg.hasSig ? cfg.canvas.toDataURL() : null;
+            cfg.canvas.width = rect.width * 2;
+            cfg.canvas.height = rect.height * 2;
+            const ctx = cfg.canvas.getContext('2d');
+            ctx.scale(2, 2);
+            ctx.lineWidth = 2.1;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            ctx.strokeStyle = '#0f172a';
 
-                let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
-                let hasVisiblePixels = false;
-
-                for (let i = 0; i < data.length; i += 4) {
-                    if (data[i + 3] > 20) {
-                        hasVisiblePixels = true;
-                        const px = (i / 4) % canvas.width;
-                        const py = Math.floor((i / 4) / canvas.width);
-                        if (px < minX) minX = px;
-                        if (px > maxX) maxX = px;
-                        if (py < minY) minY = py;
-                        if (py > maxY) maxY = py;
-                    }
-                }
-
-                if (hasVisiblePixels && maxX > minX && maxY > minY) {
-                    const pad = 4;
-                    const cw = Math.min(canvas.width, maxX - minX + pad * 2);
-                    const ch = Math.min(canvas.height, maxY - minY + pad * 2);
-                    const sx = Math.max(0, minX - pad);
-                    const sy = Math.max(0, minY - pad);
-
-                    const cropCanvas = document.createElement('canvas');
-                    cropCanvas.width = cw;
-                    cropCanvas.height = ch;
-                    cropCanvas.getContext('2d').drawImage(canvas, sx, sy, cw, ch, 0, 0, cw, ch);
-
-                    isCroppingGitHubLogo = true;
-                    imgEl.src = cropCanvas.toDataURL('image/png');
-                }
-            } catch (e) {
-                // Jika pautan luar (CORS) menyekat bacaan piksel, besarkan ketinggian secara automatik
-                imgEl.style.height = '135px';
-                imgEl.style.maxWidth = '340px';
-                imgEl.style.marginTop = '-18px';
-                imgEl.style.marginBottom = '-18px';
+            if (tempData) {
+                const img = new Image();
+                img.onload = () => ctx.drawImage(img, 0, 0, rect.width, rect.height);
+                img.src = tempData;
             }
         }
 
-        function handleLogoUpload(event) {
+        function resizeAllSignatureCanvases() {
+            Object.keys(sigConfigs).forEach(resizeSignatureCanvas);
+        }
+
+        function getSigPointerPos(canvas, e) {
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return { x: clientX - rect.left, y: clientY - rect.top };
+        }
+
+        function updateSignaturePreview(key) {
+            const cfg = sigConfigs[key];
+            if (!cfg) return;
+            if (cfg.uploadedDataUrl) {
+                cfg.outImg.src = cfg.uploadedDataUrl;
+                cfg.outImg.style.display = 'block';
+            } else if (cfg.hasSig) {
+                cfg.outImg.src = cfg.canvas.toDataURL('image/png');
+                cfg.outImg.style.display = 'block';
+            } else {
+                cfg.outImg.src = '';
+                cfg.outImg.style.display = 'none';
+            }
+        }
+
+        function clearSignature(key) {
+            const cfg = sigConfigs[key];
+            if (!cfg) return;
+            const rect = cfg.canvas.getBoundingClientRect();
+            const ctx = cfg.canvas.getContext('2d');
+            ctx.clearRect(0, 0, rect.width, rect.height);
+            cfg.hasSig = false;
+            cfg.uploadedDataUrl = null;
+            cfg.placeholder.style.display = 'flex';
+            updateSignaturePreview(key);
+        }
+
+        function clearAllSignatures() {
+            Object.keys(sigConfigs).forEach(clearSignature);
+        }
+
+        function handleSigUpload(event, key) {
             const file = event.target.files && event.target.files[0];
             if (!file) return;
-            readLogoFile(file);
-        }
-
-        function readLogoFile(file) {
             const reader = new FileReader();
             reader.onload = function(e) {
-                rawUploadedLogoDataUrl = e.target.result;
-                reprocessUploadedLogo();
-                showToast('Logo berjaya dimuatkan ke dalam borang.');
+                const img = new Image();
+                img.onload = function() {
+                    // Buang latar putih/kelabu terang dan potong ruang kosong di sekeliling tandatangan
+                    const tempCanvas = document.createElement('canvas');
+                    tempCanvas.width = img.width;
+                    tempCanvas.height = img.height;
+                    const tCtx = tempCanvas.getContext('2d');
+                    tCtx.drawImage(img, 0, 0);
+
+                    const imgData = tCtx.getImageData(0, 0, tempCanvas.width, tempCanvas.height);
+                    const data = imgData.data;
+                    let minX = tempCanvas.width, minY = tempCanvas.height, maxX = 0, maxY = 0;
+                    let hasInk = false;
+
+                    for (let i = 0; i < data.length; i += 4) {
+                        const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+                        // Tukar latar belakang putih/hampir putih menjadi lutsinar supaya bersih di atas garisan borang
+                        if (r > 215 && g > 215 && b > 215 && a > 0) {
+                            data[i + 3] = 0;
+                        } else if (data[i + 3] > 25) {
+                            hasInk = true;
+                            const px = (i / 4) % tempCanvas.width;
+                            const py = Math.floor((i / 4) / tempCanvas.width);
+                            if (px < minX) minX = px;
+                            if (px > maxX) maxX = px;
+                            if (py < minY) minY = py;
+                            if (py > maxY) maxY = py;
+                        }
+                    }
+                    tCtx.putImageData(imgData, 0, 0);
+
+                    let finalDataUrl = tempCanvas.toDataURL('image/png');
+                    if (hasInk && maxX > minX && maxY > minY) {
+                        const pad = 4;
+                        const cw = Math.min(tempCanvas.width, maxX - minX + pad * 2);
+                        const ch = Math.min(tempCanvas.height, maxY - minY + pad * 2);
+                        const sx = Math.max(0, minX - pad);
+                        const sy = Math.max(0, minY - pad);
+                        const cropCanvas = document.createElement('canvas');
+                        cropCanvas.width = cw;
+                        cropCanvas.height = ch;
+                        cropCanvas.getContext('2d').drawImage(tempCanvas, sx, sy, cw, ch, 0, 0, cw, ch);
+                        finalDataUrl = cropCanvas.toDataURL('image/png');
+                    }
+
+                    const cfg = sigConfigs[key];
+                    const rect = cfg.canvas.getBoundingClientRect();
+                    const ctx = cfg.canvas.getContext('2d');
+                    ctx.clearRect(0, 0, rect.width, rect.height);
+                    cfg.hasSig = false;
+                    cfg.uploadedDataUrl = finalDataUrl;
+                    cfg.placeholder.style.display = 'none';
+
+                    // Papar pratonton dalam kotak kanvas panel kiri
+                    const previewImg = new Image();
+                    previewImg.onload = function() {
+                        const scale = Math.min((rect.width - 16) / previewImg.width, (rect.height - 12) / previewImg.height);
+                        const drawW = previewImg.width * scale;
+                        const drawH = previewImg.height * scale;
+                        ctx.drawImage(previewImg, (rect.width - drawW) / 2, (rect.height - drawH) / 2, drawW, drawH);
+                    };
+                    previewImg.src = finalDataUrl;
+
+                    updateSignaturePreview(key);
+                    showToast('Gambar tandatangan berjaya dimuat naik.');
+                };
+                img.src = e.target.result;
             };
             reader.readAsDataURL(file);
+            event.target.value = '';
         }
 
-        function reprocessUploadedLogo() {
-            if (!rawUploadedLogoDataUrl) return;
-            const removeBlack = document.getElementById('chkRemoveBlackBg').checked;
+        // Pasang event listener lukisan untuk ketiga-tiga kanvas tandatangan
+        Object.keys(sigConfigs).forEach(key => {
+            const cfg = sigConfigs[key];
+            const canvas = cfg.canvas;
 
-            if (!removeBlack) {
-                applyLogoToDocument(rawUploadedLogoDataUrl);
-                return;
-            }
-
-            const img = new Image();
-            img.onload = function() {
-                const canvas = document.createElement('canvas');
-                canvas.width = img.width;
-                canvas.height = img.height;
+            const onStart = (e) => {
+                if (cfg.uploadedDataUrl) {
+                    clearSignature(key);
+                }
+                cfg.isDrawing = true;
+                const pos = getSigPointerPos(canvas, e);
                 const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0);
-
-                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-                const data = imgData.data;
-
-                let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
-                let hasVisiblePixels = false;
-
-                for (let i = 0; i < data.length; i += 4) {
-                    const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
-                    // Tukar piksel hitam pekat kepada lutsinar
-                    if (r < 28 && g < 28 && b < 28 && a > 0) {
-                        data[i + 3] = 0;
-                    } else if (data[i + 3] > 20) {
-                        hasVisiblePixels = true;
-                        const px = (i / 4) % canvas.width;
-                        const py = Math.floor((i / 4) / canvas.width);
-                        if (px < minX) minX = px;
-                        if (px > maxX) maxX = px;
-                        if (py < minY) minY = py;
-                        if (py > maxY) maxY = py;
-                    }
-                }
-
-                ctx.putImageData(imgData, 0, 0);
-
-                if (hasVisiblePixels && maxX > minX && maxY > minY) {
-                    const pad = 4;
-                    const cw = Math.min(canvas.width, maxX - minX + pad * 2);
-                    const ch = Math.min(canvas.height, maxY - minY + pad * 2);
-                    const sx = Math.max(0, minX - pad);
-                    const sy = Math.max(0, minY - pad);
-
-                    const cropCanvas = document.createElement('canvas');
-                    cropCanvas.width = cw;
-                    cropCanvas.height = ch;
-                    cropCanvas.getContext('2d').drawImage(canvas, sx, sy, cw, ch, 0, 0, cw, ch);
-                    applyLogoToDocument(cropCanvas.toDataURL('image/png'));
-                } else {
-                    applyLogoToDocument(canvas.toDataURL('image/png'));
-                }
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+                cfg.placeholder.style.display = 'none';
             };
-            img.src = rawUploadedLogoDataUrl;
-        }
 
-        function applyLogoToDocument(srcUrl) {
-            const imgEl = document.getElementById('customLogoImg');
-            const container = document.getElementById('customLogoContainer');
-            const promptBox = document.getElementById('logoUploadPrompt');
-            if (imgEl) imgEl.src = srcUrl;
-            if (container) container.classList.remove('hidden');
-            if (promptBox) promptBox.classList.add('hidden');
-        }
+            const onMove = (e) => {
+                if (!cfg.isDrawing) return;
+                if (e.cancelable) e.preventDefault();
+                const pos = getSigPointerPos(canvas, e);
+                const ctx = canvas.getContext('2d');
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+                cfg.hasSig = true;
+                updateSignaturePreview(key);
+            };
 
-        function resetToGitHubLogo() {
-            rawUploadedLogoDataUrl = null;
-            document.getElementById('inLogoFile').value = '';
-            applyLogoToDocument('./logo-azzuha.png');
-            showToast('Kembali kepada laluan logo lalai GitHub (./logo-azzuha.png).');
-        }
+            const onEnd = () => {
+                if (!cfg.isDrawing) return;
+                cfg.isDrawing = false;
+                canvas.getContext('2d').closePath();
+                updateSignaturePreview(key);
+            };
 
-        // Sokongan Tampal (Ctrl+V) terus gambar logo
-        window.addEventListener('paste', function(e) {
-            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
-            for (let index in items) {
-                const item = items[index];
-                if (item.kind === 'file' && item.type.startsWith('image/')) {
-                    const blob = item.getAsFile();
-                    readLogoFile(blob);
-                }
-            }
+            canvas.addEventListener('mousedown', onStart);
+            canvas.addEventListener('mousemove', onMove);
+            window.addEventListener('mouseup', onEnd);
+
+            canvas.addEventListener('touchstart', onStart, { passive: false });
+            canvas.addEventListener('touchmove', onMove, { passive: false });
+            window.addEventListener('touchend', onEnd);
         });
 
         // =========================================================
@@ -1170,95 +1299,6 @@
         }
 
         // =========================================================
-        // 5. PAD TANDATANGAN DIGITAL (TETIKUS & SENTUHAN)
-        // =========================================================
-        const sigCanvas = document.getElementById('sigCanvas');
-        const sigCtx = sigCanvas.getContext('2d');
-        let isDrawing = false;
-        let hasSignature = false;
-
-        function resizeSignatureCanvas() {
-            const rect = sigCanvas.getBoundingClientRect();
-            if (rect.width === 0 || rect.height === 0) return;
-            const tempData = hasSignature ? sigCanvas.toDataURL() : null;
-            sigCanvas.width = rect.width * 2;
-            sigCanvas.height = rect.height * 2;
-            sigCtx.scale(2, 2);
-            sigCtx.lineWidth = 2.2;
-            sigCtx.lineCap = 'round';
-            sigCtx.lineJoin = 'round';
-            sigCtx.strokeStyle = '#0f172a';
-
-            if (tempData) {
-                const img = new Image();
-                img.onload = () => sigCtx.drawImage(img, 0, 0, rect.width, rect.height);
-                img.src = tempData;
-            }
-        }
-
-        function getPointerPos(e) {
-            const rect = sigCanvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: clientX - rect.left,
-                y: clientY - rect.top
-            };
-        }
-
-        function startDraw(e) {
-            isDrawing = true;
-            const pos = getPointerPos(e);
-            sigCtx.beginPath();
-            sigCtx.moveTo(pos.x, pos.y);
-            document.getElementById('sigPlaceholder').style.display = 'none';
-        }
-
-        function drawMove(e) {
-            if (!isDrawing) return;
-            if (e.cancelable) e.preventDefault();
-            const pos = getPointerPos(e);
-            sigCtx.lineTo(pos.x, pos.y);
-            sigCtx.stroke();
-            hasSignature = true;
-            updateSignaturePreview();
-        }
-
-        function endDraw() {
-            if (!isDrawing) return;
-            isDrawing = false;
-            sigCtx.closePath();
-            updateSignaturePreview();
-        }
-
-        function updateSignaturePreview() {
-            const outImg = document.getElementById('outSigImg');
-            if (hasSignature) {
-                outImg.src = sigCanvas.toDataURL('image/png');
-                outImg.style.display = 'block';
-            } else {
-                outImg.src = '';
-                outImg.style.display = 'none';
-            }
-        }
-
-        function clearSignature() {
-            const rect = sigCanvas.getBoundingClientRect();
-            sigCtx.clearRect(0, 0, rect.width, rect.height);
-            hasSignature = false;
-            document.getElementById('sigPlaceholder').style.display = 'flex';
-            updateSignaturePreview();
-        }
-
-        sigCanvas.addEventListener('mousedown', startDraw);
-        sigCanvas.addEventListener('mousemove', drawMove);
-        window.addEventListener('mouseup', endDraw);
-
-        sigCanvas.addEventListener('touchstart', startDraw, { passive: false });
-        sigCanvas.addEventListener('touchmove', drawMove, { passive: false });
-        window.addEventListener('touchend', endDraw);
-
-        // =========================================================
         // 6. SIMPAN PROFIL STAF & SET SEMULA BORANG
         // =========================================================
         function saveProfileData() {
@@ -1323,7 +1363,7 @@
             });
 
             toggleLainInput();
-            clearSignature();
+            clearAllSignatures();
             setDefaultTodayDate();
             syncForm();
             showToast('Semua medan borang telah dikosongkan.');
@@ -1357,7 +1397,7 @@
         // =========================================================
         window.addEventListener('resize', () => {
             fitPreviewToScreen();
-            resizeSignatureCanvas();
+            resizeAllSignatureCanvases();
         });
 
         window.onload = function() {
@@ -1365,7 +1405,7 @@
             setDefaultTodayDate();
             syncForm();
             fitPreviewToScreen();
-            resizeSignatureCanvas();
+            resizeAllSignatureCanvases();
         };
     </script>
 </body>
