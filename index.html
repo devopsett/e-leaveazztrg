@@ -170,6 +170,29 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #94a3b8;
         }
+
+        /* Pemilih Tarikh Paksa Format DD/MM/YYYY Pada Semua Peranti */
+        .date-dmy-wrap {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .date-dmy-wrap input[type="date"] {
+            color: transparent !important;
+            caret-color: transparent;
+        }
+        .date-dmy-wrap input[type="date"]::-webkit-datetime-edit {
+            color: transparent !important;
+        }
+        .date-dmy-wrap input[type="date"]::-webkit-calendar-picker-indicator {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 10;
+        }
     </style>
 </head>
 <body class="min-h-screen flex flex-col lg:h-screen lg:overflow-hidden">
@@ -185,7 +208,7 @@
                 <div class="flex items-center gap-2">
                     <h1 class="font-display font-bold text-slate-900 text-sm sm:text-lg tracking-tight truncate">e-Leave Az-Zuha</h1>
                     <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#3f5829]/10 text-[#3f5829] border border-[#3f5829]/20">
-                        HR-05 (04/2022)
+                        TERENGGANU
                     </span>
                 </div>
                 <p class="text-[11px] text-slate-500 truncate">Borang Permohonan Cuti</p>
@@ -377,13 +400,25 @@
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">Tarikh Mula</label>
-                                <input type="date" id="inTarikhMula" onchange="calculateDays(); syncForm()"
-                                    class="w-full px-3 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                <div class="date-dmy-wrap">
+                                    <input type="date" id="inTarikhMula" onchange="calculateDays(); syncForm()"
+                                        class="w-full px-3 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                    <div class="pointer-events-none absolute inset-x-3 flex items-center justify-between text-xs">
+                                        <span id="dispTarikhMula" class="text-slate-400 font-medium">dd/mm/yyyy</span>
+                                        <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">Hingga / Dan</label>
-                                <input type="date" id="inTarikhAkhir" onchange="calculateDays(); syncForm()"
-                                    class="w-full px-3 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                <div class="date-dmy-wrap">
+                                    <input type="date" id="inTarikhAkhir" onchange="calculateDays(); syncForm()"
+                                        class="w-full px-3 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                    <div class="pointer-events-none absolute inset-x-3 flex items-center justify-between text-xs">
+                                        <span id="dispTarikhAkhir" class="text-slate-400 font-medium">dd/mm/yyyy</span>
+                                        <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -455,8 +490,14 @@
 
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">Tarikh Permohonan</label>
-                            <input type="date" id="inTarikhMohon" onchange="syncForm()"
-                                class="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                            <div class="date-dmy-wrap">
+                                <input type="date" id="inTarikhMohon" onchange="syncForm()"
+                                    class="w-full px-3.5 py-2.5 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                                <div class="pointer-events-none absolute inset-x-3.5 flex items-center justify-between text-xs">
+                                    <span id="dispTarikhMohon" class="text-slate-400 font-medium">dd/mm/yyyy</span>
+                                    <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -486,8 +527,14 @@
                                 </div>
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-600 mb-1">Tarikh Semakan</label>
-                                    <input type="date" id="inSemakTarikh" onchange="syncForm()"
-                                        class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                    <div class="date-dmy-wrap">
+                                        <input type="date" id="inSemakTarikh" onchange="syncForm()"
+                                            class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                        <div class="pointer-events-none absolute inset-x-3 flex items-center justify-between text-xs">
+                                            <span id="dispSemakTarikh" class="text-slate-400 font-medium">dd/mm/yyyy</span>
+                                            <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -548,8 +595,14 @@
                                 </div>
                                 <div>
                                     <label class="block text-[11px] font-semibold text-slate-600 mb-1">Tarikh Kelulusan</label>
-                                    <input type="date" id="inLulusTarikh" onchange="syncForm()"
-                                        class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                    <div class="date-dmy-wrap">
+                                        <input type="date" id="inLulusTarikh" onchange="syncForm()"
+                                            class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                        <div class="pointer-events-none absolute inset-x-3 flex items-center justify-between text-xs">
+                                            <span id="dispLulusTarikh" class="text-slate-400 font-medium">dd/mm/yyyy</span>
+                                            <i data-lucide="calendar" class="w-3.5 h-3.5 text-slate-500"></i>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -1364,6 +1417,21 @@
             return `${parts[2]}/${parts[1]}/${parts[0]}`;
         }
 
+        function updateDateOverlay(inputId, dispId) {
+            const val = document.getElementById(inputId)?.value;
+            const disp = document.getElementById(dispId);
+            if (!disp) return;
+            if (val) {
+                disp.textContent = formatDateMY(val);
+                disp.classList.remove('text-slate-400');
+                disp.classList.add('text-slate-900', 'font-semibold');
+            } else {
+                disp.textContent = 'dd/mm/yyyy';
+                disp.classList.remove('text-slate-900', 'font-semibold');
+                disp.classList.add('text-slate-400');
+            }
+        }
+
         function calculateDays() {
             const startVal = document.getElementById('inTarikhMula').value;
             const endVal = document.getElementById('inTarikhAkhir').value;
@@ -1414,6 +1482,13 @@
             document.getElementById('outLulusNama').textContent = document.getElementById('inLulusNama').value.toUpperCase();
             document.getElementById('outLulusJawatan').textContent = document.getElementById('inLulusJawatan').value.toUpperCase();
             document.getElementById('outLulusTarikh').textContent = formatDateMY(document.getElementById('inLulusTarikh').value);
+
+            // Kemas kini paparan dd/mm/yyyy pada semua input tarikh
+            updateDateOverlay('inTarikhMula', 'dispTarikhMula');
+            updateDateOverlay('inTarikhAkhir', 'dispTarikhAkhir');
+            updateDateOverlay('inTarikhMohon', 'dispTarikhMohon');
+            updateDateOverlay('inSemakTarikh', 'dispSemakTarikh');
+            updateDateOverlay('inLulusTarikh', 'dispLulusTarikh');
 
             // Status ulasan semakan (potong pilihan tidak berkenaan)
             const radSemak = document.querySelector('input[name="radSemakan"]:checked')?.value || 'none';
