@@ -648,21 +648,22 @@
                                 <div class="flex items-center justify-between gap-2 mb-1.5">
                                     <label class="text-[11px] font-semibold text-slate-600">Tandatangan Penyemak</label>
                                     <div class="flex items-center gap-1.5 shrink-0">
-                                        <label class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-md cursor-pointer whitespace-nowrap">
+                                        <label class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-lg transition cursor-pointer whitespace-nowrap">
                                             <i data-lucide="upload" class="w-3 h-3"></i>
                                             <span>Muat Naik</span>
                                             <input type="file" accept="image/*" onchange="handleSigUpload(event, 'semak')" class="hidden">
                                         </label>
-                                        <button type="button" onclick="clearSignature('semak')" class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-md cursor-pointer whitespace-nowrap">
+                                        <button type="button" onclick="clearSignature('semak')" class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition cursor-pointer whitespace-nowrap">
                                             <i data-lucide="eraser" class="w-3 h-3"></i>
                                             <span>Padam</span>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="relative bg-white/95 border border-dashed border-slate-300 rounded-lg overflow-hidden touch-none shadow-inner">
-                                    <canvas id="sigCanvasSemak" class="w-full h-24 block cursor-crosshair"></canvas>
-                                    <div id="sigPlaceholderSemak" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px] px-3 text-center">
-                                        <span>Lukis atau Muat Naik tandatangan penyemak</span>
+                                <div class="relative bg-white/95 border-2 border-dashed border-slate-300/90 rounded-xl overflow-hidden touch-none shadow-inner">
+                                    <canvas id="sigCanvasSemak" class="w-full h-28 block cursor-crosshair"></canvas>
+                                    <div id="sigPlaceholderSemak" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-[11px] px-4 text-center">
+                                        <i data-lucide="pen-line" class="w-4 h-4 mb-1 opacity-60"></i>
+                                        <span>Lukis tandatangan atau klik Muat Naik (PNG/JPG)</span>
                                     </div>
                                 </div>
                             </div>
@@ -716,21 +717,22 @@
                                 <div class="flex items-center justify-between gap-2 mb-1.5">
                                     <label class="text-[11px] font-semibold text-slate-600">Tandatangan Pelulus</label>
                                     <div class="flex items-center gap-1.5 shrink-0">
-                                        <label class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-md cursor-pointer whitespace-nowrap">
+                                        <label class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-lg transition cursor-pointer whitespace-nowrap">
                                             <i data-lucide="upload" class="w-3 h-3"></i>
                                             <span>Muat Naik</span>
                                             <input type="file" accept="image/*" onchange="handleSigUpload(event, 'lulus')" class="hidden">
                                         </label>
-                                        <button type="button" onclick="clearSignature('lulus')" class="inline-flex items-center gap-1 px-2 py-0.5 text-[10px] font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-md cursor-pointer whitespace-nowrap">
+                                        <button type="button" onclick="clearSignature('lulus')" class="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition cursor-pointer whitespace-nowrap">
                                             <i data-lucide="eraser" class="w-3 h-3"></i>
                                             <span>Padam</span>
                                         </button>
                                     </div>
                                 </div>
-                                <div class="relative bg-white/95 border border-dashed border-slate-300 rounded-lg overflow-hidden touch-none shadow-inner">
-                                    <canvas id="sigCanvasLulus" class="w-full h-24 block cursor-crosshair"></canvas>
-                                    <div id="sigPlaceholderLulus" class="pointer-events-none absolute inset-0 flex items-center justify-center text-slate-400 text-[10px] px-3 text-center">
-                                        <span>Lukis atau Muat Naik tandatangan pelulus</span>
+                                <div class="relative bg-white/95 border-2 border-dashed border-slate-300/90 rounded-xl overflow-hidden touch-none shadow-inner">
+                                    <canvas id="sigCanvasLulus" class="w-full h-28 block cursor-crosshair"></canvas>
+                                    <div id="sigPlaceholderLulus" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-[11px] px-4 text-center">
+                                        <i data-lucide="pen-line" class="w-4 h-4 mb-1 opacity-60"></i>
+                                        <span>Lukis tandatangan atau klik Muat Naik (PNG/JPG)</span>
                                     </div>
                                 </div>
                             </div>
@@ -946,7 +948,7 @@
                                     permohonan ini
                                 </td>
                                 <td style="vertical-align: bottom; position: relative;">
-                                    <div style="height: 52px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                                    <div style="width: 175px; height: 48px; margin: 0 auto 2px auto; display: flex; align-items: center; justify-content: center;">
                                         <img id="outSigSemakImg" src="" alt="" style="display: none; height: 46px; width: auto; max-width: 170px; object-fit: contain; pointer-events: none;">
                                     </div>
                                     <div>Tarikh: <span id="outSemakTarikh" style="font-weight: bold;"></span></div>
@@ -971,7 +973,7 @@
                                     MELULUSKAN</span> terhadap permohonan ini
                                 </td>
                                 <td style="vertical-align: bottom; position: relative;">
-                                    <div style="height: 52px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                                    <div style="width: 175px; height: 48px; margin: 0 auto 2px auto; display: flex; align-items: center; justify-content: center;">
                                         <img id="outSigLulusImg" src="" alt="" style="display: none; height: 46px; width: auto; max-width: 170px; object-fit: contain; pointer-events: none;">
                                     </div>
                                     <div>Tarikh: <span id="outLulusTarikh" style="font-weight: bold;"></span></div>
@@ -984,13 +986,13 @@
                     <div style="font-size: 9.5pt; font-weight: bold; margin-bottom: 16px; position: relative;">
                         <div style="display: flex; align-items: flex-end; margin-bottom: 12px; min-height: 48px;">
                             <span style="width: 155px; white-space: nowrap;">Tandatangan pemohon :</span>
-                            <div style="width: 210px; border-bottom: 1.5px dotted #000000; position: relative; height: 46px; display: flex; align-items: flex-end; justify-content: center;">
-                                <img id="outSigPemohonImg" src="" alt="" style="display: none; height: 50px; width: auto; max-width: 195px; object-fit: contain; pointer-events: none; margin-bottom: -2px;">
+                            <div style="width: 175px; border-bottom: 1.5px dotted #000000; position: relative; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                <img id="outSigPemohonImg" src="" alt="" style="display: none; height: 46px; width: auto; max-width: 170px; object-fit: contain; pointer-events: none;">
                             </div>
                         </div>
                         <div style="display: flex; align-items: baseline;">
                             <span style="width: 155px; white-space: nowrap;">Tarikh permohonan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
-                            <span class="dotted-line" id="outTarikhMohon" style="width: 210px; text-align: center;"></span>
+                            <span class="dotted-line" id="outTarikhMohon" style="width: 175px; text-align: center;"></span>
                         </div>
                     </div>
 
