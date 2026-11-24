@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>e-Cuti | Az-Zuha Group Travel & Tours</title>
+    <title>e-Leave</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter & Plus Jakarta Sans -->
@@ -137,6 +137,7 @@
             #scaleContainer {
                 transform: none !important;
                 width: 100% !important;
+                height: auto !important;
                 margin: 0 !important;
             }
             .a4-paper {
@@ -176,25 +177,25 @@
             </div>
             <div>
                 <div class="flex items-center gap-2">
-                    <h1 class="font-display font-bold text-slate-900 text-base sm:text-lg tracking-tight">e-Cuti Az-Zuha</h1>
+                    <h1 class="font-display font-bold text-slate-900 text-base sm:text-lg tracking-tight">e-Leave Az-Zuha</h1>
                     <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#3f5829]/10 text-[#3f5829] border border-[#3f5829]/20">
                         HR-05 (04/2022)
                     </span>
                 </div>
-                <p class="text-[11px] text-slate-500">Sistem Penjana Borang Permohonan Cuti Rasmi</p>
+                <p class="text-[11px] text-slate-500">Borang Permohonan Cuti</p>
             </div>
         </div>
 
         <!-- Bar Tindakan Pantas -->
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-1.5 sm:gap-2">
             <button type="button" onclick="saveProfileData()" title="Simpan profil nama, no. staf & jawatan dalam pelayar"
-                class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 rounded-xl transition cursor-pointer">
+                class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 rounded-xl transition cursor-pointer">
                 <i data-lucide="bookmark-check" class="w-4 h-4 text-[#3f5829]"></i>
                 <span class="hidden md:inline">Simpan Profil</span>
             </button>
 
             <button type="button" onclick="resetForm()" title="Kosongkan semua medan borang"
-                class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition cursor-pointer">
+                class="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-2 text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition cursor-pointer">
                 <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
                 <span class="hidden md:inline">Set Semula</span>
             </button>
@@ -202,15 +203,31 @@
             <div class="h-5 w-[1px] bg-slate-200 mx-0.5 hidden sm:block"></div>
 
             <button type="button" onclick="window.print()"
-                class="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
+                class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
                 <i data-lucide="printer" class="w-4 h-4"></i>
-                <span>Cetak / Simpan PDF</span>
+                <span>Cetak / PDF</span>
             </button>
         </div>
     </header>
 
+    <!-- Penukar Paparan Khas Mudah Alih (Mobile View Switcher) -->
+    <div class="no-print lg:hidden bg-white border-b border-slate-200 px-4 py-2 sticky top-[61px] z-20 shadow-sm">
+        <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-100 rounded-xl">
+            <button type="button" onclick="setMobileView('editor')" id="mob-btn-editor"
+                class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-bold bg-[#3f5829] text-white shadow-sm transition cursor-pointer">
+                <i data-lucide="edit-3" class="w-3.5 h-3.5"></i>
+                <span>Isi Borang</span>
+            </button>
+            <button type="button" onclick="setMobileView('preview')" id="mob-btn-preview"
+                class="flex items-center justify-center gap-2 py-2 px-3 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                <i data-lucide="file-text" class="w-3.5 h-3.5"></i>
+                <span>Pratonton A4</span>
+            </button>
+        </div>
+    </div>
+
     <!-- Pemberitahuan Toast Moden -->
-    <div id="toastBox" class="no-print fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300 translate-y-2 opacity-0">
+    <div id="toastBox" class="no-print fixed bottom-20 lg:bottom-5 left-4 right-4 sm:left-auto sm:right-5 z-50 hidden transform transition-all duration-300 translate-y-2 opacity-0">
         <div class="bg-slate-900/95 backdrop-blur text-white px-4 py-3 rounded-2xl shadow-xl border border-slate-700/60 flex items-center gap-2.5 text-xs sm:text-sm font-medium">
             <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
                 <i data-lucide="check" class="w-3.5 h-3.5"></i>
@@ -220,10 +237,10 @@
     </div>
 
     <!-- ==================== KANDUNGAN UTAMA (SPLIT VIEW) ==================== -->
-    <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
+    <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden pb-16 lg:pb-0">
 
         <!-- PANEL KIRI: EDITOR BERSTRUKTUR DENGAN TAB -->
-        <aside class="no-print w-full lg:w-[440px] xl:w-[480px] bg-white border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col lg:h-full shrink-0">
+        <aside id="editorPanel" class="no-print w-full lg:w-[440px] xl:w-[480px] bg-white border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col lg:h-full shrink-0">
             
             <!-- Navigasi Tab Langkah -->
             <div class="px-4 pt-3 pb-2 bg-slate-50/70 border-b border-slate-200/80">
@@ -575,11 +592,18 @@
                             <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
                             <span>Kembali</span>
                         </button>
-                        <button type="button" onclick="window.print()"
-                            class="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-[#3f5829] hover:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
-                            <i data-lucide="printer" class="w-4 h-4"></i>
-                            <span>Cetak Sekarang</span>
-                        </button>
+                        <div class="flex items-center gap-2">
+                            <button type="button" onclick="setMobileView('preview')"
+                                class="lg:hidden inline-flex items-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-[#3f5829] bg-[#3f5829]/10 hover:bg-[#3f5829]/20 rounded-xl transition cursor-pointer">
+                                <i data-lucide="eye" class="w-4 h-4"></i>
+                                <span>Semak Borang</span>
+                            </button>
+                            <button type="button" onclick="window.print()"
+                                class="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-[#3f5829] hover:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
+                                <i data-lucide="printer" class="w-4 h-4"></i>
+                                <span>Cetak</span>
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -587,15 +611,15 @@
         </aside>
 
         <!-- ==================== PANEL KANAN: PRATONTON DOKUMEN A4 ==================== -->
-        <section id="previewWrapper" class="flex-1 bg-slate-200/80 overflow-auto p-4 sm:p-8 flex flex-col items-center relative">
+        <section id="previewWrapper" class="hidden lg:flex flex-1 bg-slate-200/80 overflow-auto p-3 sm:p-8 flex-col items-center relative">
             
             <!-- Bar Kawalan Zoom Pratonton -->
-            <div class="no-print sticky top-0 z-20 mb-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/90 backdrop-blur border border-slate-300/80 rounded-full shadow-sm text-xs font-medium text-slate-600">
-                <span class="flex items-center gap-1.5 text-slate-700 font-semibold">
+            <div class="no-print sticky top-0 z-20 mb-3 sm:mb-4 inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 py-1.5 bg-white/95 backdrop-blur border border-slate-300/80 rounded-full shadow-sm text-xs font-medium text-slate-600">
+                <span class="hidden sm:flex items-center gap-1.5 text-slate-700 font-semibold">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     Pratonton Langsung A4
                 </span>
-                <span class="text-slate-300">|</span>
+                <span class="hidden sm:inline text-slate-300">|</span>
                 <button type="button" onclick="adjustZoom(-0.1)" class="p-1 hover:bg-slate-100 rounded-full cursor-pointer" title="Kecilkan">
                     <i data-lucide="zoom-out" class="w-3.5 h-3.5"></i>
                 </button>
@@ -603,13 +627,14 @@
                 <button type="button" onclick="adjustZoom(0.1)" class="p-1 hover:bg-slate-100 rounded-full cursor-pointer" title="Besarkan">
                     <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
                 </button>
-                <button type="button" onclick="fitPreviewToScreen()" class="px-2 py-0.5 text-[11px] bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer">
+                <button type="button" onclick="fitPreviewToScreen()" class="px-2.5 py-0.5 text-[11px] font-semibold bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer">
                     Muat Skrin
                 </button>
             </div>
 
             <!-- Bekas Skala Responsif -->
-            <div id="scaleContainer" class="origin-top transition-transform duration-150">
+            <div id="scaleOuter" class="w-full flex justify-center overflow-x-auto pb-6">
+                <div id="scaleContainer" class="origin-top-left sm:origin-top transition-transform duration-150">
                 
                 <!-- =========================================================================
                      BORANG RASMI AZ-ZUHA GROUP TRAVEL & TOURS (HR-05 04/2022) - FORMAT ASAL
@@ -870,10 +895,25 @@
                 </div>
                 <!-- TAMAT BORANG RASMI A4 -->
 
+                </div>
             </div>
         </section>
 
     </main>
+
+    <!-- Bar Tindakan Bawah Khas Mudah Alih -->
+    <div class="no-print lg:hidden fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-200 px-4 py-2.5 flex items-center justify-between gap-2 z-30 shadow-[0_-4px_12px_rgba(15,23,42,0.06)]">
+        <button type="button" onclick="saveProfileData()"
+            class="flex-1 inline-flex items-center justify-center gap-1.5 py-2.5 px-3 text-xs font-semibold text-slate-700 bg-slate-100 active:bg-slate-200 rounded-xl transition cursor-pointer">
+            <i data-lucide="bookmark-check" class="w-4 h-4 text-[#3f5829]"></i>
+            <span>Simpan Profil</span>
+        </button>
+        <button type="button" onclick="window.print()"
+            class="flex-[1.3] inline-flex items-center justify-center gap-1.5 py-2.5 px-4 text-xs font-bold text-white bg-[#3f5829] active:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            <span>Cetak / Simpan PDF</span>
+        </button>
+    </div>
 
     <script>
         // Inisialisasi Ikon Lucide
@@ -881,6 +921,48 @@
 
         // Pemboleh ubah global
         let currentZoom = 1.0;
+
+        // =========================================================
+        // 0. PENUKAR PAPARAN MUDAH ALIH (MOBILE VIEW)
+        // =========================================================
+        function setMobileView(view) {
+            const editorPanel = document.getElementById('editorPanel');
+            const previewWrapper = document.getElementById('previewWrapper');
+            const btnEditor = document.getElementById('mob-btn-editor');
+            const btnPreview = document.getElementById('mob-btn-preview');
+
+            if (window.innerWidth >= 1024) {
+                editorPanel.classList.remove('hidden');
+                previewWrapper.classList.remove('hidden');
+                previewWrapper.classList.add('flex');
+                return;
+            }
+
+            if (view === 'preview') {
+                editorPanel.classList.add('hidden');
+                previewWrapper.classList.remove('hidden');
+                previewWrapper.classList.add('flex');
+
+                btnPreview.classList.add('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
+                btnPreview.classList.remove('text-slate-600', 'font-semibold');
+                btnEditor.classList.remove('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
+                btnEditor.classList.add('text-slate-600', 'font-semibold');
+
+                setTimeout(fitPreviewToScreen, 40);
+            } else {
+                previewWrapper.classList.add('hidden');
+                previewWrapper.classList.remove('flex');
+                editorPanel.classList.remove('hidden');
+
+                btnEditor.classList.add('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
+                btnEditor.classList.remove('text-slate-600', 'font-semibold');
+                btnPreview.classList.remove('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
+                btnPreview.classList.add('text-slate-600', 'font-semibold');
+
+                setTimeout(resizeAllSignatureCanvases, 40);
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // =========================================================
         // 1. NAVIGASI TAB PANEL KIRI
@@ -968,10 +1050,21 @@
         // 3. KAWALAN ZOOM PRATONTON A4 RESPONSIF
         // =========================================================
         function applyZoom(scale) {
-            currentZoom = Math.min(1.4, Math.max(0.4, scale));
+            currentZoom = Math.min(1.4, Math.max(0.32, scale));
             const container = document.getElementById('scaleContainer');
             const label = document.getElementById('zoomLabel');
-            if (container) container.style.transform = `scale(${currentZoom})`;
+            const paper = document.getElementById('printableForm');
+            if (container && paper) {
+                container.style.transform = `scale(${currentZoom})`;
+                // Laraskan dimensi kotak pembungkus supaya tiada ruang kosong melampau di bawah pada skrin telefon
+                if (window.innerWidth < 640) {
+                    container.style.width = (794 * currentZoom) + 'px';
+                    container.style.height = (paper.offsetHeight * currentZoom) + 'px';
+                } else {
+                    container.style.width = '';
+                    container.style.height = '';
+                }
+            }
             if (label) label.textContent = Math.round(currentZoom * 100) + '%';
         }
 
@@ -981,8 +1074,8 @@
 
         function fitPreviewToScreen() {
             const wrapper = document.getElementById('previewWrapper');
-            if (!wrapper) return;
-            const availableWidth = wrapper.clientWidth - 48;
+            if (!wrapper || wrapper.classList.contains('hidden')) return;
+            const availableWidth = wrapper.clientWidth - 24;
             const a4WidthPx = 794; // ~210mm pada 96dpi
             if (availableWidth < a4WidthPx) {
                 applyZoom(availableWidth / a4WidthPx);
@@ -1432,6 +1525,12 @@
         // 7. INISIALISASI PERMULAAN HALAMAN
         // =========================================================
         window.addEventListener('resize', () => {
+            if (window.innerWidth >= 1024) {
+                document.getElementById('editorPanel').classList.remove('hidden');
+                const pw = document.getElementById('previewWrapper');
+                pw.classList.remove('hidden');
+                pw.classList.add('flex');
+            }
             fitPreviewToScreen();
             resizeAllSignatureCanvases();
         });
