@@ -725,10 +725,10 @@
         </aside>
 
         <!-- ==================== PANEL KANAN: PRATONTON DOKUMEN A4 ==================== -->
-        <section id="previewWrapper" class="hidden lg:flex flex-1 bg-transparent overflow-auto p-3 sm:p-4 lg:p-2 flex-col items-center relative">
+        <section id="previewWrapper" class="hidden lg:flex flex-1 bg-transparent overflow-auto p-3 sm:p-4 lg:p-4 flex-col items-center relative">
             
-            <!-- Bar Kawalan Zoom Pratonton Floating & Sticky (Bebas Overlap) -->
-            <div class="no-print sticky top-[108px] lg:top-2 z-20 mb-3 sm:mb-4 inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 bg-white/85 backdrop-blur-xl border border-white/90 rounded-full shadow-lg shadow-slate-900/10 text-xs font-medium text-slate-600">
+            <!-- Bar Kawalan Zoom Pratonton Floating Overlay (Bottom-Centered di Mobile & Upper-Centered Overlay Sejajar Hujung Docs di Desktop) -->
+            <div class="no-print fixed bottom-20 left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-[112px] lg:left-[calc(50%+223px)] xl:left-[calc(50%+240px)] z-30 inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 bg-white/85 backdrop-blur-xl border border-white/95 rounded-full shadow-lg shadow-slate-900/15 text-xs font-medium text-slate-600 whitespace-nowrap">
                 <span class="hidden sm:flex items-center gap-1.5 text-slate-700 font-semibold">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                     Pratonton Langsung A4
