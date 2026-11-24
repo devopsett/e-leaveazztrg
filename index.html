@@ -12,8 +12,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Penjana PDF Terus (1 Halaman A4 Tepat Pada Semua Peranti) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Definisi awal pengendali ralat gambar logo sebelum DOM siap -->
     <script>
         window.handleGitHubLogoMissing = function() {
@@ -131,7 +129,7 @@
         }
 
         /* =========================================================
-           TETAPAN CETAKAN A4 PENUH (PRINT MEDIA) - TEPAT 1 HALAMAN
+           TETAPAN CETAKAN A4 PENUH (PRINT MEDIA)
            ========================================================= */
         @media print {
             @page {
@@ -140,32 +138,24 @@
             }
             html, body {
                 width: 210mm !important;
-                height: 278mm !important;
-                max-height: 278mm !important;
-                overflow: hidden !important;
+                height: auto !important;
                 background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
             }
-            /* Sembunyikan semua elemen UI selain borang rasmi */
-            body > *:not(main),
-            .no-print,
-            header,
-            aside,
-            #toastBox {
+            .no-print, header, aside, #toastBox {
                 display: none !important;
             }
             main, #previewWrapper, #scaleOuter, #scaleContainer {
                 display: block !important;
                 position: static !important;
                 width: 210mm !important;
-                height: 278mm !important;
-                max-height: 278mm !important;
+                height: auto !important;
                 min-height: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                overflow: hidden !important;
+                overflow: visible !important;
                 transform: none !important;
                 zoom: 1 !important;
                 background: #ffffff !important;
@@ -173,20 +163,18 @@
             #printableForm {
                 position: relative !important;
                 width: 210mm !important;
-                height: 276mm !important;
+                height: 280mm !important;
                 min-height: 0 !important;
-                max-height: 276mm !important;
+                max-height: 280mm !important;
                 margin: 0 auto !important;
-                padding: 9mm 15mm !important;
+                padding: 10mm 15mm !important;
                 background: #ffffff !important;
                 box-shadow: none !important;
                 overflow: hidden !important;
                 transform: none !important;
                 zoom: 1 !important;
-                page-break-before: avoid !important;
                 page-break-after: avoid !important;
                 page-break-inside: avoid !important;
-                break-inside: avoid !important;
             }
         }
 
@@ -266,10 +254,10 @@
 
             <div class="h-5 w-[1px] bg-slate-200 mx-0.5 hidden sm:block"></div>
 
-            <button type="button" onclick="printForm()" id="btnPrintDesktop"
+            <button type="button" onclick="printForm()"
                 class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
-                <i data-lucide="file-down" class="w-4 h-4"></i>
-                <span>Muat Turun PDF</span>
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Cetak / PDF</span>
             </button>
         </div>
     </header>
@@ -1003,10 +991,10 @@
             <i data-lucide="bookmark-check" class="w-4 h-4 text-[#3f5829]"></i>
             <span>Simpan Profil</span>
         </button>
-        <button type="button" onclick="printForm()" id="btnPrintMobile"
+        <button type="button" onclick="printForm()"
             class="flex-[1.3] inline-flex items-center justify-center gap-1.5 py-2.5 px-4 text-xs font-bold text-white bg-[#3f5829] active:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
-            <i data-lucide="file-down" class="w-4 h-4"></i>
-            <span>Muat Turun PDF</span>
+            <i data-lucide="printer" class="w-4 h-4"></i>
+            <span>Cetak / Simpan PDF</span>
         </button>
     </div>
 
@@ -1605,106 +1593,12 @@
             fitPreviewToScreen();
         }
 
-        async function printForm() {
-            const filename = getFormattedPdfFilename() + '.pdf';
-            const paper = document.getElementById('printableForm');
-            const previewWrapper = document.getElementById('previewWrapper');
-            const wasPreviewHidden = previewWrapper.classList.contains('hidden');
-
-            showToast('Menjana fail PDF 1 muka surat A4...');
-
-            // Buat salinan bersih pada skala 100% (794px x 1122px) di dalam aliran dokumen supaya tidak kosong
-            const clone = paper.cloneNode(true);
-            clone.id = 'printableFormClone';
-            clone.style.width = '794px';
-            clone.style.height = '1122px';
-            clone.style.minHeight = '1122px';
-            clone.style.maxHeight = '1122px';
-            clone.style.margin = '0';
-            clone.style.padding = '42px 56px';
-            clone.style.boxShadow = 'none';
-            clone.style.transform = 'none';
-            clone.style.overflow = 'hidden';
-            clone.style.backgroundColor = '#ffffff';
-
-            // Buang kotak panduan logo jika gambar logo tidak wujud
-            const promptClone = clone.querySelector('#logoUploadPrompt');
-            if (promptClone) promptClone.remove();
-
-            // Bersihkan sebarang elemen <img> kosong atau tersembunyi
-            clone.querySelectorAll('img').forEach(img => {
-                const rawSrc = img.getAttribute('src');
-                if (!rawSrc || img.style.display === 'none' || !img.complete || img.naturalWidth === 0) {
-                    img.remove();
-                }
-            });
-
-            // Simpan posisi scroll semasa dan letakkan bekas rakaman di bahagian paling atas aliran dokumen
-            const prevScrollY = window.scrollY || window.pageYOffset || 0;
-            const staging = document.createElement('div');
-            staging.style.position = 'relative';
-            staging.style.width = '794px';
-            staging.style.height = '1122px';
-            staging.style.backgroundColor = '#ffffff';
-            staging.style.zIndex = '99999';
-            staging.appendChild(clone);
-
-            document.body.insertBefore(staging, document.body.firstChild);
-            window.scrollTo(0, 0);
-
-            // Beri masa 200ms untuk pelayar melukis semula salinan penuh sebelum dirakam
-            await new Promise(resolve => setTimeout(resolve, 200));
-
-            try {
-                const h2c = window.html2canvas;
-                const jsPDFConstructor = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
-
-                if (typeof h2c === 'function' && typeof jsPDFConstructor === 'function') {
-                    const canvas = await h2c(clone, {
-                        scale: 2,
-                        useCORS: true,
-                        allowTaint: true,
-                        logging: false,
-                        backgroundColor: '#ffffff',
-                        width: 794,
-                        height: 1122,
-                        windowWidth: 794,
-                        windowHeight: 1122,
-                        scrollX: 0,
-                        scrollY: 0,
-                        x: 0,
-                        y: 0
-                    });
-
-                    const imgData = canvas.toDataURL('image/jpeg', 0.98);
-                    const pdf = new jsPDFConstructor({
-                        orientation: 'portrait',
-                        unit: 'mm',
-                        format: 'a4'
-                    });
-
-                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
-                    pdf.save(filename);
-                    showToast('Fail PDF berjaya dimuat turun (1 Muka Surat).');
-                } else {
-                    prepareForPrint();
-                    window.print();
-                    setTimeout(() => { document.title = 'e-Leave'; }, 1000);
-                }
-            } catch (err) {
-                prepareForPrint();
-                window.print();
-                setTimeout(() => { document.title = 'e-Leave'; }, 1000);
-            } finally {
-                if (staging.parentNode) {
-                    document.body.removeChild(staging);
-                }
-                window.scrollTo(0, prevScrollY);
+        function printForm() {
+            prepareForPrint();
+            window.print();
+            setTimeout(() => {
                 document.title = 'e-Leave';
-                if (wasPreviewHidden && window.innerWidth < 1024) {
-                    previewWrapper.classList.add('hidden');
-                }
-            }
+            }, 1000);
         }
 
         window.addEventListener('beforeprint', prepareForPrint);
