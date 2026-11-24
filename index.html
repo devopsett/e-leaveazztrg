@@ -772,8 +772,8 @@
                                     permohonan ini
                                 </td>
                                 <td style="vertical-align: bottom; position: relative;">
-                                    <div style="height: 44px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-                                        <img id="outSigSemakImg" src="" alt="" style="display: none; max-height: 44px; max-width: 145px; object-fit: contain; pointer-events: none;">
+                                    <div style="height: 68px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                                        <img id="outSigSemakImg" src="" alt="" style="display: none; height: 66px; width: auto; max-width: 195px; object-fit: contain; pointer-events: none;">
                                     </div>
                                     <div>Tarikh: <span id="outSemakTarikh" style="font-weight: bold;"></span></div>
                                 </td>
@@ -797,8 +797,8 @@
                                     MELULUSKAN</span> terhadap permohonan ini
                                 </td>
                                 <td style="vertical-align: bottom; position: relative;">
-                                    <div style="height: 44px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
-                                        <img id="outSigLulusImg" src="" alt="" style="display: none; max-height: 44px; max-width: 145px; object-fit: contain; pointer-events: none;">
+                                    <div style="height: 68px; display: flex; align-items: center; justify-content: center; margin-bottom: 2px;">
+                                        <img id="outSigLulusImg" src="" alt="" style="display: none; height: 66px; width: auto; max-width: 195px; object-fit: contain; pointer-events: none;">
                                     </div>
                                     <div>Tarikh: <span id="outLulusTarikh" style="font-weight: bold;"></span></div>
                                 </td>
@@ -808,10 +808,10 @@
 
                     <!-- TANDATANGAN PEMOHON & TARIKH PERMOHONAN -->
                     <div style="font-size: 9.5pt; font-weight: bold; margin-bottom: 16px; position: relative;">
-                        <div style="display: flex; align-items: flex-end; margin-bottom: 12px; min-height: 36px;">
+                        <div style="display: flex; align-items: flex-end; margin-bottom: 12px; min-height: 54px;">
                             <span style="width: 155px; white-space: nowrap;">Tandatangan pemohon :</span>
-                            <div style="width: 210px; border-bottom: 1.5px dotted #000000; position: relative; height: 34px;">
-                                <img id="outSigPemohonImg" src="" alt="" style="display: none; position: absolute; bottom: 1px; left: 15px; max-height: 44px; max-width: 180px; object-fit: contain; pointer-events: none;">
+                            <div style="width: 225px; border-bottom: 1.5px dotted #000000; position: relative; height: 52px;">
+                                <img id="outSigPemohonImg" src="" alt="" style="display: none; position: absolute; bottom: -4px; left: 6px; height: 74px; width: auto; max-width: 215px; object-fit: contain; pointer-events: none;">
                             </div>
                         </div>
                         <div style="display: flex; align-items: baseline;">
@@ -1032,7 +1032,7 @@
             cfg.canvas.height = rect.height * 2;
             const ctx = cfg.canvas.getContext('2d');
             ctx.scale(2, 2);
-            ctx.lineWidth = 2.1;
+            ctx.lineWidth = 2.6;
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
             ctx.strokeStyle = '#0f172a';
@@ -1055,6 +1055,42 @@
             return { x: clientX - rect.left, y: clientY - rect.top };
         }
 
+        function cropCanvasWhitespace(sourceCanvas) {
+            const w = sourceCanvas.width;
+            const h = sourceCanvas.height;
+            const ctx = sourceCanvas.getContext('2d');
+            const imgData = ctx.getImageData(0, 0, w, h);
+            const data = imgData.data;
+            let minX = w, minY = h, maxX = 0, maxY = 0;
+            let hasInk = false;
+
+            for (let i = 0; i < data.length; i += 4) {
+                if (data[i + 3] > 15) {
+                    hasInk = true;
+                    const px = (i / 4) % w;
+                    const py = Math.floor((i / 4) / w);
+                    if (px < minX) minX = px;
+                    if (px > maxX) maxX = px;
+                    if (py < minY) minY = py;
+                    if (py > maxY) maxY = py;
+                }
+            }
+
+            if (hasInk && maxX > minX && maxY > minY) {
+                const pad = 4;
+                const cw = Math.min(w, maxX - minX + pad * 2);
+                const ch = Math.min(h, maxY - minY + pad * 2);
+                const sx = Math.max(0, minX - pad);
+                const sy = Math.max(0, minY - pad);
+                const cropCanvas = document.createElement('canvas');
+                cropCanvas.width = cw;
+                cropCanvas.height = ch;
+                cropCanvas.getContext('2d').drawImage(sourceCanvas, sx, sy, cw, ch, 0, 0, cw, ch);
+                return cropCanvas.toDataURL('image/png');
+            }
+            return sourceCanvas.toDataURL('image/png');
+        }
+
         function updateSignaturePreview(key) {
             const cfg = sigConfigs[key];
             if (!cfg) return;
@@ -1062,7 +1098,7 @@
                 cfg.outImg.src = cfg.uploadedDataUrl;
                 cfg.outImg.style.display = 'block';
             } else if (cfg.hasSig) {
-                cfg.outImg.src = cfg.canvas.toDataURL('image/png');
+                cfg.outImg.src = cropCanvasWhitespace(cfg.canvas);
                 cfg.outImg.style.display = 'block';
             } else {
                 cfg.outImg.src = '';
