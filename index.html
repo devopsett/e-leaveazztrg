@@ -1,676 +1,1317 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Checklist Kursus Asas Haji 1448H/2027M - Terengganu</title>
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Google Fonts: Plus Jakarta Sans -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              green: '#0B3B2C',
-              dark: '#07251C',
-              gold: '#C59A27',
-            }
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-Cuti | Az-Zuha Group Travel & Tours</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Definisi awal pengendali ralat gambar logo sebelum DOM siap -->
+    <script>
+        window.handleGitHubLogoMissing = function() {
+            var container = document.getElementById('customLogoContainer');
+            var promptBox = document.getElementById('logoUploadPrompt');
+            if (container) container.classList.add('hidden');
+            if (promptBox) promptBox.classList.remove('hidden');
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f1f5f9;
+            color: #0f172a;
         }
-      }
-    }
-  </script>
 
-  <style>
-    @media print {
-      .no-print { display: none !important; }
-      body { background: white !important; color: black !important; }
-      .print-card { break-inside: avoid; border: 1px solid #cbd5e1 !important; box-shadow: none !important; margin-bottom: 8px !important; }
-    }
-  </style>
+        .font-display {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* =========================================================
+           GAYA RASMI BORANG A4 HR-05 (04/2022) - JANGAN DIUBAH
+           ========================================================= */
+        .a4-paper {
+            width: 210mm;
+            min-height: 297mm;
+            padding: 12mm 16mm 12mm 16mm;
+            margin: 0 auto;
+            background: #ffffff;
+            box-shadow: 0 20px 50px -12px rgba(15, 23, 42, 0.18);
+            font-family: Arial, Helvetica, sans-serif;
+            color: #000000;
+            position: relative;
+            box-sizing: border-box;
+            line-height: 1.25;
+        }
+
+        .dotted-line {
+            border-bottom: 1.5px dotted #000000;
+            display: inline-block;
+            min-height: 16px;
+            vertical-align: bottom;
+            padding-left: 6px;
+            padding-right: 4px;
+            font-weight: bold;
+            color: #0f172a;
+            font-size: 10.5pt;
+        }
+
+        .cb-box {
+            width: 24px;
+            height: 17px;
+            border: 1.5px solid #000000;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+            background-color: #ffffff;
+            box-sizing: border-box;
+        }
+
+        .form-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .form-table th {
+            background-color: #3f5829 !important;
+            color: #ffffff !important;
+            border: 1.5px solid #000000;
+            padding: 6px 8px;
+            font-size: 9.5pt;
+            font-weight: bold;
+            text-align: center;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+        .form-table td {
+            border: 1.5px solid #000000;
+            padding: 6px 8px;
+            font-size: 9.5pt;
+            vertical-align: top;
+        }
+
+        .title-banner {
+            background-color: #3f5829 !important;
+            color: #ffffff !important;
+            border: 1.5px solid #000000;
+            text-align: center;
+            font-weight: bold;
+            font-size: 13.5pt;
+            padding: 4px 0;
+            letter-spacing: 0.4px;
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        /* =========================================================
+           TETAPAN CETAKAN A4 PENUH (PRINT MEDIA)
+           ========================================================= */
+        @media print {
+            @page {
+                size: A4 portrait;
+                margin: 0;
+            }
+            body {
+                background: #ffffff !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            #previewWrapper {
+                padding: 0 !important;
+                margin: 0 !important;
+                background: transparent !important;
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+            #scaleContainer {
+                transform: none !important;
+                width: 100% !important;
+                margin: 0 !important;
+            }
+            .a4-paper {
+                width: 210mm !important;
+                min-height: 297mm !important;
+                margin: 0 !important;
+                box-shadow: none !important;
+                page-break-after: avoid;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
 </head>
-<body class="bg-[#F8FAF9] text-slate-800 font-sans min-h-screen flex flex-col antialiased">
+<body class="min-h-screen flex flex-col lg:h-screen lg:overflow-hidden">
 
-  <!-- Bar Status Cloud -->
-  <aside class="bg-brand-dark text-slate-300 text-xs py-2 px-4 no-print border-b border-emerald-950">
-    <div class="max-w-4xl mx-auto flex items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <span id="syncDot" class="w-2 h-2 rounded-full bg-slate-400"></span>
-        <span id="syncLabel" class="text-[11px] font-medium">Memeriksa sambungan...</span>
-      </div>
-      <button onclick="muatDataCloud()" class="text-amber-300 hover:text-white text-[11px] font-semibold flex items-center gap-1">
-        <i class="fa-solid fa-arrows-rotate" id="syncIcon"></i>
-        <span>Segerak</span>
-      </button>
-    </div>
-  </aside>
-
-  <!-- Pengepala Utama -->
-  <header class="bg-brand-green text-white py-5 px-4 shadow-sm no-print">
-    <div class="max-w-4xl mx-auto space-y-3.5">
-      <div class="flex items-center justify-between gap-3">
-        <div>
-          <span class="inline-block bg-black/20 border border-white/10 px-2.5 py-0.5 rounded-full text-[10px] font-bold text-amber-300 tracking-wider mb-1">
-            TABUNG HAJI &bull; TERENGGANU
-          </span>
-          <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight">
-            Checklist Kursus Asas Haji 1448H / 2027M
-          </h1>
-          <p class="text-xs text-emerald-100 mt-0.5">
-            Pelan 13 Minggu (1 Hari 1 Masjid)
-          </p>
+    <!-- ==================== HEADER BAR MODEN ==================== -->
+    <header class="no-print bg-white/95 backdrop-blur-md border-b border-slate-200/80 px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3 z-30 sticky top-0">
+        <!-- Jenama Sistem -->
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-[#3f5829] to-[#588635] text-white flex items-center justify-center shadow-sm shadow-[#3f5829]/20">
+                <i data-lucide="file-check-2" class="w-5 h-5"></i>
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="font-display font-bold text-slate-900 text-base sm:text-lg tracking-tight">e-Cuti Az-Zuha</h1>
+                    <span class="hidden sm:inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#3f5829]/10 text-[#3f5829] border border-[#3f5829]/20">
+                        HR-05 (04/2022)
+                    </span>
+                </div>
+                <p class="text-[11px] text-slate-500">Sistem Penjana Borang Permohonan Cuti Rasmi</p>
+            </div>
         </div>
 
-        <button onclick="window.print()" class="bg-white/10 hover:bg-white/20 text-white border border-white/20 px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition">
-          <i class="fa-solid fa-print text-amber-300"></i>
-          <span>Cetak</span>
-        </button>
-      </div>
+        <!-- Bar Tindakan Pantas -->
+        <div class="flex items-center gap-2">
+            <button type="button" onclick="saveProfileData()" title="Simpan profil nama, no. staf & jawatan dalam pelayar"
+                class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200/80 rounded-xl transition cursor-pointer">
+                <i data-lucide="bookmark-check" class="w-4 h-4 text-[#3f5829]"></i>
+                <span class="hidden md:inline">Simpan Profil</span>
+            </button>
 
-      <!-- Tracker Kehadiran -->
-      <div class="bg-black/25 rounded-xl p-3 border border-white/10 space-y-2">
-        <div class="flex items-center justify-between text-xs">
-          <span class="text-emerald-100 font-medium">
-            Kehadiran: <strong id="txtHadir" class="text-white">0</strong> daripada 13 Masjid
-          </span>
-          <span id="txtPeratus" class="font-bold text-amber-300 text-sm">0%</span>
+            <button type="button" onclick="resetForm()" title="Kosongkan semua medan borang"
+                class="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-600 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition cursor-pointer">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                <span class="hidden md:inline">Set Semula</span>
+            </button>
+
+            <div class="h-5 w-[1px] bg-slate-200 mx-0.5 hidden sm:block"></div>
+
+            <button type="button" onclick="window.print()"
+                class="inline-flex items-center gap-2 px-4 py-2.5 text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
+                <i data-lucide="printer" class="w-4 h-4"></i>
+                <span>Cetak / Simpan PDF</span>
+            </button>
         </div>
-        <div class="w-full bg-black/30 rounded-full h-2 overflow-hidden border border-white/10">
-          <div id="barHadir" class="bg-gradient-to-r from-amber-400 to-brand-gold h-full rounded-full transition-all duration-300" style="width: 0%"></div>
+    </header>
+
+    <!-- Pemberitahuan Toast Moden -->
+    <div id="toastBox" class="no-print fixed bottom-5 right-5 z-50 hidden transform transition-all duration-300 translate-y-2 opacity-0">
+        <div class="bg-slate-900/95 backdrop-blur text-white px-4 py-3 rounded-2xl shadow-xl border border-slate-700/60 flex items-center gap-2.5 text-xs sm:text-sm font-medium">
+            <div class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            </div>
+            <span id="toastMsg">Maklumat disimpan.</span>
         </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- Kandungan Utama -->
-  <main class="max-w-4xl mx-auto px-3 sm:px-4 py-4 flex-1 w-full space-y-3.5">
-
-    <!-- Kawalan Carian & Status -->
-    <div class="bg-white rounded-xl p-3 shadow-sm border border-slate-200 flex flex-col sm:flex-row gap-2.5 items-center justify-between no-print">
-      <div class="relative w-full sm:flex-1">
-        <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs"></i>
-        <input 
-          type="text" 
-          id="carian" 
-          placeholder="Cari masjid atau daerah..." 
-          oninput="tapisSenarai()"
-          class="w-full pl-8 pr-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 focus:ring-brand-green focus:bg-white text-slate-800 transition"
-        >
-      </div>
-
-      <div class="flex items-center gap-1 bg-slate-100 p-1 rounded-lg text-xs font-semibold w-full sm:w-auto">
-        <button onclick="setTab('semua')" id="tab-semua" class="flex-1 sm:flex-initial px-3 py-1 rounded-md bg-brand-green text-white font-bold transition">
-          Semua (13)
-        </button>
-        <button onclick="setTab('belum')" id="tab-belum" class="flex-1 sm:flex-initial px-3 py-1 rounded-md text-slate-600 hover:bg-white transition">
-          Belum (<span id="cntBelum">13</span>)
-        </button>
-        <button onclick="setTab('selesai')" id="tab-selesai" class="flex-1 sm:flex-initial px-3 py-1 rounded-md text-slate-600 hover:bg-white transition">
-          Selesai (<span id="cntSelesai">0</span>)
-        </button>
-      </div>
     </div>
 
-    <!-- Senarai Kad Masjid -->
-    <div id="senaraiMasjid" class="space-y-2.5"></div>
+    <!-- ==================== KANDUNGAN UTAMA (SPLIT VIEW) ==================== -->
+    <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden">
 
-    <div id="tiadaRekod" class="hidden text-center py-10 bg-white rounded-xl border border-dashed border-slate-300 p-4 text-xs text-slate-500">
-      Tiada rekod ditemui.
-    </div>
-
-  </main>
-
-  <!-- Modal Tukar Tarikh (Custom Date Sahaja Dengan Semakan Duplikasi) -->
-  <div id="modalTarikh" class="hidden fixed inset-0 z-50 bg-black/60 flex items-center justify-center p-4 no-print">
-    <div class="bg-white rounded-xl max-w-sm w-full p-4 space-y-3.5 shadow-xl">
-      <div class="flex items-center justify-between border-b pb-2">
-        <h3 class="font-bold text-slate-800 text-sm">Tukar Tarikh Kehadiran</h3>
-        <button onclick="tutupModalTarikh()" class="text-slate-400 hover:text-slate-600 text-xs">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <div class="text-xs space-y-3">
-        <div>
-          <span class="text-slate-500 text-[11px]">Masjid Pilihan:</span>
-          <strong id="namaMasjidModal" class="text-slate-900 block text-sm font-extrabold mt-0.5"></strong>
-        </div>
-
-        <!-- Input Tarikh Tersuai -->
-        <div class="bg-slate-50 p-3 rounded-lg border border-slate-200 space-y-2">
-          <label class="block font-bold text-slate-700">Pilih Tarikh Baharu:</label>
-          <input 
-            type="date" 
-            id="inputCustomDate" 
-            onchange="semakTarikhDipilih()"
-            class="w-full p-2 bg-white border border-slate-300 rounded-md text-xs font-semibold text-slate-800 outline-none focus:ring-2 focus:ring-brand-green"
-          >
-          
-          <!-- Paparan Status Hari & Amaran Duplikasi -->
-          <div id="statusTarikhBox" class="text-[11px] font-medium pt-0.5 space-y-1">
-            <p id="previewHariText" class="text-emerald-800"></p>
-            <p id="errorDuplikasiText" class="hidden text-rose-600 font-bold bg-rose-50 p-2 rounded border border-rose-200 flex items-start gap-1">
-              <i class="fa-solid fa-triangle-exclamation mt-0.5"></i>
-              <span id="errorMsgSpan"></span>
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <div class="flex items-center gap-2 pt-1 border-t border-slate-100">
-        <button onclick="tutupModalTarikh()" class="flex-1 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-lg text-xs font-semibold transition">
-          Batal
-        </button>
-        <button id="btnSimpanTarikh" onclick="simpanTarikh()" class="flex-1 py-1.5 bg-brand-green hover:bg-emerald-900 text-white rounded-lg text-xs font-semibold transition disabled:opacity-40 disabled:cursor-not-allowed">
-          Simpan
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast Notifikasi -->
-  <div id="toast" class="fixed bottom-4 right-4 z-50 transform translate-y-16 opacity-0 transition-all duration-200 pointer-events-none no-print">
-    <div class="bg-slate-900 text-white text-xs px-3.5 py-2.5 rounded-lg shadow-lg flex items-center gap-2">
-      <i class="fa-solid fa-circle-check text-emerald-400"></i>
-      <span id="toastMsg">Mesej</span>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 text-[11px] py-4 mt-8 no-print text-center">
-    <p>Checklist Kursus Asas Haji Terengganu 1448H / 2027M</p>
-  </footer>
-
-  <!-- SCRIPT UTAMA -->
-  <script>
-    // =========================================================================
-    // 🔗 URL WEB APP GOOGLE APPS SCRIPT ANDA:
-    // =========================================================================
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyQrV4TiocIvLlx4BFHJ4GnCsYvheH4ONROVS-3trXT1dDf4R5eq1HauMhTJyGkPu2dQw/exec";
-    // =========================================================================
-
-    const NAMA_HARI = ["Ahad", "Isnin", "Selasa", "Rabu", "Khamis", "Jumaat", "Sabtu"];
-
-    const DATA_MASTER = [
-      {
-        minggu: 1,
-        id: 1,
-        nama: "Masjid At-Taqwa Durian Burung",
-        daerah: "Kuala Terengganu",
-        hari: "Jumaat",
-        masa: "8.00 pagi – 12.00 tgh",
-        tarikhDipilih: "25/09/2026",
-        gmaps: "https://maps.google.com/?cid=11503669529533817507",
-        waze: "https://waze.com/ul?q=Masjid+At-Takwa+Durian+Burung+Kuala+Terengganu&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 2,
-        id: 3,
-        nama: "Masjid Tengku Tengah Zaharah",
-        daerah: "Kuala Terengganu",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "03/10/2026",
-        gmaps: "https://maps.google.com/?cid=2971137667866400166",
-        waze: "https://waze.com/ul?q=Masjid+Tengku+Tengah+Zaharah+Kuala+Ibai&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 3,
-        id: 2,
-        nama: "Masjid Wakaf Tembesu",
-        daerah: "Kuala Terengganu",
-        hari: "Jumaat",
-        masa: "8.00 pagi – 12.00 tgh",
-        tarikhDipilih: "09/10/2026",
-        gmaps: "https://maps.google.com/?cid=13337746422889260741",
-        waze: "https://waze.com/ul?q=Masjid+Wakaf+Tembesu+Kuala+Terengganu&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 4,
-        id: 4,
-        nama: "Masjid Padang Nenas",
-        daerah: "Kuala Nerus",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "17/10/2026",
-        gmaps: "https://maps.google.com/?cid=7969624223369570891",
-        waze: "https://waze.com/ul?q=Masjid+Padang+Nenas+Kuala+Nerus&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 5,
-        id: 8,
-        nama: "Masjid Padang Mengkuang",
-        daerah: "Marang",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "24/10/2026",
-        gmaps: "https://maps.google.com/?cid=16759662360271584522",
-        waze: "https://waze.com/ul?q=Masjid+Padang+Mengkuang+Marang&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 6,
-        id: 6,
-        nama: "Masjid Kg. Butut",
-        daerah: "Kuala Berang",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "31/10/2026",
-        gmaps: "https://www.google.com/maps/search/?api=1&query=Masjid+Kampung+Butut+Kuala+Berang",
-        waze: "https://waze.com/ul?q=Masjid+Kampung+Butut+Kuala+Berang&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 7,
-        id: 7,
-        nama: "Masjid Putera Jaya",
-        daerah: "Setiu",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "07/11/2026",
-        gmaps: "https://maps.google.com/?cid=10395761525953301522",
-        waze: "https://waze.com/ul?q=Masjid+Putera+Jaya+Setiu&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 8,
-        id: 9,
-        nama: "Masjid Ulul Albab (Lulu Albab)",
-        daerah: "Besut",
-        hari: "Jumaat",
-        masa: "8.00 pagi – 12.00 tgh",
-        tarikhDipilih: "13/11/2026",
-        gmaps: "https://maps.google.com/?cid=13504445989286249215",
-        waze: "https://waze.com/ul?q=Masjid+Ulul+Albab+Seberang+Jerteh&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 9,
-        id: 10,
-        nama: "Masjid Nasiruddin Shah",
-        daerah: "Besut",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "21/11/2026",
-        gmaps: "https://maps.google.com/?cid=12316967182039580276",
-        waze: "https://waze.com/ul?q=Masjid+Nasiruddin+Shah+Kampung+Raja&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 10,
-        id: 5,
-        nama: "Masjid Balai Besar",
-        daerah: "Dungun",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "28/11/2026",
-        gmaps: "https://maps.google.com/?cid=18276482090745666868",
-        waze: "https://waze.com/ul?q=Masjid+Balai+Besar+Dungun&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 11,
-        id: 13,
-        nama: "Masjid Tg. Mizan Zainal Abidin",
-        daerah: "Kerteh",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "05/12/2026",
-        gmaps: "https://maps.google.com/?cid=7786217596767497784",
-        waze: "https://waze.com/ul?q=Masjid+Tengku+Mizan+Zainal+Abidin+Kerteh&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 12,
-        id: 11,
-        nama: "Masjid Jamek Binjai",
-        daerah: "Kemaman",
-        hari: "Jumaat",
-        masa: "8.00 pagi – 12.00 tgh",
-        tarikhDipilih: "11/12/2026",
-        gmaps: "https://maps.google.com/?cid=5766538933286069146",
-        waze: "https://waze.com/ul?q=Masjid+Mukim+Binjai+Kemaman&navigate=yes",
-        selesai: false
-      },
-      {
-        minggu: 13,
-        id: 12,
-        nama: "Masjid Batu 2 1/2 Mak Chili",
-        daerah: "Kemaman",
-        hari: "Sabtu",
-        masa: "8.30 pagi – 12.30 tgh",
-        tarikhDipilih: "19/12/2026",
-        gmaps: "https://maps.google.com/?cid=7556641092294657807",
-        waze: "https://waze.com/ul?q=Masjid+Kampung+Batu+2+1/2+Mak+Chili&navigate=yes",
-        selesai: false
-      }
-    ];
-
-    let senaraiMasjid = JSON.parse(JSON.stringify(DATA_MASTER));
-    let tabSemasa = 'semua';
-    let masjidTukar = null;
-
-    // Bersihkan format tarikh dari sebarang format ISO
-    function formatTarikhKemas(tarikhMentah) {
-      if (!tarikhMentah) return "";
-      const str = String(tarikhMentah).trim();
-      
-      if (str.includes("T")) {
-        const bahagian = str.split("T")[0].split("-");
-        if (bahagian.length === 3) {
-          return `${bahagian[2]}/${bahagian[1]}/${bahagian[0]}`;
-        }
-      }
-
-      if (str.includes("/")) {
-        return str.split(" ")[0];
-      }
-
-      return str;
-    }
-
-    // Tukar DD/MM/YYYY ke YYYY-MM-DD
-    function dmyToYmd(dmyStr) {
-      if (!dmyStr || !dmyStr.includes("/")) return "";
-      const p = dmyStr.split("/");
-      return `${p[2]}-${p[1].padStart(2, '0')}-${p[0].padStart(2, '0')}`;
-    }
-
-    // Tukar YYYY-MM-DD ke DD/MM/YYYY
-    function ymdToDmy(ymdStr) {
-      if (!ymdStr || !ymdStr.includes("-")) return "";
-      const p = ymdStr.split("-");
-      return `${p[2]}/${p[1]}/${p[0]}`;
-    }
-
-    window.addEventListener('DOMContentLoaded', () => {
-      renderSenarai();
-      if (APPS_SCRIPT_URL && !APPS_SCRIPT_URL.includes("XXXXXXXXXXXX")) {
-        muatDataCloud();
-      }
-    });
-
-    async function muatDataCloud() {
-      const dot = document.getElementById('syncDot');
-      const label = document.getElementById('syncLabel');
-      const icon = document.getElementById('syncIcon');
-
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("XXXXXXXXXXXX")) return;
-
-      dot.className = "w-2 h-2 rounded-full bg-blue-400 animate-ping";
-      label.textContent = "Menyegerak data...";
-      icon.classList.add('fa-spin');
-
-      try {
-        const res = await fetch(`${APPS_SCRIPT_URL}?action=read`);
-        const json = await res.json();
-        if (json.success && Array.isArray(json.data)) {
-          json.data.forEach(itemCloud => {
-            const padan = senaraiMasjid.find(m => m.id === itemCloud.id);
-            if (padan) {
-              padan.selesai = Boolean(itemCloud.selesai);
-              if (itemCloud.tarikhDipilih) {
-                padan.tarikhDipilih = formatTarikhKemas(itemCloud.tarikhDipilih);
-              }
-              if (itemCloud.hari) {
-                padan.hari = itemCloud.hari;
-              }
-            }
-          });
-          dot.className = "w-2 h-2 rounded-full bg-emerald-400";
-          label.textContent = "Google Sheets: Tersambung";
-          tunjukToast("Data kehadiran diselaraskan!");
-        }
-      } catch (err) {
-        dot.className = "w-2 h-2 rounded-full bg-amber-400";
-        label.textContent = "Mod Luar Talian";
-      } finally {
-        icon.classList.remove('fa-spin');
-        renderSenarai();
-      }
-    }
-
-    function hantarCloud(query) {
-      if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes("XXXXXXXXXXXX")) return;
-      fetch(`${APPS_SCRIPT_URL}?${query}`).catch(err => console.warn(err));
-    }
-
-    function setTab(tab) {
-      tabSemasa = tab;
-      ['semua', 'belum', 'selesai'].forEach(t => {
-        const el = document.getElementById(`tab-${t}`);
-        if (t === tab) {
-          el.className = "flex-1 sm:flex-initial px-3 py-1 rounded-md bg-brand-green text-white font-bold transition";
-        } else {
-          el.className = "flex-1 sm:flex-initial px-3 py-1 rounded-md text-slate-600 hover:bg-white transition";
-        }
-      });
-      tapisSenarai();
-    }
-
-    function tapisSenarai() {
-      const q = document.getElementById('carian').value.trim().toLowerCase();
-      
-      const hasil = senaraiMasjid.filter(m => {
-        const padanTab = 
-          (tabSemasa === 'semua') ||
-          (tabSemasa === 'belum' && !m.selesai) ||
-          (tabSemasa === 'selesai' && m.selesai);
-
-        const padanCari = m.nama.toLowerCase().includes(q) || m.daerah.toLowerCase().includes(q);
-        return padanTab && padanCari;
-      });
-
-      renderSenarai(hasil);
-    }
-
-    function renderSenarai(senarai = null) {
-      const container = document.getElementById('senaraiMasjid');
-      if (!container) return;
-      container.innerHTML = '';
-
-      const items = senarai !== null ? senarai : senaraiMasjid;
-
-      if (items.length === 0) {
-        document.getElementById('tiadaRekod').classList.remove('hidden');
-      } else {
-        document.getElementById('tiadaRekod').classList.add('hidden');
-      }
-
-      items.forEach(item => {
-        const tarikhBersih = formatTarikhKemas(item.tarikhDipilih);
-
-        const kad = document.createElement('div');
-        kad.className = `print-card bg-white rounded-xl p-3.5 sm:p-4 border shadow-sm transition flex flex-col justify-between gap-2.5 ${
-          item.selesai ? 'border-emerald-300 bg-emerald-50/20' : 'border-slate-200'
-        }`;
-
-        kad.innerHTML = `
-          <div class="flex items-start justify-between gap-3">
-            <div class="space-y-1">
-              <div class="flex items-center gap-1.5 text-[10px] font-bold">
-                <span class="px-2 py-0.5 rounded bg-brand-green text-white">
-                  MINGGU ${item.minggu.toString().padStart(2, '0')}
-                </span>
-                <span class="px-2 py-0.5 rounded bg-slate-100 text-slate-700 uppercase">
-                  ${item.daerah}
-                </span>
-              </div>
-              <h3 class="font-extrabold text-sm sm:text-base text-slate-900 leading-snug ${item.selesai ? 'line-through text-slate-400' : ''}">
-                ${item.nama}
-              </h3>
-              <p class="text-xs text-slate-600">
-                <span class="font-bold text-slate-900">${tarikhBersih} (${item.hari})</span> &bull; ${item.masa}
-                <button onclick="bukaModalTarikh(${item.id})" class="ml-2 text-brand-green hover:underline font-bold text-[11px] no-print">Tukar Tarikh</button>
-              </p>
+        <!-- PANEL KIRI: EDITOR BERSTRUKTUR DENGAN TAB -->
+        <aside class="no-print w-full lg:w-[440px] xl:w-[480px] bg-white border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col lg:h-full shrink-0">
+            
+            <!-- Navigasi Tab Langkah -->
+            <div class="px-4 pt-3 pb-2 bg-slate-50/70 border-b border-slate-200/80">
+                <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-200/70 rounded-xl">
+                    <button type="button" onclick="switchTab('tab-pemohon')" id="btn-tab-pemohon"
+                        class="tab-btn flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-semibold bg-white text-[#3f5829] shadow-sm transition cursor-pointer">
+                        <i data-lucide="user-circle" class="w-3.5 h-3.5"></i>
+                        <span>1. Pemohon</span>
+                    </button>
+                    <button type="button" onclick="switchTab('tab-cuti')" id="btn-tab-cuti"
+                        class="tab-btn flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                        <i data-lucide="calendar-days" class="w-3.5 h-3.5"></i>
+                        <span>2. Butiran Cuti</span>
+                    </button>
+                    <button type="button" onclick="switchTab('tab-pengesahan')" id="btn-tab-pengesahan"
+                        class="tab-btn flex items-center justify-center gap-1.5 py-2 px-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer">
+                        <i data-lucide="pen-tool" class="w-3.5 h-3.5"></i>
+                        <span>3. Tandatangan</span>
+                    </button>
+                </div>
             </div>
 
-            <button 
-              onclick="toggleHadir(${item.id})" 
-              class="w-7 h-7 rounded-lg flex items-center justify-center border shrink-0 no-print transition ${
-                item.selesai ? 'bg-brand-green text-white border-brand-green' : 'border-slate-300 text-transparent hover:border-brand-green'
-              }"
-              title="${item.selesai ? 'Tanda belum' : 'Tanda selesai'}"
-            >
-              <i class="fa-solid fa-check text-xs"></i>
-            </button>
-          </div>
+            <!-- Badan Borang Input (Scrollable) -->
+            <div class="flex-1 overflow-y-auto p-4 sm:p-5 space-y-5">
 
-          <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-100 no-print">
-            <a href="${item.gmaps}" target="_blank" class="flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white font-bold py-1.5 px-3 rounded-lg text-xs transition">
-              <i class="fa-brands fa-google"></i>
-              <span>Google Maps</span>
-            </a>
-            <a href="${item.waze}" target="_blank" class="flex items-center justify-center gap-1.5 bg-sky-500 hover:bg-sky-600 text-white font-bold py-1.5 px-3 rounded-lg text-xs transition">
-              <i class="fa-brands fa-waze"></i>
-              <span>Waze</span>
-            </a>
-          </div>
-        `;
+                <!-- ==================== TAB 1: MAKLUMAT PEMOHON & LOGO ==================== -->
+                <div id="tab-pemohon" class="tab-panel space-y-4">
+                    <!-- Kad Maklumat Pemohon -->
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3.5">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                <i data-lucide="id-card" class="w-4 h-4 text-[#3f5829]"></i>
+                                Identiti Kakitangan
+                            </h2>
+                            <span class="text-[10px] font-medium text-slate-400">Auto-kemas kini</span>
+                        </div>
 
-        container.appendChild(kad);
-      });
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Penuh <span class="text-rose-500">*</span></label>
+                            <input type="text" id="inNama" oninput="syncForm()" placeholder="Contoh: AHMAD BIN ALI"
+                                class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                        </div>
 
-      kemaskiniTracker();
-    }
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">No. Staf</label>
+                                <input type="text" id="inNoStaf" oninput="syncForm()" placeholder="Contoh: AZ-0124"
+                                    class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Bahagian / Unit</label>
+                                <input type="text" id="inBahagian" oninput="syncForm()" placeholder="Contoh: OPERASI UMRAH"
+                                    class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                            </div>
+                        </div>
 
-    function toggleHadir(id) {
-      const item = senaraiMasjid.find(m => m.id === id);
-      if (!item) return;
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Jawatan</label>
+                            <input type="text" id="inJawatan" oninput="syncForm()" placeholder="Contoh: EKSEKUTIF OPERASI"
+                                class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                        </div>
+                    </div>
 
-      item.selesai = !item.selesai;
-      hantarCloud(`action=toggle&id=${id}&status=${item.selesai}`);
-      tapisSenarai();
-      tunjukToast(item.selesai ? `Minggu ${item.minggu} selesai!` : `Minggu ${item.minggu} ditanda belum.`);
-    }
+                    <!-- Kad Pengurusan Logo GitHub / Tempatan -->
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                <i data-lucide="image" class="w-4 h-4 text-[#3f5829]"></i>
+                                Logo Rasmi Syarikat
+                            </h2>
+                            <button type="button" onclick="resetToGitHubLogo()" class="text-[11px] font-semibold text-[#3f5829] hover:underline cursor-pointer">
+                                Lalai GitHub
+                            </button>
+                        </div>
 
-    function kemaskiniTracker() {
-      const jumlah = senaraiMasjid.length;
-      const siap = senaraiMasjid.filter(m => m.selesai).length;
-      const belum = jumlah - siap;
-      const peratus = Math.round((siap / jumlah) * 100);
+                        <p class="text-[11px] text-slate-500 leading-relaxed">
+                            Sistem membaca <code class="px-1.5 py-0.5 bg-slate-200/80 rounded text-slate-800 font-mono">./logo-azzuha.png</code> secara automatik. Anda juga boleh memuat naik fail PNG/JPG sementara dari peranti anda di bawah:
+                        </p>
 
-      document.getElementById('txtHadir').textContent = siap;
-      document.getElementById('txtPeratus').textContent = `${peratus}%`;
-      document.getElementById('barHadir').style.width = `${peratus}%`;
-      document.getElementById('cntBelum').textContent = belum;
-      document.getElementById('cntSelesai').textContent = siap;
-    }
+                        <label class="flex flex-col items-center justify-center w-full p-3.5 border-2 border-dashed border-slate-300 hover:border-[#3f5829] bg-white hover:bg-[#3f5829]/5 rounded-xl cursor-pointer transition group">
+                            <div class="flex items-center gap-2 text-xs font-semibold text-slate-700 group-hover:text-[#3f5829]">
+                                <i data-lucide="upload-cloud" class="w-4 h-4"></i>
+                                <span>Pilih Fail Logo (PNG / JPG) atau Tampal (Ctrl+V)</span>
+                            </div>
+                            <input type="file" id="inLogoFile" accept="image/*" onchange="handleLogoUpload(event)" class="hidden">
+                        </label>
 
-    // Modal Tukar Tarikh
-    function bukaModalTarikh(id) {
-      masjidTukar = senaraiMasjid.find(m => m.id === id);
-      if (!masjidTukar) return;
+                        <label class="flex items-center gap-2 text-xs text-slate-600 cursor-pointer select-none">
+                            <input type="checkbox" id="chkRemoveBlackBg" checked onchange="reprocessUploadedLogo()" class="rounded border-slate-300 text-[#3f5829] focus:ring-[#3f5829]">
+                            <span>Buang latar belakang hitam (untuk fail .jpg)</span>
+                        </label>
+                    </div>
 
-      document.getElementById('namaMasjidModal').textContent = masjidTukar.nama;
-      
-      const tarikhSemasaBersih = formatTarikhKemas(masjidTukar.tarikhDipilih);
-      const customInput = document.getElementById('inputCustomDate');
-      const ymdValue = dmyToYmd(tarikhSemasaBersih);
-      customInput.value = ymdValue;
+                    <div class="flex justify-end pt-1">
+                        <button type="button" onclick="switchTab('tab-cuti')"
+                            class="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
+                            <span>Seterusnya: Butiran Cuti</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
 
-      semakTarikhDipilih();
+                <!-- ==================== TAB 2: BUTIRAN & JENIS CUTI ==================== -->
+                <div id="tab-cuti" class="tab-panel hidden space-y-4">
+                    <!-- Pilihan Jenis Cuti -->
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3">
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                            <i data-lucide="check-square" class="w-4 h-4 text-[#3f5829]"></i>
+                            Jenis Permohonan Cuti
+                        </h2>
 
-      document.getElementById('modalTarikh').classList.remove('hidden');
-    }
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkTahunan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
+                                <span class="text-xs font-semibold text-slate-700">Cuti Tahunan</span>
+                            </label>
 
-    // Semak tarikh & sahkan tiada duplikasi dengan masjid lain
-    function semakTarikhDipilih() {
-      const val = document.getElementById('inputCustomDate').value;
-      const previewText = document.getElementById('previewHariText');
-      const errorBox = document.getElementById('errorDuplikasiText');
-      const errorSpan = document.getElementById('errorMsgSpan');
-      const btnSimpan = document.getElementById('btnSimpanTarikh');
+                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkTanpaGaji" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
+                                <span class="text-xs font-semibold text-slate-700">Cuti Tanpa Gaji</span>
+                            </label>
 
-      if (!val) {
-        previewText.textContent = "";
-        errorBox.classList.add('hidden');
-        btnSimpan.disabled = true;
-        return;
-      }
+                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkSakit" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
+                                <span class="text-xs font-semibold text-slate-700">Cuti Sakit</span>
+                            </label>
 
-      const dmyPilihan = ymdToDmy(val);
-      const parts = val.split("-");
-      const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-      const namaHari = NAMA_HARI[d.getDay()];
+                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkKecemasan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
+                                <span class="text-xs font-semibold text-slate-700">Cuti Kecemasan</span>
+                            </label>
 
-      previewText.textContent = `Hari: ${namaHari} (${dmyPilihan})`;
+                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkGanti" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
+                                <span class="text-xs font-semibold text-slate-700">Cuti Ganti</span>
+                            </label>
 
-      // Semak adakah tarikh ini telah digunakan oleh masjid lain
-      const masjidSama = senaraiMasjid.find(m => m.id !== masjidTukar.id && formatTarikhKemas(m.tarikhDipilih) === dmyPilihan);
+                            <label class="flex items-center gap-2.5 p-2.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-[#3f5829]/5 transition">
+                                <input type="checkbox" id="chkLain" onchange="toggleLainInput(); syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829]">
+                                <span class="text-xs font-semibold text-slate-700">Lain-Lain</span>
+                            </label>
+                        </div>
 
-      if (masjidSama) {
-        errorSpan.textContent = `Tarikh ini telah diambil untuk Minggu ${masjidSama.minggu} (${masjidSama.nama}). Sila pilih tarikh lain.`;
-        errorBox.classList.remove('hidden');
-        btnSimpan.disabled = true; // Kunci butang simpan
-      } else {
-        errorBox.classList.add('hidden');
-        btnSimpan.disabled = false; // Benarkan simpan
-      }
-    }
+                        <div id="lainTextWrapper" class="hidden pt-1">
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nyatakan Jenis Cuti Lain-lain</label>
+                            <input type="text" id="inLainText" oninput="syncForm()" placeholder="Contoh: CUTI ISTERI BERSALIN / KEMATIAN"
+                                class="w-full px-3.5 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase">
+                        </div>
+                    </div>
 
-    function tutupModalTarikh() {
-      document.getElementById('modalTarikh').classList.add('hidden');
-      masjidTukar = null;
-    }
+                    <!-- Tempoh & Sebab Cuti -->
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3.5">
+                        <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                            <i data-lucide="calendar-range" class="w-4 h-4 text-[#3f5829]"></i>
+                            Tempoh &amp; Sebab Cuti
+                        </h2>
 
-    function simpanTarikh() {
-      if (!masjidTukar) return;
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Tarikh Mula</label>
+                                <input type="date" id="inTarikhMula" onchange="calculateDays(); syncForm()"
+                                    class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">Hingga / Dan</label>
+                                <input type="date" id="inTarikhAkhir" onchange="calculateDays(); syncForm()"
+                                    class="w-full px-3 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                            </div>
+                        </div>
 
-      const ymdVal = document.getElementById('inputCustomDate').value;
-      if (!ymdVal) return;
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Jumlah Hari Cuti</label>
+                            <div class="relative">
+                                <input type="number" step="0.5" min="0.5" id="inJumlahHari" oninput="syncForm()" placeholder="Contoh: 2"
+                                    class="w-full px-3.5 py-2 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none pr-12">
+                                <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-semibold text-slate-400">hari</span>
+                            </div>
+                        </div>
 
-      const dmyBaru = ymdToDmy(ymdVal);
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Sebab Cuti</label>
+                            <input type="text" id="inSebab" oninput="syncForm()" placeholder="Contoh: URUSAN KELUARGA DI KAMPUNG"
+                                class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                        </div>
 
-      // Semak sekali lagi sebelum simpan
-      const masjidSama = senaraiMasjid.find(m => m.id !== masjidTukar.id && formatTarikhKemas(m.tarikhDipilih) === dmyBaru);
-      if (masjidSama) {
-        tunjukToast("Tarikh ini telah diambil oleh masjid lain!");
-        return;
-      }
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Nama Pengganti <span class="font-normal text-slate-400">(sekiranya perlu)</span></label>
+                            <input type="text" id="inPengganti" oninput="syncForm()" placeholder="Contoh: SITI AISHAH BINTI OMAR"
+                                class="w-full px-3.5 py-2.5 text-sm bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                        </div>
+                    </div>
 
-      const parts = ymdVal.split("-");
-      const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
-      const hariBaru = NAMA_HARI[d.getDay()];
+                    <div class="flex items-center justify-between pt-1">
+                        <button type="button" onclick="switchTab('tab-pemohon')"
+                            class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer">
+                            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                            <span>Kembali</span>
+                        </button>
+                        <button type="button" onclick="switchTab('tab-pengesahan')"
+                            class="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-xl transition cursor-pointer">
+                            <span>Seterusnya: Tandatangan</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                </div>
 
-      masjidTukar.tarikhDipilih = dmyBaru;
-      masjidTukar.hari = hariBaru;
+                <!-- ==================== TAB 3: TANDATANGAN & PENGESAHAN ==================== -->
+                <div id="tab-pengesahan" class="tab-panel hidden space-y-4">
+                    <!-- Pad Tandatangan Pemohon -->
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-3">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                <i data-lucide="signature" class="w-4 h-4 text-[#3f5829]"></i>
+                                Tandatangan Pemohon
+                            </h2>
+                            <button type="button" onclick="clearSignature()" class="text-[11px] font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1 cursor-pointer">
+                                <i data-lucide="eraser" class="w-3 h-3"></i> Padam
+                            </button>
+                        </div>
 
-      hantarCloud(`action=updateDate&id=${masjidTukar.id}&date=${encodeURIComponent(dmyBaru)}&day=${encodeURIComponent(hariBaru)}`);
-      
-      tutupModalTarikh();
-      tapisSenarai();
-      tunjukToast(`Tarikh ditukar: ${dmyBaru} (${hariBaru})`);
-    }
+                        <div class="relative bg-white border-2 border-dashed border-slate-300 rounded-xl overflow-hidden touch-none">
+                            <canvas id="sigCanvas" class="w-full h-32 block cursor-crosshair"></canvas>
+                            <div id="sigPlaceholder" class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-slate-400 text-xs">
+                                <i data-lucide="pen-line" class="w-5 h-5 mb-1 opacity-60"></i>
+                                <span>Lukis tandatangan menggunakan tetikus atau jari</span>
+                            </div>
+                        </div>
 
-    function tunjukToast(mesej) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toastMsg').textContent = mesej;
-      toast.classList.remove('translate-y-16', 'opacity-0');
-      toast.classList.add('translate-y-0', 'opacity-100');
-      setTimeout(() => {
-        toast.classList.remove('translate-y-0', 'opacity-100');
-        toast.classList.add('translate-y-16', 'opacity-0');
-      }, 2500);
-    }
-  </script>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">Tarikh Permohonan</label>
+                            <input type="date" id="inTarikhMohon" onchange="syncForm()"
+                                class="w-full px-3.5 py-2 text-xs bg-white border border-slate-300 rounded-xl focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Maklumat Penyemak & Pelulus (Terbuka & Lengkap) -->
+                    <div class="bg-slate-50/80 border border-slate-200/80 rounded-2xl p-4 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+                                <i data-lucide="users-check" class="w-4 h-4 text-[#3f5829]"></i>
+                                Maklumat Semakan &amp; Kelulusan
+                            </h2>
+                            <span class="text-[10px] font-medium text-slate-400">Auto-kemas kini</span>
+                        </div>
+
+                        <!-- 1) SEMAKAN -->
+                        <div class="p-3 bg-white border border-slate-200/90 rounded-xl space-y-2.5">
+                            <p class="text-[11px] font-bold text-[#3f5829] uppercase tracking-wide">1) Bahagian Semakan</p>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Penyemak</label>
+                                <input type="text" id="inSemakNama" oninput="syncForm()" placeholder="Contoh: MOHD FARID BIN HASSAN"
+                                    class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Jawatan</label>
+                                    <input type="text" id="inSemakJawatan" oninput="syncForm()" placeholder="Contoh: KETUA UNIT"
+                                        class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Tarikh Semakan</label>
+                                    <input type="date" id="inSemakTarikh" onchange="syncForm()"
+                                        class="w-full px-2.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Status Ulasan Semakan</label>
+                                <div class="grid grid-cols-3 gap-1.5">
+                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition">
+                                        <input type="radio" name="radSemakan" value="none" checked onchange="syncForm()" class="hidden">
+                                        <span>Kosongkan</span>
+                                    </label>
+                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-[#3f5829] has-[:checked]:bg-[#3f5829] has-[:checked]:text-white has-[:checked]:border-[#3f5829] transition">
+                                        <input type="radio" name="radSemakan" value="sokong" onchange="syncForm()" class="hidden">
+                                        <span>MENYOKONG</span>
+                                    </label>
+                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-rose-500 has-[:checked]:bg-rose-600 has-[:checked]:text-white has-[:checked]:border-rose-600 transition">
+                                        <input type="radio" name="radSemakan" value="tidak" onchange="syncForm()" class="hidden">
+                                        <span>TIDAK SOKONG</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2) KELULUSAN -->
+                        <div class="p-3 bg-white border border-slate-200/90 rounded-xl space-y-2.5">
+                            <p class="text-[11px] font-bold text-[#3f5829] uppercase tracking-wide">2) Bahagian Kelulusan</p>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Nama Pelulus</label>
+                                <input type="text" id="inLulusNama" oninput="syncForm()" placeholder="Contoh: HAJI AHMAD ZAKI"
+                                    class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                            </div>
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Jawatan</label>
+                                    <input type="text" id="inLulusJawatan" oninput="syncForm()" placeholder="Contoh: PENGURUS HR"
+                                        class="w-full px-3 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none uppercase transition">
+                                </div>
+                                <div>
+                                    <label class="block text-[11px] font-semibold text-slate-600 mb-1">Tarikh Kelulusan</label>
+                                    <input type="date" id="inLulusTarikh" onchange="syncForm()"
+                                        class="w-full px-2.5 py-2 text-xs bg-slate-50 border border-slate-300 rounded-lg focus:bg-white focus:ring-2 focus:ring-[#3f5829]/30 focus:border-[#3f5829] outline-none transition">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-slate-600 mb-1">Status Ulasan Kelulusan</label>
+                                <div class="grid grid-cols-3 gap-1.5">
+                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition">
+                                        <input type="radio" name="radKelulusan" value="none" checked onchange="syncForm()" class="hidden">
+                                        <span>Kosongkan</span>
+                                    </label>
+                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-[#3f5829] has-[:checked]:bg-[#3f5829] has-[:checked]:text-white has-[:checked]:border-[#3f5829] transition">
+                                        <input type="radio" name="radKelulusan" value="lulus" onchange="syncForm()" class="hidden">
+                                        <span>MELULUSKAN</span>
+                                    </label>
+                                    <label class="flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-semibold text-slate-700 hover:border-rose-500 has-[:checked]:bg-rose-600 has-[:checked]:text-white has-[:checked]:border-rose-600 transition">
+                                        <input type="radio" name="radKelulusan" value="tidak" onchange="syncForm()" class="hidden">
+                                        <span>TIDAK LULUS</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-1">
+                        <button type="button" onclick="switchTab('tab-cuti')"
+                            class="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition cursor-pointer">
+                            <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                            <span>Kembali</span>
+                        </button>
+                        <button type="button" onclick="window.print()"
+                            class="inline-flex items-center gap-2 px-4 py-2.5 text-xs font-semibold text-white bg-[#3f5829] hover:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
+                            <i data-lucide="printer" class="w-4 h-4"></i>
+                            <span>Cetak Sekarang</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- ==================== PANEL KANAN: PRATONTON DOKUMEN A4 ==================== -->
+        <section id="previewWrapper" class="flex-1 bg-slate-200/80 overflow-auto p-4 sm:p-8 flex flex-col items-center relative">
+            
+            <!-- Bar Kawalan Zoom Pratonton -->
+            <div class="no-print sticky top-0 z-20 mb-4 inline-flex items-center gap-2 px-3.5 py-1.5 bg-white/90 backdrop-blur border border-slate-300/80 rounded-full shadow-sm text-xs font-medium text-slate-600">
+                <span class="flex items-center gap-1.5 text-slate-700 font-semibold">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Pratonton Langsung A4
+                </span>
+                <span class="text-slate-300">|</span>
+                <button type="button" onclick="adjustZoom(-0.1)" class="p-1 hover:bg-slate-100 rounded-full cursor-pointer" title="Kecilkan">
+                    <i data-lucide="zoom-out" class="w-3.5 h-3.5"></i>
+                </button>
+                <span id="zoomLabel" class="w-10 text-center font-mono text-[11px]">100%</span>
+                <button type="button" onclick="adjustZoom(0.1)" class="p-1 hover:bg-slate-100 rounded-full cursor-pointer" title="Besarkan">
+                    <i data-lucide="zoom-in" class="w-3.5 h-3.5"></i>
+                </button>
+                <button type="button" onclick="fitPreviewToScreen()" class="px-2 py-0.5 text-[11px] bg-slate-100 hover:bg-slate-200 rounded-full cursor-pointer">
+                    Muat Skrin
+                </button>
+            </div>
+
+            <!-- Bekas Skala Responsif -->
+            <div id="scaleContainer" class="origin-top transition-transform duration-150">
+                
+                <!-- =========================================================================
+                     BORANG RASMI AZ-ZUHA GROUP TRAVEL & TOURS (HR-05 04/2022) - FORMAT ASAL
+                     ========================================================================= -->
+                <div class="a4-paper" id="printableForm">
+
+                    <!-- BAHAGIAN KEPALA: KOD DOKUMEN & LOGO -->
+                    <div style="position: relative; width: 100%; min-height: 82px; margin-bottom: 6px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                        <!-- Kod Rujukan Kanan Atas -->
+                        <div style="position: absolute; top: 0; right: 0; font-size: 9.5pt; font-weight: bold; color: #000;">
+                            HR – 05 (04/2022)
+                        </div>
+
+                        <!-- =========================================================
+                             RUANGAN LOGO RASMI: TUKAR 'src' DI BAWAH DENGAN FAIL GAMBAR ANDA
+                             ========================================================= -->
+                        <div id="customLogoContainer" style="display: flex; align-items: center; justify-content: center; margin-top: 2px;">
+                            <img id="customLogoImg" src="./logo-azzuha.png" alt="Az-Zuha Group Travel & Tours"
+                                 onerror="handleGitHubLogoMissing()"
+                                 style="max-height: 76px; max-width: 240px; width: auto; height: auto; object-fit: contain; display: block;">
+                        </div>
+
+                        <!-- Kotak Panduan Jika Fail Gambar Belum Dimasukkan -->
+                        <div id="logoUploadPrompt" class="hidden no-print" onclick="document.getElementById('inLogoFile').click()"
+                             style="border: 1.5px dashed #3f5829; background: #f4f7f1; padding: 8px 16px; border-radius: 6px; cursor: pointer; text-align: center; margin-top: 6px;">
+                            <div style="font-size: 9.5pt; font-weight: bold; color: #3f5829;">[ Letakkan fail logo-azzuha.png atau Klik untuk pratonton ]</div>
+                            <div style="font-size: 8pt; color: #475569;">Kotak ini tidak akan kelihatan semasa cetakan PDF</div>
+                        </div>
+                    </div>
+
+                    <!-- BANNER TAJUK UTAMA -->
+                    <div class="title-banner" style="margin-bottom: 10px;">
+                        BORANG PERMOHONAN CUTI
+                    </div>
+
+                    <!-- PILIHAN KOTAK JENIS CUTI (2 BARIS x 3 LAJUR BERSENTUHAN) -->
+                    <div style="margin-bottom: 12px;">
+                        <table style="border-collapse: collapse; width: 100%; font-size: 9.5pt; font-weight: bold;">
+                            <tr>
+                                <td style="width: 34%; padding: 0; vertical-align: middle;">
+                                    <div style="display: flex; align-items: center;">
+                                        <span class="cb-box" id="outChkTahunan"></span>
+                                        <span style="margin-left: 6px;">CUTI TAHUNAN</span>
+                                    </div>
+                                </td>
+                                <td style="width: 34%; padding: 0; vertical-align: middle;">
+                                    <div style="display: flex; align-items: center;">
+                                        <span class="cb-box" id="outChkTanpaGaji"></span>
+                                        <span style="margin-left: 6px;">CUTI TANPA GAJI</span>
+                                    </div>
+                                </td>
+                                <td style="width: 32%; padding: 0; vertical-align: middle;">
+                                    <div style="display: flex; align-items: center;">
+                                        <span class="cb-box" id="outChkSakit"></span>
+                                        <span style="margin-left: 6px;">CUTI SAKIT</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0; vertical-align: middle;">
+                                    <div style="display: flex; align-items: center; margin-top: -1.5px;">
+                                        <span class="cb-box" id="outChkKecemasan"></span>
+                                        <span style="margin-left: 6px;">CUTI KECEMASAN</span>
+                                    </div>
+                                </td>
+                                <td style="padding: 0; vertical-align: middle;">
+                                    <div style="display: flex; align-items: center; margin-top: -1.5px;">
+                                        <span class="cb-box" id="outChkGanti"></span>
+                                        <span style="margin-left: 6px;">CUTI GANTI</span>
+                                    </div>
+                                </td>
+                                <td style="padding: 0; vertical-align: middle;">
+                                    <div style="display: flex; align-items: center; margin-top: -1.5px;">
+                                        <span class="cb-box" id="outChkLain"></span>
+                                        <span style="margin-left: 6px; white-space: nowrap;">LAIN-LAIN</span>
+                                        <span class="dotted-line" id="outLainText" style="flex: 1; margin-left: 4px; min-width: 70px; font-size: 8.5pt;"></span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div style="font-size: 7pt; font-style: italic; font-weight: bold; margin-top: 3px;">
+                            (TANDAKAN / PADA KOTAK YANG BERKENAAN. JIKA LAIN-LAIN, SILA NYATAKAN)
+                        </div>
+                    </div>
+
+                    <!-- BUTIRAN PEMOHON & PERMOHONAN CUTI -->
+                    <div style="font-size: 10pt; line-height: 2.05; margin-bottom: 10px;">
+                        <!-- Baris 1: Nama & No Staf -->
+                        <div style="display: flex; align-items: baseline; width: 100%;">
+                            <span style="font-weight: bold; white-space: nowrap;">NAMA :</span>
+                            <span class="dotted-line" id="outNama" style="width: 53%; margin-right: 12px;"></span>
+                            <span style="font-weight: bold; white-space: nowrap;">NO. STAF:</span>
+                            <span class="dotted-line" id="outNoStaf" style="flex: 1;"></span>
+                        </div>
+
+                        <!-- Baris 2: Jawatan & Bahagian -->
+                        <div style="display: flex; align-items: baseline; width: 100%;">
+                            <span style="font-weight: bold; white-space: nowrap;">JAWATAN :</span>
+                            <span class="dotted-line" id="outJawatan" style="width: 49%; margin-right: 12px;"></span>
+                            <span style="font-weight: bold; white-space: nowrap;">BAHAGIAN :</span>
+                            <span class="dotted-line" id="outBahagian" style="flex: 1;"></span>
+                        </div>
+
+                        <!-- Baris 3: Tarikh Cuti & Jumlah Cuti -->
+                        <div style="display: flex; align-items: baseline; width: 100%;">
+                            <span style="white-space: nowrap;">Tarikh cuti :</span>
+                            <span class="dotted-line" id="outTarikhMula" style="width: 22%; text-align: center;"></span>
+                            <span style="white-space: nowrap; margin: 0 6px;">hingga/dan</span>
+                            <span class="dotted-line" id="outTarikhAkhir" style="width: 22%; text-align: center; margin-right: 10px;"></span>
+                            <span style="white-space: nowrap;">Jumlah cuti:</span>
+                            <span class="dotted-line" id="outJumlahHari" style="flex: 1; text-align: center;"></span>
+                            <span style="white-space: nowrap;">.hari</span>
+                        </div>
+
+                        <!-- Baris 4: Sebab Cuti -->
+                        <div style="display: flex; align-items: baseline; width: 100%;">
+                            <span style="white-space: nowrap;">Sebab cuti:</span>
+                            <span class="dotted-line" id="outSebab" style="flex: 1;"></span>
+                        </div>
+
+                        <!-- Baris 5: Nama Pengganti -->
+                        <div style="display: flex; align-items: baseline; width: 100%;">
+                            <span style="white-space: nowrap;">Nama Pengganti (sekiranya perlu):</span>
+                            <span class="dotted-line" id="outPengganti" style="flex: 1;"></span>
+                        </div>
+                    </div>
+
+                    <!-- ARAHAN TANDATANGAN -->
+                    <div style="font-size: 9.5pt; font-weight: bold; margin-bottom: 6px;">
+                        Pemohon perlu mendapatkan tandatangan kedua-dua pihak dibawah:
+                    </div>
+
+                    <!-- JADUAL 1: SEMAKAN & KELULUSAN -->
+                    <table class="form-table" style="margin-bottom: 14px;">
+                        <thead>
+                            <tr>
+                                <th style="width: 36%;">NAMA &amp; JAWATAN</th>
+                                <th style="width: 38%;">ULASAN</th>
+                                <th style="width: 26%;">TANDATANGAN &amp;<br>TARIKH</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Baris 1: Semakan -->
+                            <tr style="height: 82px;">
+                                <td>
+                                    <div style="margin-bottom: 10px;">1) SEMAKAN:</div>
+                                    <div style="display: flex; margin-bottom: 4px;">
+                                        <span style="width: 58px;">Nama</span><span>: </span>
+                                        <span id="outSemakNama" style="font-weight: bold; margin-left: 4px;"></span>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <span style="width: 58px;">Jawatan</span><span>: </span>
+                                        <span id="outSemakJawatan" style="font-weight: bold; margin-left: 4px;"></span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle; line-height: 1.4;">
+                                    Saya telah membuat semakan dan<br>
+                                    <span id="txtSokong">MENYOKONG</span> / <span id="txtTidakSokong">TIDAK MENYOKONG</span><br>
+                                    permohonan ini
+                                </td>
+                                <td style="vertical-align: bottom;">
+                                    <div>Tarikh: <span id="outSemakTarikh" style="font-weight: bold;"></span></div>
+                                </td>
+                            </tr>
+                            <!-- Baris 2: Kelulusan -->
+                            <tr style="height: 82px;">
+                                <td>
+                                    <div style="margin-bottom: 10px;">2) KELULUSAN</div>
+                                    <div style="display: flex; margin-bottom: 4px;">
+                                        <span style="width: 58px;">Nama</span><span>: </span>
+                                        <span id="outLulusNama" style="font-weight: bold; margin-left: 4px;"></span>
+                                    </div>
+                                    <div style="display: flex;">
+                                        <span style="width: 58px;">Jawatan</span><span>: </span>
+                                        <span id="outLulusJawatan" style="font-weight: bold; margin-left: 4px;"></span>
+                                    </div>
+                                </td>
+                                <td style="text-align: center; vertical-align: middle; line-height: 1.4;">
+                                    Saya telah meneliti tugas-tugas pemohon<br>
+                                    dan <span id="txtLulus">MELULUSKAN</span> / <span id="txtTidakLulus">TIDAK<br>
+                                    MELULUSKAN</span> terhadap permohonan ini
+                                </td>
+                                <td style="vertical-align: bottom;">
+                                    <div>Tarikh: <span id="outLulusTarikh" style="font-weight: bold;"></span></div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- TANDATANGAN PEMOHON & TARIKH PERMOHONAN -->
+                    <div style="font-size: 9.5pt; font-weight: bold; margin-bottom: 16px; position: relative;">
+                        <div style="display: flex; align-items: flex-end; margin-bottom: 12px; min-height: 36px;">
+                            <span style="width: 155px; white-space: nowrap;">Tandatangan pemohon :</span>
+                            <div style="width: 210px; border-bottom: 1.5px dotted #000000; position: relative; height: 34px;">
+                                <img id="outSigImg" src="" alt="" style="display: none; position: absolute; bottom: 1px; left: 15px; max-height: 44px; max-width: 180px; pointer-events: none;">
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: baseline;">
+                            <span style="width: 155px; white-space: nowrap;">Tarikh permohonan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</span>
+                            <span class="dotted-line" id="outTarikhMohon" style="width: 210px; text-align: center;"></span>
+                        </div>
+                    </div>
+
+                    <!-- SEKSYEN BAHAGIAN SUMBER MANUSIA -->
+                    <div style="margin-bottom: 14px;">
+                        <div style="border-top: 1px solid #000000; width: 92%; margin: 0 auto 3px auto;"></div>
+                        <div style="text-align: center; font-weight: bold; font-size: 9.5pt; margin-bottom: 4px;">
+                            UNTUK KEGUNAAN BAHAGIAN SUMBER MANUSIA
+                        </div>
+                        <table class="form-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 16%;">KELAYAKAN<br>CUTI</th>
+                                    <th style="width: 34%;">JUMLAH CUTI YANG TELAH DIAMBIL<br>(TERMASUK CUTI YANG DIPOHON)</th>
+                                    <th style="width: 18%;">BAKI KELAYAKAN<br>CUTI</th>
+                                    <th style="width: 32%;">PENGESAHAN &amp; CATATAN<br>SUMBER MANUSIA</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="height: 30px;">
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- KOTAK PERINGATAN -->
+                    <div style="border: 1.5px solid #000000; padding: 8px 12px; font-size: 8.5pt; font-style: italic; line-height: 1.38;">
+                        <div style="font-weight: bold; text-decoration: underline; margin-bottom: 5px;">
+                            Peringatan:
+                        </div>
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td style="width: 18px; vertical-align: top;">1.</td>
+                                <td style="padding-bottom: 4px;">Bercuti tanpa kelulusan adalah cuti tanpa kebenaran dan boleh dikenakan tindakan disiplin.</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 18px; vertical-align: top;">2.</td>
+                                <td style="padding-bottom: 4px;">Jika pemohon memerlukan cuti segera atas sebab-sebab kecemasan sila maklumkan kepada bahagian Sumber Manusia sekurang-kurangnya <strong>15 minit sebelum waktu bekerja</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td style="width: 18px; vertical-align: top;">3.</td>
+                                <td>Bagi permohonan cuti yang memerlukan pengganti, sila pastikan pengganti telah bersedia menggantikan tugasan kerja dan bertanggungjawab apabila dirujuk oleh pihak pengurusan.</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- TAMAT BORANG RASMI A4 -->
+
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Inisialisasi Ikon Lucide
+        lucide.createIcons();
+
+        // Pemboleh ubah global
+        let rawUploadedLogoDataUrl = null;
+        let currentZoom = 1.0;
+
+        // =========================================================
+        // 1. NAVIGASI TAB PANEL KIRI
+        // =========================================================
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            document.getElementById(tabId).classList.remove('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('bg-white', 'text-[#3f5829]', 'shadow-sm', 'font-semibold');
+                btn.classList.add('text-slate-600', 'font-medium');
+            });
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-600', 'font-medium');
+                activeBtn.classList.add('bg-white', 'text-[#3f5829]', 'shadow-sm', 'font-semibold');
+            }
+
+            if (tabId === 'tab-pengesahan') {
+                setTimeout(resizeSignatureCanvas, 50);
+            }
+        }
+
+        // =========================================================
+        // 2. KAWALAN ZOOM & SKALA RESPONSIF KERTAS A4
+        // =========================================================
+        function adjustZoom(delta) {
+            currentZoom = Math.min(1.3, Math.max(0.45, +(currentZoom + delta).toFixed(2)));
+            applyZoom();
+        }
+
+        function fitPreviewToScreen() {
+            const wrapper = document.getElementById('previewWrapper');
+            if (!wrapper) return;
+            const availableWidth = wrapper.clientWidth - 48; // padding
+            const a4PixelWidth = 794; // ~210mm pada 96dpi
+            if (availableWidth < a4PixelWidth) {
+                currentZoom = Math.max(0.42, +(availableWidth / a4PixelWidth).toFixed(2));
+            } else {
+                currentZoom = 0.95;
+            }
+            applyZoom();
+        }
+
+        function applyZoom() {
+            const scaleContainer = document.getElementById('scaleContainer');
+            const zoomLabel = document.getElementById('zoomLabel');
+            if (scaleContainer) {
+                scaleContainer.style.transform = `scale(${currentZoom})`;
+                // Laraskan margin bawah supaya tidak meninggalkan ruang kosong berlebihan bila zoom out
+                const a4Height = 1123;
+                const offset = (1 - currentZoom) * a4Height;
+                scaleContainer.style.marginBottom = currentZoom < 1 ? `-${offset}px` : '24px';
+            }
+            if (zoomLabel) {
+                zoomLabel.textContent = Math.round(currentZoom * 100) + '%';
+            }
+        }
+
+        // =========================================================
+        // 3. PENGURUSAN LOGO RASMI (GITHUB ./logo-azzuha.png & MUAT NAIK)
+        // =========================================================
+        function handleLogoUpload(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            readLogoFile(file);
+        }
+
+        function readLogoFile(file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                rawUploadedLogoDataUrl = e.target.result;
+                reprocessUploadedLogo();
+                showToast('Logo berjaya dimuatkan ke dalam borang.');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function reprocessUploadedLogo() {
+            if (!rawUploadedLogoDataUrl) return;
+            const removeBlack = document.getElementById('chkRemoveBlackBg').checked;
+
+            if (!removeBlack) {
+                applyLogoToDocument(rawUploadedLogoDataUrl);
+                return;
+            }
+
+            const img = new Image();
+            img.onload = function() {
+                const canvas = document.createElement('canvas');
+                canvas.width = img.width;
+                canvas.height = img.height;
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0);
+
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imgData.data;
+
+                let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
+                let hasVisiblePixels = false;
+
+                for (let i = 0; i < data.length; i += 4) {
+                    const r = data[i], g = data[i + 1], b = data[i + 2], a = data[i + 3];
+                    // Tukar piksel hitam pekat kepada lutsinar
+                    if (r < 28 && g < 28 && b < 28 && a > 0) {
+                        data[i + 3] = 0;
+                    } else if (data[i + 3] > 20) {
+                        hasVisiblePixels = true;
+                        const px = (i / 4) % canvas.width;
+                        const py = Math.floor((i / 4) / canvas.width);
+                        if (px < minX) minX = px;
+                        if (px > maxX) maxX = px;
+                        if (py < minY) minY = py;
+                        if (py > maxY) maxY = py;
+                    }
+                }
+
+                ctx.putImageData(imgData, 0, 0);
+
+                if (hasVisiblePixels && maxX > minX && maxY > minY) {
+                    const pad = 4;
+                    const cw = Math.min(canvas.width, maxX - minX + pad * 2);
+                    const ch = Math.min(canvas.height, maxY - minY + pad * 2);
+                    const sx = Math.max(0, minX - pad);
+                    const sy = Math.max(0, minY - pad);
+
+                    const cropCanvas = document.createElement('canvas');
+                    cropCanvas.width = cw;
+                    cropCanvas.height = ch;
+                    cropCanvas.getContext('2d').drawImage(canvas, sx, sy, cw, ch, 0, 0, cw, ch);
+                    applyLogoToDocument(cropCanvas.toDataURL('image/png'));
+                } else {
+                    applyLogoToDocument(canvas.toDataURL('image/png'));
+                }
+            };
+            img.src = rawUploadedLogoDataUrl;
+        }
+
+        function applyLogoToDocument(srcUrl) {
+            const imgEl = document.getElementById('customLogoImg');
+            const container = document.getElementById('customLogoContainer');
+            const promptBox = document.getElementById('logoUploadPrompt');
+            if (imgEl) imgEl.src = srcUrl;
+            if (container) container.classList.remove('hidden');
+            if (promptBox) promptBox.classList.add('hidden');
+        }
+
+        function resetToGitHubLogo() {
+            rawUploadedLogoDataUrl = null;
+            document.getElementById('inLogoFile').value = '';
+            applyLogoToDocument('./logo-azzuha.png');
+            showToast('Kembali kepada laluan logo lalai GitHub (./logo-azzuha.png).');
+        }
+
+        // Sokongan Tampal (Ctrl+V) terus gambar logo
+        window.addEventListener('paste', function(e) {
+            const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+            for (let index in items) {
+                const item = items[index];
+                if (item.kind === 'file' && item.type.startsWith('image/')) {
+                    const blob = item.getAsFile();
+                    readLogoFile(blob);
+                }
+            }
+        });
+
+        // =========================================================
+        // 4. PENYELARASAN DATA BORANG & PENGIRAAN HARI
+        // =========================================================
+        function toggleLainInput() {
+            const isChecked = document.getElementById('chkLain').checked;
+            const wrapper = document.getElementById('lainTextWrapper');
+            if (isChecked) {
+                wrapper.classList.remove('hidden');
+                document.getElementById('inLainText').focus();
+            } else {
+                wrapper.classList.add('hidden');
+            }
+        }
+
+        function formatDateMY(isoDate) {
+            if (!isoDate) return '';
+            const parts = isoDate.split('-');
+            if (parts.length !== 3) return isoDate;
+            return `${parts[2]}/${parts[1]}/${parts[0]}`;
+        }
+
+        function calculateDays() {
+            const startVal = document.getElementById('inTarikhMula').value;
+            const endVal = document.getElementById('inTarikhAkhir').value;
+            if (startVal && endVal) {
+                const start = new Date(startVal);
+                const end = new Date(endVal);
+                if (end >= start) {
+                    const diffTime = Math.abs(end - start);
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+                    document.getElementById('inJumlahHari').value = diffDays;
+                }
+            } else if (startVal && !endVal) {
+                document.getElementById('inTarikhAkhir').value = startVal;
+                document.getElementById('inJumlahHari').value = 1;
+            }
+        }
+
+        function syncForm() {
+            // Jenis cuti
+            document.getElementById('outChkTahunan').textContent = document.getElementById('chkTahunan').checked ? '/' : '';
+            document.getElementById('outChkTanpaGaji').textContent = document.getElementById('chkTanpaGaji').checked ? '/' : '';
+            document.getElementById('outChkSakit').textContent = document.getElementById('chkSakit').checked ? '/' : '';
+            document.getElementById('outChkKecemasan').textContent = document.getElementById('chkKecemasan').checked ? '/' : '';
+            document.getElementById('outChkGanti').textContent = document.getElementById('chkGanti').checked ? '/' : '';
+            document.getElementById('outChkLain').textContent = document.getElementById('chkLain').checked ? '/' : '';
+            document.getElementById('outLainText').textContent = document.getElementById('chkLain').checked
+                ? document.getElementById('inLainText').value.toUpperCase()
+                : '';
+
+            // Butiran utama
+            document.getElementById('outNama').textContent = document.getElementById('inNama').value.toUpperCase();
+            document.getElementById('outNoStaf').textContent = document.getElementById('inNoStaf').value.toUpperCase();
+            document.getElementById('outJawatan').textContent = document.getElementById('inJawatan').value.toUpperCase();
+            document.getElementById('outBahagian').textContent = document.getElementById('inBahagian').value.toUpperCase();
+
+            document.getElementById('outTarikhMula').textContent = formatDateMY(document.getElementById('inTarikhMula').value);
+            document.getElementById('outTarikhAkhir').textContent = formatDateMY(document.getElementById('inTarikhAkhir').value);
+            document.getElementById('outJumlahHari').textContent = document.getElementById('inJumlahHari').value;
+            document.getElementById('outSebab').textContent = document.getElementById('inSebab').value.toUpperCase();
+            document.getElementById('outPengganti').textContent = document.getElementById('inPengganti').value.toUpperCase();
+
+            // Tarikh mohon & penyemak/pelulus
+            document.getElementById('outTarikhMohon').textContent = formatDateMY(document.getElementById('inTarikhMohon').value);
+            document.getElementById('outSemakNama').textContent = document.getElementById('inSemakNama').value.toUpperCase();
+            document.getElementById('outSemakJawatan').textContent = document.getElementById('inSemakJawatan').value.toUpperCase();
+            document.getElementById('outSemakTarikh').textContent = formatDateMY(document.getElementById('inSemakTarikh').value);
+
+            document.getElementById('outLulusNama').textContent = document.getElementById('inLulusNama').value.toUpperCase();
+            document.getElementById('outLulusJawatan').textContent = document.getElementById('inLulusJawatan').value.toUpperCase();
+            document.getElementById('outLulusTarikh').textContent = formatDateMY(document.getElementById('inLulusTarikh').value);
+
+            // Status ulasan semakan (potong pilihan tidak berkenaan)
+            const radSemak = document.querySelector('input[name="radSemakan"]:checked')?.value || 'none';
+            const txtSokong = document.getElementById('txtSokong');
+            const txtTidakSokong = document.getElementById('txtTidakSokong');
+            txtSokong.style.textDecoration = (radSemak === 'tidak') ? 'line-through' : 'none';
+            txtSokong.style.fontWeight = (radSemak === 'sokong') ? 'bold' : 'normal';
+            txtTidakSokong.style.textDecoration = (radSemak === 'sokong') ? 'line-through' : 'none';
+            txtTidakSokong.style.fontWeight = (radSemak === 'tidak') ? 'bold' : 'normal';
+
+            // Status ulasan kelulusan (potong pilihan tidak berkenaan)
+            const radLulus = document.querySelector('input[name="radKelulusan"]:checked')?.value || 'none';
+            const txtLulus = document.getElementById('txtLulus');
+            const txtTidakLulus = document.getElementById('txtTidakLulus');
+            txtLulus.style.textDecoration = (radLulus === 'tidak') ? 'line-through' : 'none';
+            txtLulus.style.fontWeight = (radLulus === 'lulus') ? 'bold' : 'normal';
+            txtTidakLulus.style.textDecoration = (radLulus === 'lulus') ? 'line-through' : 'none';
+            txtTidakLulus.style.fontWeight = (radLulus === 'tidak') ? 'bold' : 'normal';
+        }
+
+        // =========================================================
+        // 5. PAD TANDATANGAN DIGITAL (TETIKUS & SENTUHAN)
+        // =========================================================
+        const sigCanvas = document.getElementById('sigCanvas');
+        const sigCtx = sigCanvas.getContext('2d');
+        let isDrawing = false;
+        let hasSignature = false;
+
+        function resizeSignatureCanvas() {
+            const rect = sigCanvas.getBoundingClientRect();
+            if (rect.width === 0 || rect.height === 0) return;
+            const tempData = hasSignature ? sigCanvas.toDataURL() : null;
+            sigCanvas.width = rect.width * 2;
+            sigCanvas.height = rect.height * 2;
+            sigCtx.scale(2, 2);
+            sigCtx.lineWidth = 2.2;
+            sigCtx.lineCap = 'round';
+            sigCtx.lineJoin = 'round';
+            sigCtx.strokeStyle = '#0f172a';
+
+            if (tempData) {
+                const img = new Image();
+                img.onload = () => sigCtx.drawImage(img, 0, 0, rect.width, rect.height);
+                img.src = tempData;
+            }
+        }
+
+        function getPointerPos(e) {
+            const rect = sigCanvas.getBoundingClientRect();
+            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+            return {
+                x: clientX - rect.left,
+                y: clientY - rect.top
+            };
+        }
+
+        function startDraw(e) {
+            isDrawing = true;
+            const pos = getPointerPos(e);
+            sigCtx.beginPath();
+            sigCtx.moveTo(pos.x, pos.y);
+            document.getElementById('sigPlaceholder').style.display = 'none';
+        }
+
+        function drawMove(e) {
+            if (!isDrawing) return;
+            if (e.cancelable) e.preventDefault();
+            const pos = getPointerPos(e);
+            sigCtx.lineTo(pos.x, pos.y);
+            sigCtx.stroke();
+            hasSignature = true;
+            updateSignaturePreview();
+        }
+
+        function endDraw() {
+            if (!isDrawing) return;
+            isDrawing = false;
+            sigCtx.closePath();
+            updateSignaturePreview();
+        }
+
+        function updateSignaturePreview() {
+            const outImg = document.getElementById('outSigImg');
+            if (hasSignature) {
+                outImg.src = sigCanvas.toDataURL('image/png');
+                outImg.style.display = 'block';
+            } else {
+                outImg.src = '';
+                outImg.style.display = 'none';
+            }
+        }
+
+        function clearSignature() {
+            const rect = sigCanvas.getBoundingClientRect();
+            sigCtx.clearRect(0, 0, rect.width, rect.height);
+            hasSignature = false;
+            document.getElementById('sigPlaceholder').style.display = 'flex';
+            updateSignaturePreview();
+        }
+
+        sigCanvas.addEventListener('mousedown', startDraw);
+        sigCanvas.addEventListener('mousemove', drawMove);
+        window.addEventListener('mouseup', endDraw);
+
+        sigCanvas.addEventListener('touchstart', startDraw, { passive: false });
+        sigCanvas.addEventListener('touchmove', drawMove, { passive: false });
+        window.addEventListener('touchend', endDraw);
+
+        // =========================================================
+        // 6. SIMPAN PROFIL STAF & SET SEMULA BORANG
+        // =========================================================
+        function saveProfileData() {
+            const profile = {
+                nama: document.getElementById('inNama').value,
+                noStaf: document.getElementById('inNoStaf').value,
+                jawatan: document.getElementById('inJawatan').value,
+                bahagian: document.getElementById('inBahagian').value,
+                semakNama: document.getElementById('inSemakNama').value,
+                semakJawatan: document.getElementById('inSemakJawatan').value,
+                lulusNama: document.getElementById('inLulusNama').value,
+                lulusJawatan: document.getElementById('inLulusJawatan').value
+            };
+            try {
+                localStorage.setItem('azzuha_ecuti_profile', JSON.stringify(profile));
+                showToast('Profil kakitangan berjaya disimpan dalam pelayar.');
+            } catch (err) {
+                showToast('Profil dikemas kini untuk sesi ini.');
+            }
+        }
+
+        function loadProfileData() {
+            try {
+                const raw = localStorage.getItem('azzuha_ecuti_profile');
+                if (!raw) return;
+                const p = JSON.parse(raw);
+                if (p.nama) document.getElementById('inNama').value = p.nama;
+                if (p.noStaf) document.getElementById('inNoStaf').value = p.noStaf;
+                if (p.jawatan) document.getElementById('inJawatan').value = p.jawatan;
+                if (p.bahagian) document.getElementById('inBahagian').value = p.bahagian;
+                if (p.semakNama) document.getElementById('inSemakNama').value = p.semakNama;
+                if (p.semakJawatan) document.getElementById('inSemakJawatan').value = p.semakJawatan;
+                if (p.lulusNama) document.getElementById('inLulusNama').value = p.lulusNama;
+                if (p.lulusJawatan) document.getElementById('inLulusJawatan').value = p.lulusJawatan;
+            } catch (err) {
+                // Abaikan jika storan pelayar disekat
+            }
+        }
+
+        function resetForm() {
+            const textIds = [
+                'inNama', 'inNoStaf', 'inJawatan', 'inBahagian',
+                'inTarikhMula', 'inTarikhAkhir', 'inJumlahHari',
+                'inSebab', 'inPengganti', 'inLainText',
+                'inSemakNama', 'inSemakJawatan', 'inSemakTarikh',
+                'inLulusNama', 'inLulusJawatan', 'inLulusTarikh'
+            ];
+            textIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.value = '';
+            });
+
+            const radSemakDefault = document.querySelector('input[name="radSemakan"][value="none"]');
+            if (radSemakDefault) radSemakDefault.checked = true;
+            const radLulusDefault = document.querySelector('input[name="radKelulusan"][value="none"]');
+            if (radLulusDefault) radLulusDefault.checked = true;
+
+            const chkIds = ['chkTahunan', 'chkTanpaGaji', 'chkSakit', 'chkKecemasan', 'chkGanti', 'chkLain'];
+            chkIds.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.checked = false;
+            });
+
+            toggleLainInput();
+            clearSignature();
+            setDefaultTodayDate();
+            syncForm();
+            showToast('Semua medan borang telah dikosongkan.');
+        }
+
+        function setDefaultTodayDate() {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            document.getElementById('inTarikhMohon').value = `${yyyy}-${mm}-${dd}`;
+        }
+
+        function showToast(message) {
+            const box = document.getElementById('toastBox');
+            const msg = document.getElementById('toastMsg');
+            msg.textContent = message;
+            box.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                box.classList.remove('translate-y-2', 'opacity-0');
+            });
+            clearTimeout(window._toastTimer);
+            window._toastTimer = setTimeout(() => {
+                box.classList.add('translate-y-2', 'opacity-0');
+                setTimeout(() => box.classList.add('hidden'), 300);
+            }, 2800);
+        }
+
+        // =========================================================
+        // 7. INISIALISASI PERMULAAN HALAMAN
+        // =========================================================
+        window.addEventListener('resize', () => {
+            fitPreviewToScreen();
+            resizeSignatureCanvas();
+        });
+
+        window.onload = function() {
+            loadProfileData();
+            setDefaultTodayDate();
+            syncForm();
+            fitPreviewToScreen();
+            resizeSignatureCanvas();
+        };
+    </script>
 </body>
 </html>
