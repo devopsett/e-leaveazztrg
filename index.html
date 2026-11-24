@@ -28,6 +28,23 @@
             color: #0f172a;
         }
 
+        .cb-box {
+            width: 24px !important;
+            height: 17px !important;
+            min-width: 24px !important;
+            min-height: 17px !important;
+            border: 1.5px solid #000000 !important;
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 13px;
+            line-height: 1;
+            background-color: #ffffff !important;
+            box-sizing: border-box;
+            flex-shrink: 0;
+        }
+
         .font-display {
             font-family: 'Plus Jakarta Sans', sans-serif;
         }
@@ -52,25 +69,14 @@
         .dotted-line {
             border-bottom: 1.5px dotted #000000;
             display: inline-block;
-            min-height: 16px;
+            height: 22px;
+            line-height: 22px;
             vertical-align: bottom;
             padding-left: 6px;
             padding-right: 4px;
             font-weight: bold;
             color: #0f172a;
             font-size: 10.5pt;
-        }
-
-        .cb-box {
-            width: 24px;
-            height: 17px;
-            border: 1.5px solid #000000;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 13px;
-            background-color: #ffffff;
             box-sizing: border-box;
         }
 
@@ -836,8 +842,8 @@
                     <div style="font-size: 9.5pt; font-weight: bold; margin-bottom: 16px; position: relative;">
                         <div style="display: flex; align-items: flex-end; margin-bottom: 12px; min-height: 48px;">
                             <span style="width: 155px; white-space: nowrap;">Tandatangan pemohon :</span>
-                            <div style="width: 225px; border-bottom: 1.5px dotted #000000; position: relative; height: 46px;">
-                                <img id="outSigPemohonImg" src="" alt="" style="display: none; position: absolute; bottom: -2px; left: 8px; height: 50px; width: auto; max-width: 195px; object-fit: contain; pointer-events: none;">
+                            <div style="width: 210px; border-bottom: 1.5px dotted #000000; position: relative; height: 46px; display: flex; align-items: flex-end; justify-content: center;">
+                                <img id="outSigPemohonImg" src="" alt="" style="display: none; height: 50px; width: auto; max-width: 195px; object-fit: contain; pointer-events: none; margin-bottom: -2px;">
                             </div>
                         </div>
                         <div style="display: flex; align-items: baseline;">
@@ -945,9 +951,9 @@
                 previewWrapper.classList.add('flex');
 
                 btnPreview.classList.add('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
-                btnPreview.classList.remove('text-slate-600', 'font-semibold');
+                btnPreview.classList.remove('text-slate-600', 'hover:text-slate-900', 'font-semibold');
                 btnEditor.classList.remove('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
-                btnEditor.classList.add('text-slate-600', 'font-semibold');
+                btnEditor.classList.add('text-slate-600', 'hover:text-slate-900', 'font-semibold');
 
                 setTimeout(fitPreviewToScreen, 40);
             } else {
@@ -956,9 +962,9 @@
                 editorPanel.classList.remove('hidden');
 
                 btnEditor.classList.add('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
-                btnEditor.classList.remove('text-slate-600', 'font-semibold');
+                btnEditor.classList.remove('text-slate-600', 'hover:text-slate-900', 'font-semibold');
                 btnPreview.classList.remove('bg-[#3f5829]', 'text-white', 'font-bold', 'shadow-sm');
-                btnPreview.classList.add('text-slate-600', 'font-semibold');
+                btnPreview.classList.add('text-slate-600', 'hover:text-slate-900', 'font-semibold');
 
                 setTimeout(resizeAllSignatureCanvases, 40);
             }
