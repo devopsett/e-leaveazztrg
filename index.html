@@ -1613,14 +1613,14 @@
 
             showToast('Menjana fail PDF 1 muka surat A4...');
 
-            // Buat salinan bersih di luar skrin pada skala 100% supaya tidak terjejas oleh zoom telefon
+            // Buat salinan bersih di luar skrin pada skala 100% (794px x 1122px) supaya tidak terpotong di telefon
             const clone = paper.cloneNode(true);
-            clone.style.width = '210mm';
-            clone.style.height = '296mm';
-            clone.style.minHeight = '296mm';
-            clone.style.maxHeight = '296mm';
+            clone.style.width = '794px';
+            clone.style.height = '1122px';
+            clone.style.minHeight = '1122px';
+            clone.style.maxHeight = '1122px';
             clone.style.margin = '0';
-            clone.style.padding = '12mm 16mm';
+            clone.style.padding = '42px 56px';
             clone.style.boxShadow = 'none';
             clone.style.transform = 'none';
             clone.style.overflow = 'hidden';
@@ -1629,16 +1629,30 @@
             const promptClone = clone.querySelector('#logoUploadPrompt');
             if (promptClone) promptClone.remove();
 
+            // Bersihkan sebarang elemen <img> kosong atau tersembunyi supaya html2canvas tidak mencetuskan unhandledrejection
+            clone.querySelectorAll('img').forEach(img => {
+                const rawSrc = img.getAttribute('src');
+                if (!rawSrc || img.style.display === 'none' || !img.complete || img.naturalWidth === 0) {
+                    img.remove();
+                }
+            });
+
             const staging = document.createElement('div');
             staging.style.position = 'fixed';
-            staging.style.left = '-9999px';
+            staging.style.left = '0';
             staging.style.top = '0';
-            staging.style.width = '210mm';
-            staging.style.height = '296mm';
-            staging.style.overflow = 'hidden';
-            staging.style.background = '#ffffff';
+            staging.style.width = '100vw';
+            staging.style.height = '100vh';
+            staging.style.zIndex = '99999';
+            staging.style.opacity = '1';
+            staging.style.pointerEvents = 'none';
+            staging.style.overflow = 'auto';
+            staging.style.background = '#f1f5f9';
             staging.appendChild(clone);
             document.body.appendChild(staging);
+
+            // Beri masa 150ms untuk pelayar melukis semula salinan penuh sebelum dirakam
+            await new Promise(resolve => setTimeout(resolve, 150));
 
             try {
                 if (typeof html2pdf !== 'undefined') {
@@ -1649,10 +1663,17 @@
                         html2canvas: {
                             scale: 2,
                             useCORS: true,
+                            allowTaint: true,
+                            logging: false,
                             backgroundColor: '#ffffff',
                             width: 794,
-                            height: 1120,
-                            windowWidth: 1024
+                            height: 1122,
+                            windowWidth: 1200,
+                            windowHeight: 1200,
+                            scrollX: 0,
+                            scrollY: 0,
+                            x: 0,
+                            y: 0
                         },
                         jsPDF: {
                             unit: 'mm',
@@ -1675,7 +1696,9 @@
                 window.print();
                 setTimeout(() => { document.title = 'e-Leave'; }, 1000);
             } finally {
-                document.body.removeChild(staging);
+                if (staging.parentNode) {
+                    document.body.removeChild(staging);
+                }
                 document.title = 'e-Leave';
                 if (wasPreviewHidden && window.innerWidth < 1024) {
                     previewWrapper.classList.add('hidden');
