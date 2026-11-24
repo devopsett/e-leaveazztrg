@@ -12,6 +12,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Penjana PDF Terus (1 Halaman A4 Tepat Pada Semua Peranti) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <!-- Definisi awal pengendali ralat gambar logo sebelum DOM siap -->
     <script>
         window.handleGitHubLogoMissing = function() {
@@ -264,10 +266,10 @@
 
             <div class="h-5 w-[1px] bg-slate-200 mx-0.5 hidden sm:block"></div>
 
-            <button type="button" onclick="printForm()"
+            <button type="button" onclick="printForm()" id="btnPrintDesktop"
                 class="hidden lg:inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-[#3f5829] to-[#4d6c32] hover:from-[#334821] hover:to-[#3f5829] rounded-xl shadow-md shadow-[#3f5829]/20 transition transform active:scale-95 cursor-pointer">
-                <i data-lucide="printer" class="w-4 h-4"></i>
-                <span>Cetak / PDF</span>
+                <i data-lucide="file-down" class="w-4 h-4"></i>
+                <span>Muat Turun PDF</span>
             </button>
         </div>
     </header>
@@ -1001,10 +1003,10 @@
             <i data-lucide="bookmark-check" class="w-4 h-4 text-[#3f5829]"></i>
             <span>Simpan Profil</span>
         </button>
-        <button type="button" onclick="printForm()"
+        <button type="button" onclick="printForm()" id="btnPrintMobile"
             class="flex-[1.3] inline-flex items-center justify-center gap-1.5 py-2.5 px-4 text-xs font-bold text-white bg-[#3f5829] active:bg-[#314520] rounded-xl shadow-sm transition cursor-pointer">
-            <i data-lucide="printer" class="w-4 h-4"></i>
-            <span>Cetak / Simpan PDF</span>
+            <i data-lucide="file-down" class="w-4 h-4"></i>
+            <span>Muat Turun PDF</span>
         </button>
     </div>
 
@@ -1603,12 +1605,82 @@
             fitPreviewToScreen();
         }
 
-        function printForm() {
-            prepareForPrint();
-            window.print();
-            setTimeout(() => {
+        async function printForm() {
+            const filename = getFormattedPdfFilename() + '.pdf';
+            const paper = document.getElementById('printableForm');
+            const previewWrapper = document.getElementById('previewWrapper');
+            const wasPreviewHidden = previewWrapper.classList.contains('hidden');
+
+            showToast('Menjana fail PDF 1 muka surat A4...');
+
+            // Buat salinan bersih di luar skrin pada skala 100% supaya tidak terjejas oleh zoom telefon
+            const clone = paper.cloneNode(true);
+            clone.style.width = '210mm';
+            clone.style.height = '296mm';
+            clone.style.minHeight = '296mm';
+            clone.style.maxHeight = '296mm';
+            clone.style.margin = '0';
+            clone.style.padding = '12mm 16mm';
+            clone.style.boxShadow = 'none';
+            clone.style.transform = 'none';
+            clone.style.overflow = 'hidden';
+
+            // Buang kotak panduan logo jika gambar logo tidak wujud
+            const promptClone = clone.querySelector('#logoUploadPrompt');
+            if (promptClone) promptClone.remove();
+
+            const staging = document.createElement('div');
+            staging.style.position = 'fixed';
+            staging.style.left = '-9999px';
+            staging.style.top = '0';
+            staging.style.width = '210mm';
+            staging.style.height = '296mm';
+            staging.style.overflow = 'hidden';
+            staging.style.background = '#ffffff';
+            staging.appendChild(clone);
+            document.body.appendChild(staging);
+
+            try {
+                if (typeof html2pdf !== 'undefined') {
+                    const opt = {
+                        margin: 0,
+                        filename: filename,
+                        image: { type: 'jpeg', quality: 0.98 },
+                        html2canvas: {
+                            scale: 2,
+                            useCORS: true,
+                            backgroundColor: '#ffffff',
+                            width: 794,
+                            height: 1120,
+                            windowWidth: 1024
+                        },
+                        jsPDF: {
+                            unit: 'mm',
+                            format: 'a4',
+                            orientation: 'portrait'
+                        },
+                        pagebreak: { mode: ['avoid-all'] }
+                    };
+
+                    await html2pdf().set(opt).from(clone).save();
+                    showToast('Fail PDF berjaya dimuat turun (1 Muka Surat).');
+                } else {
+                    // Sandaran jika pustaka luar disekat
+                    prepareForPrint();
+                    window.print();
+                    setTimeout(() => { document.title = 'e-Leave'; }, 1000);
+                }
+            } catch (err) {
+                prepareForPrint();
+                window.print();
+                setTimeout(() => { document.title = 'e-Leave'; }, 1000);
+            } finally {
+                document.body.removeChild(staging);
                 document.title = 'e-Leave';
-            }, 1000);
+                if (wasPreviewHidden && window.innerWidth < 1024) {
+                    previewWrapper.classList.add('hidden');
+                }
+            }
         }
 
         window.addEventListener('beforeprint', prepareForPrint);
