@@ -134,7 +134,7 @@
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 0;
+                margin: 0 !important;
             }
             html, body {
                 width: 210mm !important;
@@ -144,43 +144,27 @@
                 padding: 0 !important;
                 overflow: hidden !important;
             }
-            .no-print {
-                display: none !important;
+            body * {
+                visibility: hidden !important;
             }
-            main, #scaleOuter {
-                display: block !important;
-                width: 100% !important;
-                height: auto !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                overflow: visible !important;
+            #printableForm, #printableForm * {
+                visibility: visible !important;
             }
-            #previewWrapper {
-                padding: 0 !important;
-                margin: 0 !important;
-                background: transparent !important;
-                display: block !important;
-                width: 100% !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
-            #scaleContainer {
-                transform: none !important;
-                width: 100% !important;
-                height: auto !important;
-                margin: 0 !important;
-            }
-            .a4-paper {
+            #printableForm {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
                 width: 210mm !important;
-                height: 296mm !important;
-                min-height: 296mm !important;
-                max-height: 296mm !important;
+                height: 297mm !important;
+                min-height: 297mm !important;
+                max-height: 297mm !important;
                 margin: 0 !important;
-                padding: 10mm 16mm !important;
+                padding: 11mm 16mm !important;
+                background: #ffffff !important;
                 box-shadow: none !important;
                 overflow: hidden !important;
-                page-break-after: avoid !important;
-                break-after: avoid !important;
+                transform: none !important;
+                zoom: 1 !important;
             }
         }
 
