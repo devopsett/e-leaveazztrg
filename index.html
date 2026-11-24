@@ -1613,8 +1613,9 @@
 
             showToast('Menjana fail PDF 1 muka surat A4...');
 
-            // Buat salinan bersih di luar skrin pada skala 100% (794px x 1122px) supaya tidak terpotong di telefon
+            // Buat salinan bersih pada skala 100% (794px x 1122px) di dalam aliran dokumen supaya tidak kosong
             const clone = paper.cloneNode(true);
+            clone.id = 'printableFormClone';
             clone.style.width = '794px';
             clone.style.height = '1122px';
             clone.style.minHeight = '1122px';
@@ -1624,12 +1625,13 @@
             clone.style.boxShadow = 'none';
             clone.style.transform = 'none';
             clone.style.overflow = 'hidden';
+            clone.style.backgroundColor = '#ffffff';
 
             // Buang kotak panduan logo jika gambar logo tidak wujud
             const promptClone = clone.querySelector('#logoUploadPrompt');
             if (promptClone) promptClone.remove();
 
-            // Bersihkan sebarang elemen <img> kosong atau tersembunyi supaya html2canvas tidak mencetuskan unhandledrejection
+            // Bersihkan sebarang elemen <img> kosong atau tersembunyi
             clone.querySelectorAll('img').forEach(img => {
                 const rawSrc = img.getAttribute('src');
                 if (!rawSrc || img.style.display === 'none' || !img.complete || img.naturalWidth === 0) {
@@ -1637,56 +1639,54 @@
                 }
             });
 
+            // Simpan posisi scroll semasa dan letakkan bekas rakaman di bahagian paling atas aliran dokumen
+            const prevScrollY = window.scrollY || window.pageYOffset || 0;
             const staging = document.createElement('div');
-            staging.style.position = 'fixed';
-            staging.style.left = '0';
-            staging.style.top = '0';
-            staging.style.width = '100vw';
-            staging.style.height = '100vh';
+            staging.style.position = 'relative';
+            staging.style.width = '794px';
+            staging.style.height = '1122px';
+            staging.style.backgroundColor = '#ffffff';
             staging.style.zIndex = '99999';
-            staging.style.opacity = '1';
-            staging.style.pointerEvents = 'none';
-            staging.style.overflow = 'auto';
-            staging.style.background = '#f1f5f9';
             staging.appendChild(clone);
-            document.body.appendChild(staging);
 
-            // Beri masa 150ms untuk pelayar melukis semula salinan penuh sebelum dirakam
-            await new Promise(resolve => setTimeout(resolve, 150));
+            document.body.insertBefore(staging, document.body.firstChild);
+            window.scrollTo(0, 0);
+
+            // Beri masa 200ms untuk pelayar melukis semula salinan penuh sebelum dirakam
+            await new Promise(resolve => setTimeout(resolve, 200));
 
             try {
-                if (typeof html2pdf !== 'undefined') {
-                    const opt = {
-                        margin: 0,
-                        filename: filename,
-                        image: { type: 'jpeg', quality: 0.98 },
-                        html2canvas: {
-                            scale: 2,
-                            useCORS: true,
-                            allowTaint: true,
-                            logging: false,
-                            backgroundColor: '#ffffff',
-                            width: 794,
-                            height: 1122,
-                            windowWidth: 1200,
-                            windowHeight: 1200,
-                            scrollX: 0,
-                            scrollY: 0,
-                            x: 0,
-                            y: 0
-                        },
-                        jsPDF: {
-                            unit: 'mm',
-                            format: 'a4',
-                            orientation: 'portrait'
-                        },
-                        pagebreak: { mode: ['avoid-all'] }
-                    };
+                const h2c = window.html2canvas;
+                const jsPDFConstructor = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
 
-                    await html2pdf().set(opt).from(clone).save();
+                if (typeof h2c === 'function' && typeof jsPDFConstructor === 'function') {
+                    const canvas = await h2c(clone, {
+                        scale: 2,
+                        useCORS: true,
+                        allowTaint: true,
+                        logging: false,
+                        backgroundColor: '#ffffff',
+                        width: 794,
+                        height: 1122,
+                        windowWidth: 794,
+                        windowHeight: 1122,
+                        scrollX: 0,
+                        scrollY: 0,
+                        x: 0,
+                        y: 0
+                    });
+
+                    const imgData = canvas.toDataURL('image/jpeg', 0.98);
+                    const pdf = new jsPDFConstructor({
+                        orientation: 'portrait',
+                        unit: 'mm',
+                        format: 'a4'
+                    });
+
+                    pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+                    pdf.save(filename);
                     showToast('Fail PDF berjaya dimuat turun (1 Muka Surat).');
                 } else {
-                    // Sandaran jika pustaka luar disekat
                     prepareForPrint();
                     window.print();
                     setTimeout(() => { document.title = 'e-Leave'; }, 1000);
@@ -1699,6 +1699,7 @@
                 if (staging.parentNode) {
                     document.body.removeChild(staging);
                 }
+                window.scrollTo(0, prevScrollY);
                 document.title = 'e-Leave';
                 if (wasPreviewHidden && window.innerWidth < 1024) {
                     previewWrapper.classList.add('hidden');
