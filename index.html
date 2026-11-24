@@ -136,13 +136,24 @@
                 size: A4 portrait;
                 margin: 0;
             }
-            body {
+            html, body {
+                width: 210mm !important;
+                height: 297mm !important;
                 background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
+                overflow: hidden !important;
             }
             .no-print {
                 display: none !important;
+            }
+            main, #scaleOuter {
+                display: block !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
             }
             #previewWrapper {
                 padding: 0 !important;
@@ -161,10 +172,15 @@
             }
             .a4-paper {
                 width: 210mm !important;
-                min-height: 297mm !important;
+                height: 296mm !important;
+                min-height: 296mm !important;
+                max-height: 296mm !important;
                 margin: 0 !important;
+                padding: 10mm 16mm !important;
                 box-shadow: none !important;
-                page-break-after: avoid;
+                overflow: hidden !important;
+                page-break-after: avoid !important;
+                break-after: avoid !important;
             }
         }
 
