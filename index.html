@@ -129,7 +129,7 @@
         }
 
         /* =========================================================
-           TETAPAN CETAKAN A4 PENUH (PRINT MEDIA)
+           TETAPAN CETAKAN A4 PENUH (PRINT MEDIA) - TEPAT 1 HALAMAN
            ========================================================= */
         @media print {
             @page {
@@ -138,24 +138,32 @@
             }
             html, body {
                 width: 210mm !important;
-                height: auto !important;
+                height: 278mm !important;
+                max-height: 278mm !important;
+                overflow: hidden !important;
                 background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
             }
-            .no-print, header, aside, #toastBox {
+            /* Sembunyikan semua elemen UI selain borang rasmi */
+            body > *:not(main),
+            .no-print,
+            header,
+            aside,
+            #toastBox {
                 display: none !important;
             }
             main, #previewWrapper, #scaleOuter, #scaleContainer {
                 display: block !important;
                 position: static !important;
                 width: 210mm !important;
-                height: auto !important;
+                height: 278mm !important;
+                max-height: 278mm !important;
                 min-height: 0 !important;
                 max-width: none !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                overflow: visible !important;
+                overflow: hidden !important;
                 transform: none !important;
                 zoom: 1 !important;
                 background: #ffffff !important;
@@ -163,18 +171,20 @@
             #printableForm {
                 position: relative !important;
                 width: 210mm !important;
-                height: 280mm !important;
+                height: 276mm !important;
                 min-height: 0 !important;
-                max-height: 280mm !important;
+                max-height: 276mm !important;
                 margin: 0 auto !important;
-                padding: 10mm 15mm !important;
+                padding: 9mm 15mm !important;
                 background: #ffffff !important;
                 box-shadow: none !important;
                 overflow: hidden !important;
                 transform: none !important;
                 zoom: 1 !important;
+                page-break-before: avoid !important;
                 page-break-after: avoid !important;
                 page-break-inside: avoid !important;
+                break-inside: avoid !important;
             }
         }
 
