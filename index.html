@@ -138,33 +138,43 @@
             }
             html, body {
                 width: 210mm !important;
-                height: 297mm !important;
+                height: auto !important;
                 background: #ffffff !important;
                 margin: 0 !important;
                 padding: 0 !important;
-                overflow: hidden !important;
             }
-            body * {
-                visibility: hidden !important;
+            .no-print, header, aside, #toastBox {
+                display: none !important;
             }
-            #printableForm, #printableForm * {
-                visibility: visible !important;
+            main, #previewWrapper, #scaleOuter, #scaleContainer {
+                display: block !important;
+                position: static !important;
+                width: 210mm !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                overflow: visible !important;
+                transform: none !important;
+                zoom: 1 !important;
+                background: #ffffff !important;
             }
             #printableForm {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
+                position: relative !important;
                 width: 210mm !important;
-                height: 297mm !important;
-                min-height: 297mm !important;
-                max-height: 297mm !important;
-                margin: 0 !important;
-                padding: 11mm 16mm !important;
+                height: 280mm !important;
+                min-height: 0 !important;
+                max-height: 280mm !important;
+                margin: 0 auto !important;
+                padding: 10mm 15mm !important;
                 background: #ffffff !important;
                 box-shadow: none !important;
                 overflow: hidden !important;
                 transform: none !important;
                 zoom: 1 !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
             }
         }
 
@@ -1553,12 +1563,28 @@
             document.title = getFormattedPdfFilename();
         }
 
-        function printForm() {
+        function prepareForPrint() {
             updateDocumentFilename();
+            // Set semula skala mudah alih supaya pelayar telefon tidak mengecilkan kertas menjadi kenit
+            const container = document.getElementById('scaleContainer');
+            if (container) {
+                container.style.transform = 'none';
+                container.style.width = '';
+                container.style.height = '';
+            }
+        }
+
+        function restoreAfterPrint() {
+            fitPreviewToScreen();
+        }
+
+        function printForm() {
+            prepareForPrint();
             window.print();
         }
 
-        window.addEventListener('beforeprint', updateDocumentFilename);
+        window.addEventListener('beforeprint', prepareForPrint);
+        window.addEventListener('afterprint', restoreAfterPrint);
 
         // =========================================================
         // 6. SIMPAN PROFIL STAF & SET SEMULA BORANG
