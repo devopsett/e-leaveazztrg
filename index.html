@@ -30,7 +30,12 @@
             font-family: 'Inter', sans-serif;
             background: linear-gradient(135deg, #e7efe2 0%, #f1f5f9 48%, #e2ece9 100%);
             color: #0f172a;
-            overscroll-behavior-y: none;
+        }
+
+        /* Tatalan lancar untuk kontena bertatal di mobile & desktop */
+        .smooth-scroll-area {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Tatalan lancar untuk kontena beratal di mobile & desktop */
@@ -254,7 +259,7 @@
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col lg:h-screen lg:overflow-hidden relative selection:bg-[#3f5829]/20 selection:text-[#3f5829]">
+<body class="h-[100dvh] overflow-hidden flex flex-col lg:h-screen relative selection:bg-[#3f5829]/20 selection:text-[#3f5829]">
 
     <!-- Cahaya Latar Gradient Dekoratif (Tidak Dicetak) -->
     <div class="no-print pointer-events-none fixed inset-0 overflow-hidden z-0">
@@ -306,7 +311,7 @@
     </header>
 
     <!-- Penukar Paparan Khas Mudah Alih (Mobile View Switcher) -->
-    <div class="no-print lg:hidden glass-panel border-b border-white/70 px-3.5 py-2 sticky top-[56px] z-20">
+    <div class="no-print lg:hidden glass-panel border-b border-white/70 px-3.5 py-2 shrink-0 z-20">
         <div class="grid grid-cols-2 gap-1.5 p-1 bg-slate-200/60 backdrop-blur-md rounded-xl border border-white/60">
             <button type="button" onclick="setMobileView('editor')" id="mob-btn-editor"
                 class="flex items-center justify-center gap-1.5 py-2 px-3 rounded-lg text-xs font-bold bg-gradient-to-r from-[#3f5829] to-[#517235] text-white shadow-sm transition cursor-pointer">
@@ -332,13 +337,13 @@
     </div>
 
     <!-- ==================== KANDUNGAN UTAMA (SPLIT VIEW FLOATING) ==================== -->
-    <main class="flex-1 flex flex-col lg:flex-row lg:overflow-hidden lg:p-4 lg:gap-4 pb-16 lg:pb-4 relative z-10">
+    <main class="flex-1 min-h-0 flex flex-col lg:flex-row overflow-hidden lg:p-4 lg:gap-4 pb-16 lg:pb-4 relative z-10">
 
         <!-- PANEL KIRI: EDITOR BERSTRUKTUR FLOATING & STICKY DENGAN TAB -->
-        <aside id="editorPanel" class="no-print w-full lg:w-[430px] xl:w-[465px] glass-panel border-b lg:border lg:border-white/85 lg:rounded-3xl flex flex-col lg:h-full lg:sticky lg:top-0 shrink-0 shadow-xl shadow-slate-900/10 lg:overflow-hidden">
+        <aside id="editorPanel" class="no-print w-full lg:w-[430px] xl:w-[465px] glass-panel border-b lg:border lg:border-white/85 lg:rounded-3xl flex flex-col flex-1 min-h-0 lg:flex-initial lg:h-full shrink-0 shadow-xl shadow-slate-900/10 overflow-hidden">
             
-            <!-- Navigasi Tab Langkah (Sticky di atas panel editor tanpa bergerak di mobile & desktop) -->
-            <div class="sticky top-[106px] lg:top-0 z-20 px-3.5 sm:px-4 pt-3 pb-2.5 bg-white/90 backdrop-blur-xl border-b border-white/70 shadow-2xs lg:shadow-none">
+            <!-- Navigasi Tab Langkah (Kekal pegun di atas panel editor pada mobile & desktop) -->
+            <div class="shrink-0 z-20 px-3.5 sm:px-4 pt-3 pb-2.5 bg-white/90 backdrop-blur-xl border-b border-white/70 shadow-2xs lg:shadow-none">
                 <div class="grid grid-cols-3 gap-1.5 p-1 bg-slate-200/60 backdrop-blur-sm rounded-xl border border-white/60">
                     <button type="button" onclick="switchTab('tab-pemohon')" id="btn-tab-pemohon"
                         class="tab-btn flex flex-col sm:flex-row items-center justify-center gap-1 sm:gap-1.5 py-2 px-1.5 rounded-lg text-[11px] sm:text-xs font-semibold bg-white/95 text-[#3f5829] shadow-sm transition cursor-pointer text-center leading-tight">
@@ -359,7 +364,7 @@
             </div>
 
             <!-- Badan Borang Input (Scrollable) -->
-            <div id="editorScrollArea" class="smooth-scroll-area flex-1 overflow-y-auto p-3.5 sm:p-5 space-y-4 sm:space-y-5">
+            <div id="editorScrollArea" class="smooth-scroll-area flex-1 min-h-0 overflow-y-auto p-3.5 sm:p-5 pb-8 space-y-4 sm:space-y-5">
 
                 <!-- ==================== TAB 1: MAKLUMAT PEMOHON & LOGO ==================== -->
                 <div id="tab-pemohon" class="tab-panel space-y-4">
@@ -401,7 +406,7 @@
 
                     <div class="flex justify-end pt-1">
                         <button type="button" onclick="switchTab('tab-cuti')"
-                            class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black shadow-md shadow-slate-900/15 rounded-xl transition cursor-pointer">
+                            class="w-full sm:w-auto inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-[#3f5829] via-[#4a6830] to-[#5a7d3b] hover:from-[#334821] hover:to-[#47642e] shadow-md shadow-[#3f5829]/20 ring-1 ring-white/25 rounded-xl transition active:scale-[0.98] cursor-pointer">
                             <span>Seterusnya: Butiran Cuti</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </button>
@@ -417,35 +422,53 @@
                             <span>Jenis Permohonan Cuti</span>
                         </h2>
 
-                        <div class="grid grid-cols-2 gap-2">
-                            <label class="flex items-center gap-2 p-2.5 bg-white/85 border border-slate-200/90 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-r has-[:checked]:from-[#3f5829]/10 has-[:checked]:to-emerald-500/10 transition shadow-2xs">
-                                <input type="checkbox" id="chkTahunan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
-                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Tahunan</span>
+                        <div class="grid grid-cols-2 gap-2.5">
+                            <label class="group flex items-center gap-2.5 p-2.5 bg-white/85 border border-slate-200/90 rounded-2xl cursor-pointer hover:border-[#3f5829]/60 hover:bg-white has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-br has-[:checked]:from-[#3f5829]/12 has-[:checked]:via-[#517235]/8 has-[:checked]:to-emerald-500/12 has-[:checked]:shadow-sm has-[:checked]:shadow-[#3f5829]/10 transition-all duration-200 active:scale-[0.98]">
+                                <input type="checkbox" id="chkTahunan" onchange="syncForm()" class="peer sr-only">
+                                <span class="w-5 h-5 rounded-lg border-2 border-slate-300 bg-white flex items-center justify-center shrink-0 transition-all duration-200 group-hover:border-[#3f5829]/60 peer-checked:border-transparent peer-checked:bg-gradient-to-br peer-checked:from-[#3f5829] peer-checked:to-[#5b823b] peer-checked:shadow-xs peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
+                                    <svg class="w-3.5 h-3.5 text-white opacity-0 scale-50 transition-all duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </span>
+                                <span class="text-xs font-semibold text-slate-700 peer-checked:text-[#2c3f1c] peer-checked:font-bold leading-tight">Cuti Tahunan</span>
                             </label>
 
-                            <label class="flex items-center gap-2 p-2.5 bg-white/85 border border-slate-200/90 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-r has-[:checked]:from-[#3f5829]/10 has-[:checked]:to-emerald-500/10 transition shadow-2xs">
-                                <input type="checkbox" id="chkTanpaGaji" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
-                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Tanpa Gaji</span>
+                            <label class="group flex items-center gap-2.5 p-2.5 bg-white/85 border border-slate-200/90 rounded-2xl cursor-pointer hover:border-[#3f5829]/60 hover:bg-white has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-br has-[:checked]:from-[#3f5829]/12 has-[:checked]:via-[#517235]/8 has-[:checked]:to-emerald-500/12 has-[:checked]:shadow-sm has-[:checked]:shadow-[#3f5829]/10 transition-all duration-200 active:scale-[0.98]">
+                                <input type="checkbox" id="chkTanpaGaji" onchange="syncForm()" class="peer sr-only">
+                                <span class="w-5 h-5 rounded-lg border-2 border-slate-300 bg-white flex items-center justify-center shrink-0 transition-all duration-200 group-hover:border-[#3f5829]/60 peer-checked:border-transparent peer-checked:bg-gradient-to-br peer-checked:from-[#3f5829] peer-checked:to-[#5b823b] peer-checked:shadow-xs peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
+                                    <svg class="w-3.5 h-3.5 text-white opacity-0 scale-50 transition-all duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </span>
+                                <span class="text-xs font-semibold text-slate-700 peer-checked:text-[#2c3f1c] peer-checked:font-bold leading-tight">Cuti Tanpa Gaji</span>
                             </label>
 
-                            <label class="flex items-center gap-2 p-2.5 bg-white/85 border border-slate-200/90 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-r has-[:checked]:from-[#3f5829]/10 has-[:checked]:to-emerald-500/10 transition shadow-2xs">
-                                <input type="checkbox" id="chkSakit" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
-                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Sakit</span>
+                            <label class="group flex items-center gap-2.5 p-2.5 bg-white/85 border border-slate-200/90 rounded-2xl cursor-pointer hover:border-[#3f5829]/60 hover:bg-white has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-br has-[:checked]:from-[#3f5829]/12 has-[:checked]:via-[#517235]/8 has-[:checked]:to-emerald-500/12 has-[:checked]:shadow-sm has-[:checked]:shadow-[#3f5829]/10 transition-all duration-200 active:scale-[0.98]">
+                                <input type="checkbox" id="chkSakit" onchange="syncForm()" class="peer sr-only">
+                                <span class="w-5 h-5 rounded-lg border-2 border-slate-300 bg-white flex items-center justify-center shrink-0 transition-all duration-200 group-hover:border-[#3f5829]/60 peer-checked:border-transparent peer-checked:bg-gradient-to-br peer-checked:from-[#3f5829] peer-checked:to-[#5b823b] peer-checked:shadow-xs peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
+                                    <svg class="w-3.5 h-3.5 text-white opacity-0 scale-50 transition-all duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </span>
+                                <span class="text-xs font-semibold text-slate-700 peer-checked:text-[#2c3f1c] peer-checked:font-bold leading-tight">Cuti Sakit</span>
                             </label>
 
-                            <label class="flex items-center gap-2 p-2.5 bg-white/85 border border-slate-200/90 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-r has-[:checked]:from-[#3f5829]/10 has-[:checked]:to-emerald-500/10 transition shadow-2xs">
-                                <input type="checkbox" id="chkKecemasan" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
-                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Kecemasan</span>
+                            <label class="group flex items-center gap-2.5 p-2.5 bg-white/85 border border-slate-200/90 rounded-2xl cursor-pointer hover:border-[#3f5829]/60 hover:bg-white has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-br has-[:checked]:from-[#3f5829]/12 has-[:checked]:via-[#517235]/8 has-[:checked]:to-emerald-500/12 has-[:checked]:shadow-sm has-[:checked]:shadow-[#3f5829]/10 transition-all duration-200 active:scale-[0.98]">
+                                <input type="checkbox" id="chkKecemasan" onchange="syncForm()" class="peer sr-only">
+                                <span class="w-5 h-5 rounded-lg border-2 border-slate-300 bg-white flex items-center justify-center shrink-0 transition-all duration-200 group-hover:border-[#3f5829]/60 peer-checked:border-transparent peer-checked:bg-gradient-to-br peer-checked:from-[#3f5829] peer-checked:to-[#5b823b] peer-checked:shadow-xs peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
+                                    <svg class="w-3.5 h-3.5 text-white opacity-0 scale-50 transition-all duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </span>
+                                <span class="text-xs font-semibold text-slate-700 peer-checked:text-[#2c3f1c] peer-checked:font-bold leading-tight">Cuti Kecemasan</span>
                             </label>
 
-                            <label class="flex items-center gap-2 p-2.5 bg-white/85 border border-slate-200/90 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-r has-[:checked]:from-[#3f5829]/10 has-[:checked]:to-emerald-500/10 transition shadow-2xs">
-                                <input type="checkbox" id="chkGanti" onchange="syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
-                                <span class="text-xs font-semibold text-slate-700 leading-tight">Cuti Ganti</span>
+                            <label class="group flex items-center gap-2.5 p-2.5 bg-white/85 border border-slate-200/90 rounded-2xl cursor-pointer hover:border-[#3f5829]/60 hover:bg-white has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-br has-[:checked]:from-[#3f5829]/12 has-[:checked]:via-[#517235]/8 has-[:checked]:to-emerald-500/12 has-[:checked]:shadow-sm has-[:checked]:shadow-[#3f5829]/10 transition-all duration-200 active:scale-[0.98]">
+                                <input type="checkbox" id="chkGanti" onchange="syncForm()" class="peer sr-only">
+                                <span class="w-5 h-5 rounded-lg border-2 border-slate-300 bg-white flex items-center justify-center shrink-0 transition-all duration-200 group-hover:border-[#3f5829]/60 peer-checked:border-transparent peer-checked:bg-gradient-to-br peer-checked:from-[#3f5829] peer-checked:to-[#5b823b] peer-checked:shadow-xs peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
+                                    <svg class="w-3.5 h-3.5 text-white opacity-0 scale-50 transition-all duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </span>
+                                <span class="text-xs font-semibold text-slate-700 peer-checked:text-[#2c3f1c] peer-checked:font-bold leading-tight">Cuti Ganti</span>
                             </label>
 
-                            <label class="flex items-center gap-2 p-2.5 bg-white/85 border border-slate-200/90 rounded-xl cursor-pointer hover:border-[#3f5829] has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-r has-[:checked]:from-[#3f5829]/10 has-[:checked]:to-emerald-500/10 transition shadow-2xs">
-                                <input type="checkbox" id="chkLain" onchange="toggleLainInput(); syncForm()" class="w-4 h-4 rounded text-[#3f5829] focus:ring-[#3f5829] shrink-0">
-                                <span class="text-xs font-semibold text-slate-700 leading-tight">Lain-Lain</span>
+                            <label class="group flex items-center gap-2.5 p-2.5 bg-white/85 border border-slate-200/90 rounded-2xl cursor-pointer hover:border-[#3f5829]/60 hover:bg-white has-[:checked]:border-[#3f5829] has-[:checked]:bg-gradient-to-br has-[:checked]:from-[#3f5829]/12 has-[:checked]:via-[#517235]/8 has-[:checked]:to-emerald-500/12 has-[:checked]:shadow-sm has-[:checked]:shadow-[#3f5829]/10 transition-all duration-200 active:scale-[0.98]">
+                                <input type="checkbox" id="chkLain" onchange="toggleLainInput(); syncForm()" class="peer sr-only">
+                                <span class="w-5 h-5 rounded-lg border-2 border-slate-300 bg-white flex items-center justify-center shrink-0 transition-all duration-200 group-hover:border-[#3f5829]/60 peer-checked:border-transparent peer-checked:bg-gradient-to-br peer-checked:from-[#3f5829] peer-checked:to-[#5b823b] peer-checked:shadow-xs peer-checked:[&_svg]:opacity-100 peer-checked:[&_svg]:scale-100">
+                                    <svg class="w-3.5 h-3.5 text-white opacity-0 scale-50 transition-all duration-200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                                </span>
+                                <span class="text-xs font-semibold text-slate-700 peer-checked:text-[#2c3f1c] peer-checked:font-bold leading-tight">Lain-Lain</span>
                             </label>
                         </div>
 
@@ -517,7 +540,7 @@
                             <span>Kembali</span>
                         </button>
                         <button type="button" onclick="switchTab('tab-pengesahan')"
-                            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black shadow-md shadow-slate-900/15 rounded-xl transition cursor-pointer">
+                            class="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-white bg-gradient-to-r from-[#3f5829] via-[#4a6830] to-[#5a7d3b] hover:from-[#334821] hover:to-[#47642e] shadow-md shadow-[#3f5829]/20 ring-1 ring-white/25 rounded-xl transition active:scale-[0.98] cursor-pointer">
                             <span>Seterusnya: Tandatangan</span>
                             <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
                         </button>
@@ -606,7 +629,7 @@
                             <div>
                                 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Status Ulasan Semakan</label>
                                 <div class="grid grid-cols-3 gap-1.5">
-                                    <label class="flex items-center justify-center py-2 px-1 bg-white/80 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition text-center whitespace-nowrap">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-white/80 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-amber-400/80 has-[:checked]:bg-gradient-to-r has-[:checked]:from-amber-50 has-[:checked]:to-orange-50 has-[:checked]:text-amber-800 has-[:checked]:font-semibold has-[:checked]:border-amber-300/90 has-[:checked]:shadow-2xs transition text-center whitespace-nowrap">
                                         <input type="radio" name="radSemakan" value="none" checked onchange="syncForm()" class="hidden">
                                         <span>Kosongkan</span>
                                     </label>
@@ -674,7 +697,7 @@
                             <div>
                                 <label class="block text-[11px] font-semibold text-slate-600 mb-1">Status Ulasan Kelulusan</label>
                                 <div class="grid grid-cols-3 gap-1.5">
-                                    <label class="flex items-center justify-center py-2 px-1 bg-white/80 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-[#3f5829] has-[:checked]:bg-slate-800 has-[:checked]:text-white has-[:checked]:border-slate-800 transition text-center whitespace-nowrap">
+                                    <label class="flex items-center justify-center py-2 px-1 bg-white/80 border border-slate-200 rounded-lg cursor-pointer text-[11px] font-medium text-slate-600 hover:border-amber-400/80 has-[:checked]:bg-gradient-to-r has-[:checked]:from-amber-50 has-[:checked]:to-orange-50 has-[:checked]:text-amber-800 has-[:checked]:font-semibold has-[:checked]:border-amber-300/90 has-[:checked]:shadow-2xs transition text-center whitespace-nowrap">
                                         <input type="radio" name="radKelulusan" value="none" checked onchange="syncForm()" class="hidden">
                                         <span>Kosongkan</span>
                                     </label>
@@ -721,7 +744,7 @@
                             <span>Kembali</span>
                         </button>
                         <button type="button" onclick="setMobileView('preview')"
-                            class="lg:hidden flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-slate-800 to-slate-900 hover:from-slate-900 hover:to-black shadow-md shadow-slate-900/15 rounded-xl transition cursor-pointer">
+                            class="lg:hidden flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-[#3f5829] via-[#4a6830] to-[#5a7d3b] hover:from-[#334821] hover:to-[#47642e] shadow-md shadow-[#3f5829]/20 ring-1 ring-white/25 rounded-xl transition active:scale-[0.98] cursor-pointer">
                             <i data-lucide="eye" class="w-4 h-4"></i>
                             <span>Semak Borang A4</span>
                         </button>
@@ -737,7 +760,7 @@
         </aside>
 
         <!-- ==================== PANEL KANAN: PRATONTON DOKUMEN A4 ==================== -->
-        <section id="previewWrapper" class="smooth-scroll-area hidden lg:flex flex-1 bg-transparent overflow-auto p-3 sm:p-4 lg:p-6 flex-col items-center relative">
+        <section id="previewWrapper" class="smooth-scroll-area hidden lg:flex flex-1 min-h-0 bg-transparent overflow-y-auto overflow-x-hidden p-3 sm:p-4 lg:p-6 flex-col items-center relative">
             
             <!-- Bar Kawalan Zoom Pratonton Floating Overlay (Bottom-Centered di Mobile & Upper-Centered Overlay Sejajar Hujung Docs di Desktop) -->
             <div class="no-print fixed bottom-[72px] left-1/2 -translate-x-1/2 lg:bottom-auto lg:top-[104px] lg:left-[calc(50%+223px)] xl:left-[calc(50%+240px)] z-30 inline-flex items-center gap-1.5 sm:gap-2 px-3.5 sm:px-4 py-1.5 bg-white/88 backdrop-blur-xl border border-white/95 rounded-full shadow-lg shadow-slate-900/15 text-xs font-medium text-slate-600 whitespace-nowrap">
