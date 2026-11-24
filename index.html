@@ -607,8 +607,9 @@
                              ========================================================= -->
                         <div id="customLogoContainer" style="display: flex; align-items: center; justify-content: center; margin-top: 2px;">
                             <img id="customLogoImg" src="logo azzuha.png" alt="Az-Zuha Group Travel & Tours"
+                                 onload="autoCropGitHubLogo(this)"
                                  onerror="handleGitHubLogoMissing()"
-                                 style="max-height: 76px; max-width: 240px; width: auto; height: auto; object-fit: contain; display: block;">
+                                 style="height: 82px; width: auto; max-width: 280px; object-fit: contain; display: block;">
                         </div>
 
                         <!-- Kotak Panduan Jika Fail Gambar Belum Dimasukkan -->
@@ -919,6 +920,60 @@
         // =========================================================
         // 3. PENGURUSAN LOGO RASMI (GITHUB ./logo-azzuha.png & MUAT NAIK)
         // =========================================================
+        let isCroppingGitHubLogo = false;
+
+        function autoCropGitHubLogo(imgEl) {
+            if (isCroppingGitHubLogo || !imgEl || !imgEl.src || imgEl.src.startsWith('data:')) return;
+            try {
+                const canvas = document.createElement('canvas');
+                canvas.width = imgEl.naturalWidth;
+                canvas.height = imgEl.naturalHeight;
+                if (canvas.width === 0 || canvas.height === 0) return;
+
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(imgEl, 0, 0);
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const data = imgData.data;
+
+                let minX = canvas.width, minY = canvas.height, maxX = 0, maxY = 0;
+                let hasVisiblePixels = false;
+
+                for (let i = 0; i < data.length; i += 4) {
+                    if (data[i + 3] > 20) {
+                        hasVisiblePixels = true;
+                        const px = (i / 4) % canvas.width;
+                        const py = Math.floor((i / 4) / canvas.width);
+                        if (px < minX) minX = px;
+                        if (px > maxX) maxX = px;
+                        if (py < minY) minY = py;
+                        if (py > maxY) maxY = py;
+                    }
+                }
+
+                if (hasVisiblePixels && maxX > minX && maxY > minY) {
+                    const pad = 4;
+                    const cw = Math.min(canvas.width, maxX - minX + pad * 2);
+                    const ch = Math.min(canvas.height, maxY - minY + pad * 2);
+                    const sx = Math.max(0, minX - pad);
+                    const sy = Math.max(0, minY - pad);
+
+                    const cropCanvas = document.createElement('canvas');
+                    cropCanvas.width = cw;
+                    cropCanvas.height = ch;
+                    cropCanvas.getContext('2d').drawImage(canvas, sx, sy, cw, ch, 0, 0, cw, ch);
+
+                    isCroppingGitHubLogo = true;
+                    imgEl.src = cropCanvas.toDataURL('image/png');
+                }
+            } catch (e) {
+                // Jika pautan luar (CORS) menyekat bacaan piksel, besarkan ketinggian secara automatik
+                imgEl.style.height = '135px';
+                imgEl.style.maxWidth = '340px';
+                imgEl.style.marginTop = '-18px';
+                imgEl.style.marginBottom = '-18px';
+            }
+        }
+
         function handleLogoUpload(event) {
             const file = event.target.files && event.target.files[0];
             if (!file) return;
